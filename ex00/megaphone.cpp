@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 17:25:42 by fwahl             #+#    #+#             */
-/*   Updated: 2024/05/17 17:07:11 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/07/11 19:57:37 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ int	main(int argc, char **argv)
 		{
 			for (int j = 0; argv[i][j] != '\0'; ++j)
 				std::cout << static_cast<char>(toupper(argv[i][j]));
-			if (i < argc - 1)
-				std::cout << ' ';
 		}
+		std::cout << std::endl;
 	}
 }
