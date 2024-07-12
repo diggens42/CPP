@@ -6,11 +6,12 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 17:11:14 by fwahl             #+#    #+#             */
-/*   Updated: 2024/07/12 17:31:58 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/07/12 17:56:15 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
+#include "Contact.hpp"
 
 PhoneBook::PhoneBook() : i(0), oldest(0) {}
 
@@ -39,9 +40,7 @@ void PhoneBook::search_contact() const
 {
 	if (i == 0)
 	{
-		std::cout
-			<< "No contacts in phonebook" <<
-		std::endl;
+		std::cout << "No contacts in phonebook" << std::endl;
 		return ;
 	}
 	std::cout
@@ -60,21 +59,17 @@ void PhoneBook::search_contact() const
 			<< std::setw(10) << truncate(contacts[j].get_lastname()) << "|"
 			<< std::setw(10) << truncate(contacts[j].get_nickname()) << "|" <<
 		std::endl;
+		j++;
 	}
 
 	int	idx;
-	std::cout << "Enter index of contact to display ";
+	std::cout << "Enter index of contact to display " << std::endl;
 	std::cin >> idx;
 
 	if (idx >= 0 && idx < i)
 		contacts[idx].print_contact();
 	else
-	{
-		std::cout
-			<< "index no bueno" <<
-		std::endl;
-
-	}
+		std::cout << "index no bueno" << std::endl;
 }
 
 int	main()
@@ -84,28 +79,39 @@ int	main()
 
 	while(1337)
 	{
-		std::cout << "Commands: ADD, SEARCH, EXIT";
+		std::cout << "Commands: ADD, SEARCH, EXIT" << std::endl;
 		std::cin >> cmd;
 
 		if (cmd == "ADD")
 		{
-			Contact newContact;
-			std::string first;
-			std::string last;
-			std::string nick;
-			std::string phone;
-			std::string secret;
+			Contact new_contact;
+			std::string first, last, nick, phone, secret;
 
+			std::cout << "Enter first name 🌚  ";
+			std::cin >> first;
+			std::cout << "Enter last name 🌝  ";
+			std::cin >> last;
+			std::cout << "Enter nick name 🗿  ";
+			std::cin >> nick;
+			std::cout << "Enter phonenumber 📞  ";
+			std::cin >> phone;
+			std::cout << "Enter your darkest secret 🍆  ";
+			std::cin >> secret;
+			// std::cin.ignore();
+			// std::getline(std::cin, secret);
 
+			new_contact.set_contact(first, last, nick, phone, secret);
+			phonebook.add_contact(new_contact);
+			std::cout << "Contact added" << std::endl;
 		}
 		else if (cmd == "SEARCH")
-		{
-
-		}
+			phonebook.search_contact();
 		else if (cmd == "EXIT")
 			break ;
 		else
 			std::cout << "invalid command" << std::endl;
+		std::cout << std::endl;
 	}
+	return (0);
 };
 
