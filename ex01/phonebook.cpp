@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 17:11:14 by fwahl             #+#    #+#             */
-/*   Updated: 2024/07/12 17:56:15 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/07/12 18:01:26 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,6 @@ int	main()
 			std::cin >> phone;
 			std::cout << "Enter your darkest secret 🍆  ";
 			std::cin >> secret;
-			// std::cin.ignore();
-			// std::getline(std::cin, secret);
 
 			new_contact.set_contact(first, last, nick, phone, secret);
 			phonebook.add_contact(new_contact);
