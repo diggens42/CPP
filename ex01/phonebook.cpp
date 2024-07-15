@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 17:11:14 by fwahl             #+#    #+#             */
-/*   Updated: 2024/07/15 18:30:49 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/07/15 19:06:19 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ void PhoneBook::add_contact(const Contact& contact)
 	}
 }
 
-void PhoneBook::search_contact() const
+bool PhoneBook::search_contact() const
 {
 	if (i == 0)
 	{
 		std::cout << "No contacts in phonebook" << std::endl;
-		return ;
+		return (true);
 	}
 	std::cout
 		<< std::setw(10) << "Index" << "|"
@@ -65,11 +65,13 @@ void PhoneBook::search_contact() const
 	int	idx;
 	std::cout << "Enter index of contact to display " << std::endl;
 	std::cin >> idx;
-
+	if (std::cin.eof())
+		return (false);
 	if (idx >= 0 && idx < i)
 		contacts[idx].print_contact();
 	else
 		std::cout << "index no bueno" << std::endl;
+	return (true);
 }
 
 int	main()
@@ -89,21 +91,33 @@ int	main()
 
 			std::cout << "Enter first name 🌚  ";
 			std::cin >> first;
+			if (first.empty())
+				break ;
 			std::cout << "Enter last name 🌝  ";
 			std::cin >> last;
+			if (last.empty())
+				break ;
 			std::cout << "Enter nick name 🗿  ";
 			std::cin >> nick;
+			if (nick.empty())
+				break ;
 			std::cout << "Enter phonenumber 📞  ";
 			std::cin >> phone;
+			if (phone.empty())
+				break ;
 			std::cout << "Enter your darkest secret 🍆  ";
 			std::cin >> secret;
-
+			if (secret.empty())
+				break ;
 			new_contact.set_contact(first, last, nick, phone, secret);
 			phonebook.add_contact(new_contact);
 			std::cout << "Contact added" << std::endl;
 		}
 		else if (cmd == "SEARCH")
-			phonebook.search_contact();
+		{
+			if (!phonebook.search_contact())
+				break ;
+		}
 		else if (cmd == "EXIT" || cmd.empty())
 			break ;
 		else
