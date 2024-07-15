@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   phonebook.cpp                                      :+:      :+:    :+:   */
+/*   PhoneBook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 17:11:14 by fwahl             #+#    #+#             */
-/*   Updated: 2024/07/12 18:01:26 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/07/15 18:30:49 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int	main()
 		}
 		else if (cmd == "SEARCH")
 			phonebook.search_contact();
-		else if (cmd == "EXIT")
+		else if (cmd == "EXIT" || cmd.empty())
 			break ;
 		else
 			std::cout << "invalid command" << std::endl;

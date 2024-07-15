@@ -6,16 +6,13 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 19:08:17 by fwahl             #+#    #+#             */
-/*   Updated: 2024/07/13 20:55:16 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/07/13 21:09:10 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include <string>
 #include <ctime>
-#include <iomanip>
 #include "Account.hpp"
-
 
 int Account::_nbAccounts = 0;
 int Account::_totalAmount = 0;
@@ -45,10 +42,10 @@ void	Account::_displayTimestamp( void )
 	struct tm	*local_time;
 	char		buf[20];
 
-	time(&ts);
-	local_time = localtime(&ts);
+	std::time(&ts);
+	local_time = std::localtime(&ts);
 
-	strftime(buf, 20, "[%Y%m%d_%H%M%S]", local_time);
+	std::strftime(buf, 20, "[%Y%m%d_%H%M%S]", local_time);
 	std::cout << buf << " ";
 }
 
@@ -80,14 +77,14 @@ void	Account::makeDeposit( int deposit )
 	_displayTimestamp();
 	std::cout
 		<< "index:" << _accountIndex << ";"
-		<< "p_amount:" << _amount << ";"
+		<< "p_amount:" << checkAmount() << ";"
 		<< "deposit:" << deposit << ";";
 	_amount += deposit;
 	_totalAmount += deposit;
 	_nbDeposits++;
 	_totalNbDeposits++;
 	std::cout
-		<< "amount:" << _amount << ";"
+		<< "amount:" << checkAmount() << ";"
 		<< "nb_deposits:" << _nbDeposits <<
 	std::endl;
 }
@@ -97,9 +94,9 @@ bool	Account::makeWithdrawal( int withdrawal )
 	_displayTimestamp();
 	std::cout
 		<< "index:" << _accountIndex << ";"
-		<< "p_amount:" << _amount << ";"
+		<< "p_amount:" << checkAmount() << ";"
 		<< "withdrawl:";
-	if (withdrawal <= _amount)
+	if (withdrawal <= checkAmount())
 	{
 		_amount -= withdrawal;
 		_totalAmount -= withdrawal;
@@ -107,7 +104,7 @@ bool	Account::makeWithdrawal( int withdrawal )
 		_totalNbWithdrawals++;
  		std::cout
 			<< withdrawal << ";"
-			<< "amount:" << _amount << ";"
+			<< "amount:" << checkAmount() << ";"
 			<< "nb_withdrawals:" << _nbWithdrawals <<
 		std::endl;
 		return (true);
