@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 18:12:04 by fwahl             #+#    #+#             */
-/*   Updated: 2024/07/14 18:22:44 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/07/16 19:13:03 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ class Zombie
 		Zombie(std::string name);
 		~Zombie();
 		void	announce();
-		Zombie* newZombie(std::string name);
-		void	randomChump(std::string name);
-};
 
+
+};
+Zombie* newZombie(std::string name);
+void	randomChump(std::string name);

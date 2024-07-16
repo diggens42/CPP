@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 18:12:07 by fwahl             #+#    #+#             */
-/*   Updated: 2024/07/14 18:33:09 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/07/16 19:13:54 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,10 @@
 
 int	main()
 {
-	//stack allocated zombie
-	Zombie stack("Stack");
-	stack.announce();
-
-	//heap allocated zombie
-	Zombie* heap = stack.newZombie("Heap");
+	Zombie* heap = newZombie("Heap");
 	heap->announce();
-
-	//randomChump
-	stack.randomChump("Random");
-
-	//free heap zombie
 	delete heap;
 
+	randomChump("Random");
 	return 0;
 }

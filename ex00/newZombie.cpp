@@ -6,13 +6,13 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 18:12:48 by fwahl             #+#    #+#             */
-/*   Updated: 2024/07/14 18:23:41 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/07/16 19:12:05 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
 
-Zombie* Zombie::newZombie(std::string name)
+Zombie* newZombie(std::string name)
 {
 	return (new Zombie(name));
 }
