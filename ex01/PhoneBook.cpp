@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 17:11:14 by fwahl             #+#    #+#             */
-/*   Updated: 2024/07/15 19:19:27 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/07/16 18:22:46 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,27 +57,33 @@ bool PhoneBook::search_contact() const
 			<< std::setw(10) << j << "|"
 			<< std::setw(10) << truncate(contacts[j].get_firstname()) << "|"
 			<< std::setw(10) << truncate(contacts[j].get_lastname()) << "|"
-			<< std::setw(10) << truncate(contacts[j].get_nickname()) << "|" <<
+			<< std::setw(10) << truncate(contacts[j].get_nickname()) <<
 		std::endl;
 		j++;
 	}
 
 	int	idx;
-	std::cout << "Enter index of contact to display " << std::endl;
-	std::cin >> idx;
-	if (std::cin.eof())
-		return (false);
-	if (idx >= 0 && idx < i)
+	std::cout << "Enter index of contact to display: ";
+	while (!(std::cin >> idx))
+	{
+		if (std::cin.eof())
+			return (false);
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		std::cout << "Invalid input. Please enter a number: ";
+	}
+	std::cout << std::endl;
+	if (idx >= 0 && idx < 8 && idx < i)
 		contacts[idx].print_contact();
 	else
-		std::cout << "index no bueno" << std::endl;
+		std::cout << "Invalid index." << std::endl;
 	return (true);
 }
 
 int	main()
 {
-	PhoneBook phonebook;
-	std::string cmd;
+	PhoneBook	phonebook;
+	std::string	cmd;
 
 	while(1337)
 	{
@@ -88,7 +94,6 @@ int	main()
 		{
 			Contact new_contact;
 			std::string first, last, nick, phone, secret;
-
 			std::cout << "Enter first name 🌚  ";
 			std::cin >> first;
 			if (first.empty())
@@ -102,9 +107,9 @@ int	main()
 			if (nick.empty())
 				break ;
 			std::cout << "Enter phonenumber 📞  ";
-			std::cin >> phone;
 			if (phone.empty())
 				break ;
+			// check for numeric arg
 			std::cout << "Enter your darkest secret 🍆  ";
 			std::cin >> secret;
 			if (secret.empty())
