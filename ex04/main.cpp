@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 18:27:35 by fwahl             #+#    #+#             */
-/*   Updated: 2024/07/18 19:02:55 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/07/19 17:23:01 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@ int main (int argc, char **argv)
 	}
 	filename = argv[1];
 	string1 = argv[2];
+	if (string1.empty())
+	{
+		std::cerr << "String 1 can't be empty" << std::endl;
+		return (1);
+	}
 	string2 = argv[3];
 	ReplaceFile replace_file(filename, string1, string2);
 	try

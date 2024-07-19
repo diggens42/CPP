@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 18:27:08 by fwahl             #+#    #+#             */
-/*   Updated: 2024/07/18 19:07:00 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/07/19 17:04:04 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ std::string ReplaceFile::read_file()
 void	ReplaceFile::write_file(const std::string& content)
 {
 	std::string new_filename = _filename + ".replace";
-	std::ofstream file(new_filename);
-	if (!file.is_open())
+	std::ofstream new_file(new_filename);
+	if (!new_file.is_open())
 		throw std::runtime_error("can't create output file");
-	file << content;
-	file.close();
+	new_file << content;
+	new_file.close();
 }
 
 std::string	ReplaceFile::replace_match(const std::string& content)

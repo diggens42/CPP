@@ -1,4 +1,4 @@
-NAME		= violence
+NAME		= replace
 
 CXX			= c++
 CFLAGS		= -Wall -Wextra -Werror -std=c++98
