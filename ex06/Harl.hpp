@@ -1,29 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.hpp                                         :+:      :+:    :+:   */
+/*   Harl.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/14 18:12:04 by fwahl             #+#    #+#             */
-/*   Updated: 2024/07/19 17:06:11 by fwahl            ###   ########.fr       */
+/*   Created: 2024/07/21 19:54:36 by fwahl             #+#    #+#             */
+/*   Updated: 2024/07/21 21:25:51 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include <string>
+#ifndef HARL_HPP
+# define HARL_HPP
 
-class Zombie
+#include <string>
+#include <iostream>
+
+class Harl
 {
 	private:
-		std::string name;
+		void	debug(void);
+		void	info(void);
+		void	warning(void);
+		void	error(void);
+
+		typedef void	(Harl::*ComplaintFunction)(void);
+		struct ComplaintLevel
+		{
+			std::string			level;
+			ComplaintFunction	fn;
+		};
+		ComplaintLevel levels[4];
 
 	public:
-		Zombie(std::string name);
-		Zombie();
-		~Zombie();
-		void	announce();
-		void	setName(std::string name);
+		void	complain(std::string level);
+		Harl();
+		~Harl();
 };
-Zombie* zombieHorde( int N, std::string name );
 
+#endif

@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.hpp                                         :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/14 18:12:04 by fwahl             #+#    #+#             */
-/*   Updated: 2024/07/19 17:06:11 by fwahl            ###   ########.fr       */
+/*   Created: 2024/07/21 19:54:24 by fwahl             #+#    #+#             */
+/*   Updated: 2024/07/21 21:40:14 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include <string>
+#include "Harl.hpp"
 
-class Zombie
+int	main(int argc, char **argv)
 {
-	private:
-		std::string name;
+	Harl harl;
 
-	public:
-		Zombie(std::string name);
-		Zombie();
-		~Zombie();
-		void	announce();
-		void	setName(std::string name);
-};
-Zombie* zombieHorde( int N, std::string name );
-
+	if (argc == 2)
+		harl.complain(argv[1]);
+	else
+		std::cout << "invalid input" <<std::endl;
+	return (0);
+}
