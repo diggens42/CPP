@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 19:36:43 by fwahl             #+#    #+#             */
-/*   Updated: 2024/07/25 20:45:43 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/07/25 23:46:50 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ class Fixed
 		Fixed&	operator--(); //pre
 		Fixed	operator--(int); //post
 
-		static	Fixed& min(Fixed& a, Fixed& b);
+		static			Fixed& min(Fixed& a, Fixed& b);
 		static const	Fixed& min(const Fixed& a, const Fixed& b);
-		static	Fixed& max(Fixed& a, Fixed& b);
+		static			Fixed& max(Fixed& a, Fixed& b);
 		static const	Fixed& max(const Fixed& a, const Fixed& b);
 };
 
