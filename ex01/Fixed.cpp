@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 18:06:52 by fwahl             #+#    #+#             */
-/*   Updated: 2024/07/23 19:01:22 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/07/23 19:55:23 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,18 @@
 Fixed::Fixed() : value(0)
 {
 	std::cout << "Default constructor called" << std::endl;
+}
+
+Fixed::Fixed(const int n)
+{
+	this->value = n << fractBits;
+	std::cout << "Int constructor called" << std::endl;
+}
+
+Fixed::Fixed(const float n)
+{
+	this->value = roundf(n * (1 << fractBits));
+	std::cout << "Float constructor called" << std::endl;
 }
 
 Fixed::Fixed(const Fixed& other)
@@ -44,6 +56,21 @@ void	Fixed::setRawBits(int const raw)
 
 int	Fixed::getRawBits(void) const
 {
-	std::cout << "getRawBits member function called" << std::endl;
 	return (this->value);
+}
+
+float	Fixed::toFloat(void) const
+{
+	return (static_cast<float>(this->value) / (1 << fractBits));
+}
+
+int	Fixed::toInt(void) const
+{
+	return (this->value >> fractBits);
+}
+
+std::ostream& operator<<(std::ostream& os, const Fixed& fixed)
+{
+	os << fixed.toFloat();
+	return (os);
 }
