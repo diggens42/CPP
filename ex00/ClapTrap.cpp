@@ -8,12 +8,20 @@ ClapTrap::ClapTrap() : hp(10), energy(10), atk(0)
 
 ClapTrap::ClapTrap(const std::string& name) : name(name), hp(10), energy(10), atk(0)
 {
-	std::cout << "ClapTrap constructor called for " << getName() << std::endl;
+	std::cout << "ClapTrap constructor called ";
+	if (!getName().empty())
+		std::cout << "for " << getName() << std::endl;
+	else
+		std::cout << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap &other)
 {
-	std::cout << "ClapTrap copy constructor called for " << getName() << std::endl;
+	std::cout << "ClapTrap copy constructor called ";
+	if (!getName().empty())
+		std::cout << "for " << getName() << std::endl;
+	else
+		std::cout << std::endl;
 }
 
 ClapTrap& ClapTrap::operator=(const ClapTrap &other)
@@ -24,14 +32,22 @@ ClapTrap& ClapTrap::operator=(const ClapTrap &other)
 		setHP(other.hp);
 		setEnergy(other.energy);
 		setATK(other.atk);
-		std::cout << "ClapTrap copy assignment operator called for " << getName() << std::endl;
+		std::cout << "ClapTrap copy assignment operator called ";
+		if (!getName().empty())
+			std::cout << "for " << getName() << std::endl;
+		else
+			std::cout << std::endl;
 	}
 	return (*this);
 }
 
 ClapTrap::~ClapTrap()
 {
-	std::cout << "ClapTrap destructor called for " << getName() << std::endl;
+	std::cout << "ClapTrap destructor called ";
+	if (!getName().empty())
+		std::cout << "for " << getName() << std::endl;
+	else
+		std::cout << std::endl;
 }
 
 void	ClapTrap::attack(const std::string& target)

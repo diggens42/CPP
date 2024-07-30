@@ -14,24 +14,40 @@ ScavTrap::ScavTrap(const std::string& name) : ClapTrap(name)
 	setHP(100);
 	setEnergy(50);
 	setATK(20);
-	std::cout << "ScavTrap constructor called" << std::endl;
+	std::cout << "ScavTrap constructor called ";
+	if (!getName().empty())
+		std::cout << "for " << getName() << std::endl;
+	else
+		std::cout << std::endl;
 }
 
 ScavTrap::ScavTrap(const ScavTrap &other)
 {
-	std::cout << "ScavTrap copy constructor called" << std::endl;
+	std::cout << "ScavTrap copy constructor called ";
+	if (!getName().empty())
+		std::cout << "for " << getName() << std::endl;
+	else
+		std::cout << std::endl;
 }
 
 ScavTrap& ScavTrap::operator=(const ScavTrap &other)
 {
 	ClapTrap::operator=(other);
-	std::cout << "ScavTrap assignment operator called" << std::endl;
+	std::cout << "ScavTrap assignment operator called ";
+	if (!getName().empty())
+		std::cout << "for " << getName() << std::endl;
+	else
+		std::cout << std::endl;
 	return (*this);
 }
 
 ScavTrap::~ScavTrap()
 {
-	std::cout << "ScavTrap destructor called" << std::endl;
+	std::cout << "ScavTrap destructor called ";
+	if (!getName().empty())
+		std::cout << "for " << getName() << std::endl;
+	else
+		std::cout << std::endl;
 }
 
 void	ScavTrap::attack(const std::string& target)
