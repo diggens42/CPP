@@ -33,7 +33,7 @@ FragTrap::FragTrap(const FragTrap &other)
 FragTrap& FragTrap::operator=(const FragTrap &other)
 {
 	ClapTrap::operator=(other);
-	std::cout << "FragTrap assignment operator called ";
+	std::cout << "FragTrap copy assignment operator called ";
 	if (!getName().empty())
 		std::cout << "for " << getName() << std::endl;
 	else
@@ -48,4 +48,9 @@ FragTrap::~FragTrap()
 		std::cout << "for " << getName() << std::endl;
 	else
 		std::cout << std::endl;
+}
+
+void	FragTrap::highFivesGuys(void)
+{
+	std::cout << "Gimme a high five bro" << std::endl;
 }
