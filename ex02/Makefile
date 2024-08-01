@@ -1,4 +1,4 @@
-NAME		= claptrap
+NAME		= fragtrap
 
 CXX			= c++
 CFLAGS		= -Wall -Wextra -Werror -std=c++98
