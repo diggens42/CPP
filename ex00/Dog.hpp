@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 20:02:08 by fwahl             #+#    #+#             */
-/*   Updated: 2024/08/20 20:02:11 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/08/21 20:51:58 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ class Dog : public Animal
 		Dog();
 		Dog(const Dog &other);
 		Dog& operator=(const Dog &other);
-		~Dog();
+		~Dog() override;
 		void	makeSound() const override;
 };
 

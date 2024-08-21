@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.hpp                                            :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/20 20:02:29 by fwahl             #+#    #+#             */
-/*   Updated: 2024/08/21 20:52:05 by fwahl            ###   ########.fr       */
+/*   Created: 2024/08/20 20:01:46 by fwahl             #+#    #+#             */
+/*   Updated: 2024/08/21 20:37:46 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CAT_H
-#define CAT_H
-#include "Animal.hpp"
-
-class Cat : public Animal
+#include "Cat.hpp"
+#include "Dog.hpp"
+#include <iostream>
+#include <string>
+int main()
 {
-	public:
-		Cat();
-		Cat(const Cat &other);
-		Cat& operator=(const Cat &other);
-		~Cat() override;
-		void	makeSound() const override;
-};
+const Animal* j = new Dog();
+const Animal* i = new Cat();
+delete j;//should not create a leak
+delete i;
 
-#endif // CAT_H
+return 0;
+}

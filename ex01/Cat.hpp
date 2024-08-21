@@ -6,13 +6,14 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 20:02:29 by fwahl             #+#    #+#             */
-/*   Updated: 2024/08/21 20:52:05 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/08/21 20:51:11 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CAT_H
 #define CAT_H
 #include "Animal.hpp"
+#include "Brain.hpp"
 
 class Cat : public Animal
 {
@@ -22,6 +23,9 @@ class Cat : public Animal
 		Cat& operator=(const Cat &other);
 		~Cat() override;
 		void	makeSound() const override;
+
+	private:
+		Brain* brain;
 };
 
 #endif // CAT_H
