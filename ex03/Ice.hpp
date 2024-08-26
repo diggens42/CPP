@@ -1,22 +1,18 @@
 #ifndef ICE_H
 #define ICE_H
 
-class Ice {
+#include "AMateria.hpp"
+
+class Ice : public AMateria
+{
 	public:
-		// Default constructor
 		Ice();
-
-		// Copy constructor
 		Ice(const Ice &other);
-
-		// Copy assignment operator
 		Ice& operator=(const Ice &other);
-
-		// Destructor
 		~Ice();
 
-	private:
-		// Class members
+		virtual AMateria* clone() const;
+		virtual void use(ICharacter& target);
 };
 
 #endif // ICE_H

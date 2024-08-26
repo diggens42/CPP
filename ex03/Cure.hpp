@@ -1,22 +1,17 @@
 #ifndef CURE_H
 #define CURE_H
+#include "AMateria.hpp"
 
-class Cure {
+class Cure : public AMateria
+{
 	public:
-		// Default constructor
 		Cure();
-
-		// Copy constructor
 		Cure(const Cure &other);
-
-		// Copy assignment operator
 		Cure& operator=(const Cure &other);
-
-		// Destructor
 		~Cure();
 
-	private:
-		// Class members
+		virtual AMateria* clone() const;
+		virtual void use(ICharacter& target);
 };
 
 #endif // CURE_H

@@ -1,30 +1,34 @@
 #include "Cure.hpp"
 #include <iostream>
 
-// Default constructor
-Cure::Cure() {
-	std::cout << "Default constructor called" << std::endl;
-	// Initialization code
+Cure::Cure() : AMateria("Cure")
+{
+	std::cout << "Cure default constructor called" << std::endl;
 }
 
-// Copy constructor
-Cure::Cure(const Cure &other) {
-	std::cout << "Copy constructor called" << std::endl;
-	// Copy initialization code
+Cure::Cure(const Cure &other)
+{
+	std::cout << "Cure copy constructor called" << std::endl;
 }
 
-// Copy assignment operator
-Cure& Cure::operator=(const Cure &other) {
-	// self-assignment check
-	if (this != &other) {
-		std::cout << "Copy assignment operator called" << std::endl;
-		// Copy assignment code
+Cure& Cure::operator=(const Cure &other)
+{
+	if (this != &other)
+	{
+		std::cout << "Cure copy assignment operator called" << std::endl;
 	}
 	return *this;
 }
 
-// Destructor
-Cure::~Cure() {
-	std::cout << "Destructor called" << std::endl;
-	// Cleanup code
+Cure::~Cure()
+{
+	std::cout << "Cure destructor called" << std::endl;
+}
+AMateria* Cure::clone() const
+{
+	return (new Cure());
+}
+void Cure::use(ICharacter& target)
+{
+	std::cout << "* heals " << target.getName() << " wounds *" << std::endl;
 }
