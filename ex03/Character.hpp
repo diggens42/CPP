@@ -22,9 +22,10 @@ class Character : public ICharacter
 	private:
 		std::string			_name;
 		static const int	_slots = 4;
+		static const int	_storage_slots = 256;
 		int					_storage_idx;
 		AMateria*			_inventory[_slots];
-		AMateria*			_storage[256];
+		AMateria*			_storage[_storage_slots];
 
 };
 
