@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Ice.hpp                                            :+:      :+:    :+:   */
+/*   MateriaSource.hpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/28 20:38:45 by fwahl             #+#    #+#             */
-/*   Updated: 2024/08/28 20:45:08 by fwahl            ###   ########.fr       */
+/*   Created: 2024/08/28 20:38:18 by fwahl             #+#    #+#             */
+/*   Updated: 2024/08/28 20:51:05 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ICE_H
-#define ICE_H
+#ifndef MATERIASOURCE_H
+#define MATERIASOURCE_H
 
-#include <iostream>
-#include <string>
-#include "AMateria.hpp"
-#include "Character.hpp"
+#include "IMateriaSource.hpp"
 
-class Ice : public AMateria
+class MateriaSource : public IMateriaSource
 {
 	public:
-		Ice();
-		Ice(const Ice &other);
-		Ice& operator=(const Ice &other);
-		~Ice();
+		MateriaSource();
+		MateriaSource(const MateriaSource &other);
+		MateriaSource& operator=(const MateriaSource &other);
+		~MateriaSource();
 
-		virtual AMateria* clone() const;
-		virtual void use(ICharacter& target);
+	private:
+		// Class members
 };
 
-#endif // ICE_H
+#endif // MATERIASOURCE_H

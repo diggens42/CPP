@@ -1,8 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Character.hpp                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/28 20:39:20 by fwahl             #+#    #+#             */
+/*   Updated: 2024/08/28 20:44:55 by fwahl            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CHARACTER_H
 #define CHARACTER_H
 
 #include "AMateria.hpp"
 #include "ICharacter.hpp"
+#include <iostream>
+#include <string>
 
 class Character : public ICharacter
 {

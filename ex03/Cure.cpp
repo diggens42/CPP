@@ -1,5 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Cure.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/28 20:39:12 by fwahl             #+#    #+#             */
+/*   Updated: 2024/08/28 20:47:17 by fwahl            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Cure.hpp"
-#include <iostream>
 
 Cure::Cure() : AMateria("Cure")
 {
@@ -17,7 +28,7 @@ Cure& Cure::operator=(const Cure &other)
 	{
 		std::cout << "Cure copy assignment operator called" << std::endl;
 	}
-	return *this;
+	return (*this);
 }
 
 Cure::~Cure()

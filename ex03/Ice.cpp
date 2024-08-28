@@ -1,5 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Ice.cpp                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/28 20:38:54 by fwahl             #+#    #+#             */
+/*   Updated: 2024/08/28 20:47:26 by fwahl            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Ice.hpp"
-#include <iostream>
 
 Ice::Ice() : AMateria("Ice")
 {
@@ -17,7 +28,7 @@ Ice& Ice::operator=(const Ice &other)
 	{
 		std::cout << "Ice copy assignment operator called" << std::endl;
 	}
-	return *this;
+	return (*this);
 }
 
 Ice::~Ice()

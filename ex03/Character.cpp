@@ -1,5 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Character.cpp                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/28 20:39:33 by fwahl             #+#    #+#             */
+/*   Updated: 2024/08/28 20:47:46 by fwahl            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Character.hpp"
-#include <iostream>
 
 Character::Character()
 {
@@ -86,7 +97,7 @@ Character& Character::operator=(const Character &other)
 		}
 		std::cout << "Character copy assignment operator called" << std::endl;
 	}
-	return *this;
+	return (*this);
 }
 
 Character::~Character()

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   AMateria.cpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/28 20:40:02 by fwahl             #+#    #+#             */
+/*   Updated: 2024/08/28 20:48:08 by fwahl            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "AMateria.hpp"
 #include <iostream>
 AMateria::AMateria()
@@ -20,7 +32,7 @@ AMateria& AMateria::operator=(const AMateria &other)
 	{
 		std::cout << "Materia copy assignment operator called" << std::endl;
 	}
-	return *this;
+	return (*this);
 }
 
 AMateria::~AMateria()
