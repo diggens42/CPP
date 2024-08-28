@@ -6,12 +6,15 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 20:39:49 by fwahl             #+#    #+#             */
-/*   Updated: 2024/08/28 20:39:51 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/08/28 21:38:45 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef AMATERIA_H
 #define AMATERIA_H
+
+#include <string>
+#include <iostream>
 
 class ICharacter;
 

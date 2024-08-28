@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 20:38:18 by fwahl             #+#    #+#             */
-/*   Updated: 2024/08/28 20:51:05 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/08/28 21:15:03 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define MATERIASOURCE_H
 
 #include "IMateriaSource.hpp"
+#include "AMateria.hpp"
 
 class MateriaSource : public IMateriaSource
 {
@@ -23,8 +24,12 @@ class MateriaSource : public IMateriaSource
 		MateriaSource& operator=(const MateriaSource &other);
 		~MateriaSource();
 
+		void		learnMateria(AMateria* m);
+		AMateria*	createMateria(std::string const & type);
+
 	private:
-		// Class members
+		static const int	_templateMax = 256;
+		AMateria*			_template[_templateMax];
 };
 
 #endif // MATERIASOURCE_H
