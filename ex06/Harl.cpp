@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 19:59:02 by fwahl             #+#    #+#             */
-/*   Updated: 2024/07/21 21:40:54 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/07/22 18:28:51 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,12 @@ void	Harl::complain(std::string lvl)
 		case 0:
 			std::cout << "[DEBUG]" << std::endl;
 			Harl::debug();
-			/* FALLTHROUGH */
 		case 1:
 			std::cout << "[INFO]" << std::endl;
 			Harl::info();
-			/* FALLTHROUGH */
 		case 2:
 			std::cout << "[WARNING]" << std::endl;
 			Harl::warning();
-			/* FALLTHROUGH */
 		case 3:
 			std::cout << "[ERROR]" << std::endl;
 			Harl::error();

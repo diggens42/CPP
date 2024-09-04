@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 18:12:04 by fwahl             #+#    #+#             */
-/*   Updated: 2024/07/16 19:13:03 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/09/03 18:11:47 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 class Zombie
 {
 	private:
-		std::string name;
+		std::string _name;
 
 	public:
 		Zombie(std::string name);
