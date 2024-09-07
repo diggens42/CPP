@@ -6,15 +6,16 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 19:36:24 by fwahl             #+#    #+#             */
-/*   Updated: 2024/07/23 19:40:57 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/09/06 20:52:14 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
+//error check int overflow
 int main( void )
 {
 	Fixed a;
-	Fixed const b( 10 );
+	Fixed const b( 1000000000 );
 	Fixed const c( 42.42f );
 	Fixed const d( b );
 	a = Fixed( 1234.4321f );
