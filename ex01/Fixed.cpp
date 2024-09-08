@@ -6,11 +6,13 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 18:06:52 by fwahl             #+#    #+#             */
-/*   Updated: 2024/09/07 22:07:48 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/09/08 20:46:31 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
+
+const float FLOAT_MAX = 3.40282347e+38f;
 
 Fixed::Fixed() : _value(0)
 {
@@ -20,21 +22,25 @@ Fixed::Fixed() : _value(0)
 Fixed::Fixed(const int n)
 {
 	std::cout << "Int constructor called" << std::endl;
-	try
+	if (n > (INT_MAX >> _fractBits))
 	{
-		setValue(n);
-	}
-	catch(const std::overflow_error& e)
-	{
-		std::cerr << e.what() << std::endl;
+		std::cerr << "Int overflow error" << std::endl;
 		std::exit(EXIT_FAILURE);
 	}
+	else
+		this->_value = n << _fractBits;
 }
 
 Fixed::Fixed(const float n)
 {
-	this->_value = roundf(n * (1 << _fractBits));
 	std::cout << "Float constructor called" << std::endl;
+	if (n > roundf(FLOAT_MAX / (1 << _fractBits)))
+	{
+		std::cerr << "Float overflow error" << std::endl;
+		std::exit(EXIT_FAILURE);
+	}
+	else
+		this->_value = roundf(n * (1 << _fractBits));
 }
 
 Fixed::Fixed(const Fixed& other)
@@ -83,10 +89,3 @@ std::ostream& operator<<(std::ostream& os, const Fixed& fixed)
 	return (os);
 }
 
-void	Fixed::setValue(int n)
-{
-	if (n > (INT_MAX >> _fractBits))
-		throw std::overflow_error("Value too big(INT oveflow)");
-	else
-		this->_value = n << _fractBits;
-}

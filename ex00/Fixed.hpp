@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 19:36:43 by fwahl             #+#    #+#             */
-/*   Updated: 2024/07/23 18:09:29 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/09/06 18:44:52 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 class Fixed
 {
 	private:
-		int					value;
-		static const int	fractBits = 8;
+		int					_value;
+		static const int	_fractBits = 8;
 	public:
 		Fixed(); //default constructor
 		Fixed(const Fixed& other);// copy constructor

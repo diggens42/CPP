@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 19:36:43 by fwahl             #+#    #+#             */
-/*   Updated: 2024/09/07 22:00:36 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/09/08 20:46:49 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ class Fixed
 
 		int		getRawBits(void) const;
 		void	setRawBits(int const raw);
-		void	setValue(int n);
 		float	toFloat(void) const;
 		int		toInt(void) const;
 };
