@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 00:04:43 by fwahl             #+#    #+#             */
-/*   Updated: 2024/07/26 00:15:54 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/09/06 20:54:53 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,7 @@ bool bsp(Point const a, Point const b, Point const c, Point const point)
 
     // Check if the point is on any edge or vertex
 	if (area1 == 0 || area2 == 0 || area3 == 0)
-	{
 		return false;
-    }
 
 	bool sameSign = (mainArea > 0 && area1 > 0 && area2 > 0 && area3 > 0) ||
 					(mainArea < 0 && area1 < 0 && area2 < 0 && area3 < 0);
