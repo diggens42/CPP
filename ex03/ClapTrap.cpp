@@ -1,12 +1,12 @@
 #include "ClapTrap.hpp"
 
 
-ClapTrap::ClapTrap() : hp(10), energy(10), atk(0)
+ClapTrap::ClapTrap() : _hp(10), _energy(10), _atk(0)
 {
 	std::cout << "ClapTrap default constructor called" << std::endl;
 }
 
-ClapTrap::ClapTrap(const std::string& name) : name(name), hp(10), energy(10), atk(0)
+ClapTrap::ClapTrap(const std::string& name) : _name(name), _hp(10), _energy(10), _atk(0)
 {
 	std::cout << "ClapTrap constructor called ";
 	if (!getName().empty())
@@ -28,10 +28,10 @@ ClapTrap& ClapTrap::operator=(const ClapTrap &other)
 {
 	if (this != &other)
 	{
-		setName(other.name);
-		setHP(other.hp);
-		setEnergy(other.energy);
-		setATK(other.atk);
+		setName(other._name);
+		setHP(other._hp);
+		setEnergy(other._energy);
+		setATK(other._atk);
 		std::cout << "ClapTrap copy assignment operator called ";
 		if (!getName().empty())
 			std::cout << "for " << getName() << std::endl;
@@ -54,13 +54,13 @@ void	ClapTrap::attack(const std::string& target)
 {
 	if (getHP() > 0 && getEnergy() > 0)
 	{
-		std::cout << getName() << " attacks " << target << " and deals " << getATK() << " damage " << std::endl;
+		std::cout << "ClapTrap " << getName() << " attacks " << target << " and deals " << getATK() << " damage " << std::endl;
 		setEnergy(getEnergy() - 1);
 	}
 	else if (getHP() == 0)
-		std::cout << getName() << " can't attack " << target << " because it's technically dead (0 HP)" << std::endl;
+		std::cout << "ClapTrap " << getName() << " can't attack " << target << " because it's technically dead (0 HP)" << std::endl;
 	else if (getEnergy() == 0)
-		std::cout  << getName() << " can't attack " << target << " because its energy is too low" << std::endl;
+		std::cout  << "ClapTrap " << getName() << " can't attack " << target << " because its energy is too low" << std::endl;
 }
 
 void	ClapTrap::takeDamage(unsigned int amount)
@@ -89,42 +89,42 @@ void	ClapTrap::beRepaired(unsigned int amount)
 
 std::string		ClapTrap::getName() const
 {
-	return (name);
+	return (_name);
 }
 
 unsigned int	ClapTrap::getHP() const
 {
-	return (hp);
+	return (_hp);
 }
 
 unsigned int	ClapTrap::getEnergy() const
 {
-	return (energy);
+	return (_energy);
 }
 
 unsigned int	ClapTrap::getATK() const
 {
-	return (atk);
+	return (_atk);
 }
 
 
 void			ClapTrap::setName(const std::string& set_name)
 {
-	name = set_name;
+	_name = set_name;
 }
 
 void			ClapTrap::setHP(unsigned int set_hp)
 {
-	hp = set_hp;
+	_hp = set_hp;
 }
 
 void			ClapTrap::setEnergy(unsigned int set_energy)
 {
-	energy = set_energy;
+	_energy = set_energy;
 }
 
 void			ClapTrap::setATK(unsigned int set_atk)
 {
-	atk = set_atk;
+	_atk = set_atk;
 }
 
