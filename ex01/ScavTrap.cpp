@@ -21,7 +21,7 @@ ScavTrap::ScavTrap(const std::string& name) : ClapTrap(name)
 		std::cout << std::endl;
 }
 
-ScavTrap::ScavTrap(const ScavTrap &other)
+ScavTrap::ScavTrap(const ScavTrap &other) : ClapTrap(other)
 {
 	std::cout << "ScavTrap copy constructor called ";
 	if (!getName().empty())

@@ -1,13 +1,21 @@
 #include "ClapTrap.hpp"
 
 
-ClapTrap::ClapTrap() : _hp(10), _energy(10), _atk(0)
+ClapTrap::ClapTrap()
 {
+	// setName("default");
+	setHP(10);
+	setEnergy(10);
+	setATK(0);
 	std::cout << "ClapTrap default constructor called" << std::endl;
 }
 
-ClapTrap::ClapTrap(const std::string& name) : _name(name), _hp(10), _energy(10), _atk(0)
+ClapTrap::ClapTrap(const std::string& name)
 {
+	setName(name);
+	setHP(10);
+	setEnergy(10);
+	setATK(0);
 	std::cout << "ClapTrap constructor called ";
 	if (!getName().empty())
 		std::cout << "for " << getName() << std::endl;
@@ -17,6 +25,10 @@ ClapTrap::ClapTrap(const std::string& name) : _name(name), _hp(10), _energy(10),
 
 ClapTrap::ClapTrap(const ClapTrap &other)
 {
+	setName(other._name);
+	setHP(other._hp);
+	setEnergy(other._energy);
+	setATK(other._atk);
 	std::cout << "ClapTrap copy constructor called ";
 	if (!getName().empty())
 		std::cout << "for " << getName() << std::endl;

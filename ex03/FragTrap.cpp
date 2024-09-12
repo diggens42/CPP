@@ -25,7 +25,7 @@ void	FragTrap::init(void)
 }
 
 
-FragTrap::FragTrap(const FragTrap &other)
+FragTrap::FragTrap(const FragTrap &other) : ClapTrap(other)
 {
 	std::cout << "FragTrap copy constructor called ";
 	if (!getName().empty())
