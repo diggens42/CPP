@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 20:02:35 by fwahl             #+#    #+#             */
-/*   Updated: 2024/08/21 20:50:54 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/09/14 21:31:14 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,14 @@
 
 Cat::Cat()
 {
-	type = "Cat";
+	setType("Cat");
 	std::cout << "Cat default constructor called" << std::endl;
 }
 
 Cat::Cat(const Cat &other)
 {
 	std::cout << "Cat copy constructor called" << std::endl;
+	*this = other;
 }
 
 Cat& Cat::operator=(const Cat &other)

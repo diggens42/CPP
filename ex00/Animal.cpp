@@ -6,14 +6,14 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 20:02:58 by fwahl             #+#    #+#             */
-/*   Updated: 2024/08/20 20:20:49 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/09/14 21:30:40 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Animal.hpp"
 #include <iostream>
 
-Animal::Animal() : type("Animal")
+Animal::Animal() : _type("Animal")
 {
 	std::cout << "Animal default constructor called" << std::endl;
 }
@@ -21,6 +21,7 @@ Animal::Animal() : type("Animal")
 Animal::Animal(const Animal &other)
 {
 	std::cout << "Animal copy constructor called" << std::endl;
+	*this = other;
 }
 
 Animal& Animal::operator=(const Animal &other)
@@ -44,5 +45,10 @@ void	Animal::makeSound() const
 
 std::string Animal::getType() const
 {
-	return (type);
+	return (_type);
+}
+
+void	Animal::setType(std::string type)
+{
+	this->_type = type;
 }
