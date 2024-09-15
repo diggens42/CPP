@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 20:01:46 by fwahl             #+#    #+#             */
-/*   Updated: 2024/09/15 17:22:06 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/09/15 21:04:22 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,37 +16,49 @@
 #include "WrongAnimal.hpp"
 #include <iostream>
 #include <string>
-int main(void)
+// int main(void)
+// {
+// 	Dog doge;
+// 	std::cout << "-------" << std::endl;
+// 	Dog doge2(doge);
+
+// 	doge.makeSound();
+// 	doge2.makeSound();
+
+// }
+
+int main()
 {
 	std::cout << "--------------------------------" << std::endl;
-	std::cout << "Test Animal, Dog and Cat class: " << std::endl;
+	std::cout << "        Test animal array       " << std::endl;
 	std::cout << "--------------------------------" << std::endl;
-	Animal* doge = new Dog();
-	Animal* katzer = new Cat();
-	Animal* animal = new Animal();
-	
-	std::cout << "This animal is of the type " << doge->getType() << " and makes the sound "  << std::endl;
-	doge->makeSound();
-	std::cout << "This animal is of the type " << katzer->getType() << " and makes the sound " << std::endl;
-	katzer->makeSound();
-	std::cout << "This animal is of the type " << animal->getType() << " and makes the sound " << std::endl;
-	animal->makeSound();
-	delete doge;
-	delete katzer;
-	delete animal;
+	const int size = 6;
+	Animal* animals[size];
 
+	for (int i = 0; i < size / 2; ++i)
+		animals[i] = new Dog();
+	for (int i = size / 2; i < size; ++i)
+		animals[i] = new Cat();
+	for (int i = 0; i < size; ++i)
+		animals[i]->makeSound();
+	for (int i = 0; i < size; ++i)
+		delete animals[i];
 
 	std::cout << "--------------------------------" << std::endl;
-	std::cout << "Test WrongAnimal and WrongCat class: " << std::endl;
+	std::cout << "        Test brain & ideas      " << std::endl;
 	std::cout << "--------------------------------" << std::endl;
-	WrongAnimal* falscherkatzer = new WrongCat();
-	WrongAnimal* wronganimal = new WrongAnimal();
 
+	Dog*	snoop_doge = new Dog();
+	Dog		doge2;
+	snoop_doge->getBrain()->setIdea("eat", 0);
+	doge2.getBrain()->setIdea("sleep",0);
+	std::cout << "Idea[0] Dog1" << snoop_doge->getBrain()->getIdea(0) <<std::endl;
+	std::cout << "Idea[0] Dog2" << doge2.getBrain()->getIdea(0) <<std::endl;
 
-	std::cout << "This animal is of the type " << falscherkatzer->getType() << " and makes the sound " << std::endl;
-	falscherkatzer->makeSound();
-	std::cout << "This animal is of the type " << wronganimal->getType() << " and makes the sound " << std::endl;
-	wronganimal->makeSound();
-	delete falscherkatzer;
-	delete wronganimal;
+	doge2 = *snoop_doge;
+	std::cout << "Idea[0] Dog1" << snoop_doge->getBrain()->getIdea(0) <<std::endl;
+	std::cout << "Idea[0] Dog2" << doge2.getBrain()->getIdea(0) <<std::endl;
+
+	delete snoop_doge;
+	return 0;
 }

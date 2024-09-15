@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 20:02:58 by fwahl             #+#    #+#             */
-/*   Updated: 2024/09/14 21:30:40 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/09/15 18:53:49 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ Animal& Animal::operator=(const Animal &other)
 {
 	if (this != &other)
 	{
+		setType(other._type);
 		std::cout << "Animal copy assignment operator called" << std::endl;
 	}
 	return (*this);
