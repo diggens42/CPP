@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 20:02:48 by fwahl             #+#    #+#             */
-/*   Updated: 2024/08/21 21:05:51 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/09/15 21:42:17 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 class AAnimal
 {
 	protected:
-		std::string type;
+		std::string _type;
 	public:
 		AAnimal();
 		AAnimal(const AAnimal &other);

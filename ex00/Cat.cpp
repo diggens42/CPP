@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 20:02:35 by fwahl             #+#    #+#             */
-/*   Updated: 2024/09/14 21:31:14 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/09/15 18:58:06 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ Cat& Cat::operator=(const Cat &other)
 {
 	if (this != &other)
 	{
+		Animal::operator=(other);
 		std::cout << "Cat copy assignment operator called" << std::endl;
 	}
 	return *this;
