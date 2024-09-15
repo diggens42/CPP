@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 20:02:08 by fwahl             #+#    #+#             */
-/*   Updated: 2024/08/21 20:51:25 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/09/14 18:07:28 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #define DOG_H
 
 #include "Animal.hpp"
-#include "Brain.hpp"
 
 class Dog : public Animal
 {
@@ -22,10 +21,8 @@ class Dog : public Animal
 		Dog();
 		Dog(const Dog &other);
 		Dog& operator=(const Dog &other);
-		~Dog() override;
+		~Dog();
 		void	makeSound() const override;
-	private:
-		Brain* brain;
 };
 
 #endif // DOG_H

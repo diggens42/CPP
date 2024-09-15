@@ -6,33 +6,30 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 20:02:21 by fwahl             #+#    #+#             */
-/*   Updated: 2024/08/21 19:47:14 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/09/14 21:31:25 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Dog.hpp"
 #include <iostream>
 
-Dog::Dog() : Animal()
+Dog::Dog()
 {
-	type = "Dog";
-	brain = new Brain();
+	setType("Dog");
 	std::cout << "Dog default constructor called" << std::endl;
 }
 
-Dog::Dog(const Dog &other) : Animal(other)
+Dog::Dog(const Dog &other)
 {
-	brain = new Brain(*other.brain);
 	std::cout << "Dog copy constructor called" << std::endl;
+	*this = other;
 }
 
 Dog& Dog::operator=(const Dog &other)
 {
 	if (this != &other)
 	{
-		Animal::operator=(other);
-		delete brain;
-		brain = new Brain(*other.brain);
+		setType(other._type);
 		std::cout << "Dog copy assignment operator called" << std::endl;
 	}
 	return *this;
@@ -40,7 +37,6 @@ Dog& Dog::operator=(const Dog &other)
 
 Dog::~Dog()
 {
-	delete brain;
 	std::cout << "Dog destructor called" << std::endl;
 }
 
