@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 21:35:05 by fwahl             #+#    #+#             */
-/*   Updated: 2024/08/28 21:38:01 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/09/17 20:11:01 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int main()
 	ICharacter* bob = new Character("bob");
 	me->use(0, *bob);
 	me->use(1, *bob);
+
+
 	delete bob;
 	delete me;
 	delete src;

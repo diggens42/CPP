@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 20:38:54 by fwahl             #+#    #+#             */
-/*   Updated: 2024/08/29 20:38:00 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/09/17 18:30:16 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,14 @@ Ice::Ice() : AMateria("ice")
 Ice::Ice(const Ice &other)
 {
 	std::cout << "Ice copy constructor called" << std::endl;
+	*this = other;
 }
 
 Ice& Ice::operator=(const Ice &other)
 {
 	if (this != &other)
 	{
+		AMateria::operator=(other);
 		std::cout << "Ice copy assignment operator called" << std::endl;
 	}
 	return (*this);

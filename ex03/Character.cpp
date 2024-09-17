@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 20:39:33 by fwahl             #+#    #+#             */
-/*   Updated: 2024/09/17 18:03:38 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/09/17 19:59:10 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,10 @@ Character::Character()
 	}
 }
 
-Character::Character(std::string const & name) : _name(name)
+Character::Character(std::string const & name)
 {
 	std::cout << "Character named constructor called" << std::endl;
+	setName(name);
 	int	i = 0;
 	while (i < _slots)
 	{
@@ -159,7 +160,7 @@ void	Character::unequip(int idx)
 		}
 		_storage_idx = 0;
 	}
-	_storage[_storage_idx] = _inventory[idx];
+	setStorage(getStorageIndex(), getInventory(idx));
 	_inventory[idx] = nullptr;
 	_storage_idx++;
 }
@@ -177,4 +178,35 @@ void	Character::use(int idx, ICharacter& target)
 std::string const & Character::getName() const
 {
 	return (_name);
+}
+
+void	Character::setName(std::string const & name)
+{
+	this->_name = name;
+}
+
+AMateria*	Character::getInventory(int idx) const
+{
+	if (idx >= 0 && idx < _slots && _inventory[idx] != nullptr)
+		return _storage[idx];
+	return (nullptr);
+}
+
+AMateria*	Character::getStorage(int idx) const
+{
+	if (idx >= 0 && idx < _storage_slots && _storage[idx] != nullptr)
+		return (_storage[idx]);
+	return (nullptr);
+}
+
+void		Character::setStorage(int idx, AMateria *m)
+{
+	if (idx >= 0 && idx < _storage_slots && m != nullptr)
+		_storage[idx] = m;
+	else if (m == nullptr)
+		_storage[idx] = nullptr;
+}
+int			Character::getStorageIndex() const
+{
+	return (this->_storage_idx);
 }

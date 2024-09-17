@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 20:39:20 by fwahl             #+#    #+#             */
-/*   Updated: 2024/08/28 20:44:55 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/09/17 19:54:25 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,13 @@ class Character : public ICharacter
 		void	unequip(int idx);
 		void	use(int idx, ICharacter& target);
 
-		std::string const & getName() const;
+		std::string	const & getName() const;
+		void		setName(std::string const & name);
+		AMateria*	getInventory(int idx) const;
+		AMateria*	getStorage(int idx) const;
+		void		setStorage(int idx, AMateria *m);
+		int			getStorageIndex() const;
+
 
 	private:
 		std::string			_name;
