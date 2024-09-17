@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 20:39:33 by fwahl             #+#    #+#             */
-/*   Updated: 2024/08/28 20:47:46 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/09/17 18:03:38 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ Character::Character()
 	int	i = 0;
 	while (i < _slots)
 	{
-		_inventory[i] = NULL;
+		_inventory[i] = nullptr;
 		i++;
 	}
 	i = 0;
 	while (i < _storage_slots)
 	{
-		_storage[i] = NULL;
+		_storage[i] = nullptr;
 		i++;
 	}
 }
@@ -35,13 +35,13 @@ Character::Character(std::string const & name) : _name(name)
 	int	i = 0;
 	while (i < _slots)
 	{
-		_inventory[i] = NULL;
+		_inventory[i] = nullptr;
 		i++;
 	}
 	i = 0;
 	while (i < _storage_slots)
 	{
-		_storage[i] = NULL;
+		_storage[i] = nullptr;
 		i++;
 	}
 }
@@ -52,13 +52,13 @@ Character::Character(const Character &other)
 	int	i = 0;
 	while (i < _slots)
 	{
-		_inventory[i] = NULL;
+		_inventory[i] = nullptr;
 		i++;
 	}
 	i = 0;
 	while (i < _storage_slots)
 	{
-		_storage[i] = NULL;
+		_storage[i] = nullptr;
 		i++;
 	}
 	*this = other;
@@ -74,24 +74,24 @@ Character& Character::operator=(const Character &other)
 		int i = 0;
 		while (i < _slots)
 		{
-			if (_inventory[i] != NULL)
+			if (_inventory[i] != nullptr)
 			{
 				delete _inventory[i];
-				_inventory[i] = NULL;
+				_inventory[i] = nullptr;
 			}
-			if (other._inventory[i] != NULL)
+			if (other._inventory[i] != nullptr)
 				_inventory[i] = other._inventory[i]->clone();
 			i++;
 		}
 		i = 0;
 		while (i < _storage_slots)
 		{
-			if (_storage[i] != NULL)
+			if (_storage[i] != nullptr)
 			{
 				delete _storage[i];
-				_storage[i] = NULL;
+				_storage[i] = nullptr;
 			}
-			if (other._storage[i] != NULL)
+			if (other._storage[i] != nullptr)
 				_storage[i] = other._storage[i]->clone();
 			i++;
 		}
@@ -105,14 +105,14 @@ Character::~Character()
 	int i = 0;
 	while (i < _slots)
 	{
-		if (_inventory[i] != NULL)
+		if (_inventory[i] != nullptr)
 			delete _inventory[i];
 		i++;
 	}
 	i = 0;
 	while (i < _storage_slots)
 	{
-		if (_storage[i] != NULL)
+		if (_storage[i] != nullptr)
 			delete _storage[i];
 		i++;
 	}
@@ -124,7 +124,7 @@ void	Character::equip(AMateria* m)
 	int i = 0;
 	while (i < _slots)
 	{
-		if (_inventory[i] == NULL)
+		if (_inventory[i] == nullptr)
 		{
 			_inventory[i] = m;
 			std::cout << "Materia of type " << m->getType() << " equipped to inventory slot " << i << std::endl;
@@ -142,7 +142,7 @@ void	Character::unequip(int idx)
 		std::cout << "Invalid Index [0 - 3]" << std::endl;
 		return ;
 	}
-	if (_inventory[idx] == NULL)
+	if (_inventory[idx] == nullptr)
 	{
 		std::cout << "Nothing equipped on inventory slot " << idx << std::endl;
 		return ;
@@ -154,13 +154,13 @@ void	Character::unequip(int idx)
 		while (i < _storage_slots)
 		{
 			delete _storage[i];
-			_storage[i] = NULL;
+			_storage[i] = nullptr;
 			i++;
 		}
 		_storage_idx = 0;
 	}
 	_storage[_storage_idx] = _inventory[idx];
-	_inventory[idx] = NULL;
+	_inventory[idx] = nullptr;
 	_storage_idx++;
 }
 
@@ -168,7 +168,7 @@ void	Character::use(int idx, ICharacter& target)
 {
 	if (idx < 0 || idx >= _slots)
 		std::cout << "Invalid inventory index" << std::endl;
-	else if (_inventory[idx] == NULL)
+	else if (_inventory[idx] == nullptr)
 		std::cout << "No item equipped on this slot" << std::endl;
 	else
 		_inventory[idx]->use(target);

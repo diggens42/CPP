@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 20:38:02 by fwahl             #+#    #+#             */
-/*   Updated: 2024/08/28 21:34:36 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/09/17 18:03:38 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ MateriaSource::MateriaSource()
 	int i = 0;
 	while (i < _templateMax)
 	{
-		_template[i] = NULL;
+		_template[i] = nullptr;
 		i++;
 	}
 	std::cout << "MateriaSource default constructor called" << std::endl;
@@ -29,10 +29,10 @@ MateriaSource::MateriaSource(const MateriaSource &other)
 	int i = 0;
 	while (i < _templateMax)
 	{
-		if (_template[i] != NULL)
+		if (_template[i] != nullptr)
 		{
 			delete _template[i];
-			_template[i] = NULL;
+			_template[i] = nullptr;
 		}
 		i++;
 	}
@@ -47,17 +47,17 @@ MateriaSource& MateriaSource::operator=(const MateriaSource &other)
 		int i = 0;
 		while (i < _templateMax)
 		{
-			if (_template[i] != NULL)
+			if (_template[i] != nullptr)
 			{
 				delete _template[i];
-				_template[i] = NULL;
+				_template[i] = nullptr;
 			}
 			i++;
 		}
 		i = 0;
 		while (i < _templateMax)
 		{
-			if (other._template[i] != NULL)
+			if (other._template[i] != nullptr)
 				_template[i] = other._template[i]->clone();
 			i++;
 		}
@@ -71,7 +71,7 @@ MateriaSource::~MateriaSource()
 	int i = 0;
 	while (i < _templateMax)
 	{
-		if (_template[i] != NULL)
+		if (_template[i] != nullptr)
 			delete _template[i];
 		i++;
 	}
@@ -83,7 +83,7 @@ void	MateriaSource::learnMateria(AMateria* m)
 	int i = 0;
 	while (i < _templateMax)
 	{
-		if (_template[i] == NULL)
+		if (_template[i] == nullptr)
 		{
 			_template[i] = m;
 			return ;
@@ -97,10 +97,10 @@ AMateria*	MateriaSource::createMateria(std::string const & type)
 	int i = 0;
 	while (i < _templateMax)
 	{
-		if (_template[i] != NULL && _template[i]->getType() == type)
+		if (_template[i] != nullptr && _template[i]->getType() == type)
 			return _template[i]->clone();
 		i++;
 	}
 	std::cerr << "No matching templates" <<std::endl;
-	return (NULL);
+	return (nullptr);
 }
