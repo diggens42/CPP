@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 20:38:02 by fwahl             #+#    #+#             */
-/*   Updated: 2024/09/17 18:03:38 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/09/20 17:45:42 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ MateriaSource::MateriaSource()
 
 MateriaSource::MateriaSource(const MateriaSource &other)
 {
+	std::cout << "MateriaSource copy constructor called" << std::endl;
 	int i = 0;
 	while (i < _templateMax)
 	{
@@ -36,7 +37,6 @@ MateriaSource::MateriaSource(const MateriaSource &other)
 		}
 		i++;
 	}
-	std::cout << "MateriaSource copy constructor called" << std::endl;
 	*this = other;
 }
 
@@ -58,7 +58,7 @@ MateriaSource& MateriaSource::operator=(const MateriaSource &other)
 		while (i < _templateMax)
 		{
 			if (other._template[i] != nullptr)
-				_template[i] = other._template[i]->clone();
+				_template[i] = other._template[i];
 			i++;
 		}
 		std::cout << "MateriaSource copy assignment operator called" << std::endl;
@@ -68,14 +68,17 @@ MateriaSource& MateriaSource::operator=(const MateriaSource &other)
 
 MateriaSource::~MateriaSource()
 {
+	std::cout << "MateriaSource destructor called" << std::endl;
 	int i = 0;
 	while (i < _templateMax)
 	{
 		if (_template[i] != nullptr)
+		{
 			delete _template[i];
+			_template[i] = nullptr;
+		}
 		i++;
 	}
-	std::cout << "MateriaSource destructor called" << std::endl;
 }
 
 void	MateriaSource::learnMateria(AMateria* m)
@@ -91,6 +94,7 @@ void	MateriaSource::learnMateria(AMateria* m)
 		i++;
 	}
 	std::cerr << "Can't add new template because templates are full" << std::endl;
+	delete m;
 }
 AMateria*	MateriaSource::createMateria(std::string const & type)
 {

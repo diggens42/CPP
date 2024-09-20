@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 20:39:33 by fwahl             #+#    #+#             */
-/*   Updated: 2024/09/17 19:59:10 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/09/20 18:33:15 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ Character::Character()
 		_storage[i] = nullptr;
 		i++;
 	}
+	setName("random");
 }
 
 Character::Character(std::string const & name)
@@ -103,21 +104,27 @@ Character& Character::operator=(const Character &other)
 
 Character::~Character()
 {
+	std::cout << "Character destructor called" << std::endl;
 	int i = 0;
 	while (i < _slots)
 	{
 		if (_inventory[i] != nullptr)
+		{
 			delete _inventory[i];
+			_inventory[i] = nullptr;
+		}
 		i++;
 	}
 	i = 0;
 	while (i < _storage_slots)
 	{
 		if (_storage[i] != nullptr)
+		{
 			delete _storage[i];
+			_storage[i] = nullptr;
+		}
 		i++;
 	}
-	std::cout << "Character destructor called" << std::endl;
 }
 
 void	Character::equip(AMateria* m)
@@ -162,6 +169,7 @@ void	Character::unequip(int idx)
 	}
 	setStorage(getStorageIndex(), getInventory(idx));
 	_inventory[idx] = nullptr;
+	std::cout << "Materia of type " << _storage[getStorageIndex()]->getType() << " unequipped to storage idx " << getStorageIndex() << std::endl;
 	_storage_idx++;
 }
 
@@ -188,7 +196,7 @@ void	Character::setName(std::string const & name)
 AMateria*	Character::getInventory(int idx) const
 {
 	if (idx >= 0 && idx < _slots && _inventory[idx] != nullptr)
-		return _storage[idx];
+		return _inventory[idx];
 	return (nullptr);
 }
 

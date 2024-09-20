@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 20:38:54 by fwahl             #+#    #+#             */
-/*   Updated: 2024/09/17 18:30:16 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/09/20 17:51:04 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ Ice::Ice() : AMateria("ice")
 	std::cout << "Ice default constructor called" << std::endl;
 }
 
-Ice::Ice(const Ice &other)
+Ice::Ice(const Ice &other) : AMateria(other)
 {
 	std::cout << "Ice copy constructor called" << std::endl;
 	*this = other;

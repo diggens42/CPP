@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 20:39:12 by fwahl             #+#    #+#             */
-/*   Updated: 2024/09/17 18:29:27 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/09/20 17:51:20 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ Cure::Cure() : AMateria("cure")
 	std::cout << "Cure default constructor called" << std::endl;
 }
 
-Cure::Cure(const Cure &other)
+Cure::Cure(const Cure &other) : AMateria(other)
 {
 	std::cout << "Cure copy constructor called" << std::endl;
 	*this = other;
