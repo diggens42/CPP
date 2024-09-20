@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 20:02:48 by fwahl             #+#    #+#             */
-/*   Updated: 2024/09/15 21:42:17 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/09/20 16:53:17 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ class AAnimal
 		virtual ~AAnimal();
 		virtual void makeSound() const = 0;
 		std::string getType() const;
+		void	setType(std::string type);
 };
 
 #endif // ANIMAL_H

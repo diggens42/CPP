@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 20:01:46 by fwahl             #+#    #+#             */
-/*   Updated: 2024/09/15 21:04:22 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/09/20 16:45:47 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,13 @@ int main()
 	std::cout << "Idea[0] Dog1" << snoop_doge->getBrain()->getIdea(0) <<std::endl;
 	std::cout << "Idea[0] Dog2" << doge2.getBrain()->getIdea(0) <<std::endl;
 
+	std::cout << "--------------------------------" << std::endl;
+	std::cout << "         Test deep copy         " << std::endl;
+	std::cout << "--------------------------------" << std::endl;
+
+	snoop_doge->getBrain()->setIdea("chase stick", 0);
+	std::cout << "Idea[0] Dog1" << snoop_doge->getBrain()->getIdea(0) <<std::endl;
+	std::cout << "Idea[0] Dog2" << doge2.getBrain()->getIdea(0) <<std::endl;
 	delete snoop_doge;
 	return 0;
 }
