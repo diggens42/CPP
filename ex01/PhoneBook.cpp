@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 17:11:14 by fwahl             #+#    #+#             */
-/*   Updated: 2024/07/16 18:22:46 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/09/21 17:23:05 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ std::string	PhoneBook::truncate(const std::string& string) const
 	return (string);
 }
 
-void PhoneBook::add_contact(const Contact& contact)
+void PhoneBook::addContact(const Contact& contact)
 {
 	if (i < 8)
 	{
@@ -36,7 +36,7 @@ void PhoneBook::add_contact(const Contact& contact)
 	}
 }
 
-bool PhoneBook::search_contact() const
+bool PhoneBook::searchContact() const
 {
 	if (i == 0)
 	{
@@ -55,9 +55,9 @@ bool PhoneBook::search_contact() const
 	{
 		std::cout
 			<< std::setw(10) << j << "|"
-			<< std::setw(10) << truncate(contacts[j].get_firstname()) << "|"
-			<< std::setw(10) << truncate(contacts[j].get_lastname()) << "|"
-			<< std::setw(10) << truncate(contacts[j].get_nickname()) <<
+			<< std::setw(10) << truncate(contacts[j].getFirstName()) << "|"
+			<< std::setw(10) << truncate(contacts[j].getLastName()) << "|"
+			<< std::setw(10) << truncate(contacts[j].getNickName()) <<
 		std::endl;
 		j++;
 	}
@@ -74,61 +74,96 @@ bool PhoneBook::search_contact() const
 	}
 	std::cout << std::endl;
 	if (idx >= 0 && idx < 8 && idx < i)
-		contacts[idx].print_contact();
+		contacts[idx].getContact();
 	else
 		std::cout << "Invalid index." << std::endl;
 	return (true);
 }
 
-int	main()
+
+bool	readStrToVar(std::string& var)
 {
-	PhoneBook	phonebook;
+	while (true)
+	{
+		std::getline(std::cin, var);
+
+		if (std::cin.eof())
+		{
+			std::cout << "EOF detected";
+			return (false);
+		}
+		if (std::cin.fail())
+		{
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cout << "Invalid input, please try again";
+		}
+		else if (var.empty())
+		{
+			std::cout << "Input can't be empty, please try again: ";
+		}
+		else
+			break ;
+	}
+	std::cout << std::endl;
+	return (true);
+}
+
+int main(void)
+{
+	PhoneBook phonebook;
+
 	std::string	cmd;
 
-	while(1337)
+	while (true)
 	{
 		std::cout << "Commands: ADD, SEARCH, EXIT" << std::endl;
-		std::cin >> cmd;
-
+		if (!readStrToVar(cmd))
+			break ;
 		if (cmd == "ADD")
 		{
-			Contact new_contact;
-			std::string first, last, nick, phone, secret;
-			std::cout << "Enter first name 🌚  ";
-			std::cin >> first;
-			if (first.empty())
+			Contact	newcontact;
+
+			std::string first;
+			std::cout << "Enter firstname: ";
+			if (!readStrToVar(first))
 				break ;
-			std::cout << "Enter last name 🌝  ";
-			std::cin >> last;
-			if (last.empty())
+
+			std::string last;
+			std::cout << "Enter lastname: ";
+			if (!readStrToVar(last))
 				break ;
-			std::cout << "Enter nick name 🗿  ";
-			std::cin >> nick;
-			if (nick.empty())
+
+			std::string nick;
+			std::cout << "Enter nickname: ";
+			if (!readStrToVar(nick))
 				break ;
-			std::cout << "Enter phonenumber 📞  ";
-			if (phone.empty())
+
+			std::string phone;
+			std::cout << "Enter phonenumber: ";
+			if (!readStrToVar(phone))
 				break ;
-			// check for numeric arg
-			std::cout << "Enter your darkest secret 🍆  ";
-			std::cin >> secret;
-			if (secret.empty())
+
+			std::string secret;
+			std::cout << "Enter your darkest secret: ";
+			if (!readStrToVar(secret))
 				break ;
-			new_contact.set_contact(first, last, nick, phone, secret);
-			phonebook.add_contact(new_contact);
-			std::cout << "Contact added" << std::endl;
+
+			newcontact.setContact(first, last, nick, phone, secret);
+			phonebook.addContact(newcontact);
+			std::cout << "New contact added to phonebook" << std::endl;
 		}
 		else if (cmd == "SEARCH")
 		{
-			if (!phonebook.search_contact())
+			if (!phonebook.searchContact())
 				break ;
 		}
-		else if (cmd == "EXIT" || cmd.empty())
+		else if (cmd == "EXIT")
 			break ;
 		else
-			std::cout << "invalid command" << std::endl;
+			std::cout << "Invalid command, please try again" << std::endl;
 		std::cout << std::endl;
 	}
 	return (0);
-};
+}
 

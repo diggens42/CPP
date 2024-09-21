@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 16:42:55 by fwahl             #+#    #+#             */
-/*   Updated: 2024/09/21 15:00:10 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/09/21 15:14:05 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ std::string Contact::getDarkestSecret() const
 {
 	return (_darkestsecret);
 }
-
-
 
 void		Contact::setFirstName(const std::string& first)
 {
