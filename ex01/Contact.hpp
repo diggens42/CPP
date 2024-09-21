@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 16:37:15 by fwahl             #+#    #+#             */
-/*   Updated: 2024/07/12 16:54:48 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/09/21 14:58:58 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,27 @@
 class Contact
 {
 	private:
-		std::string firstname;
-		std::string lastname;
-		std::string nickname;
-		std::string phonenumber;
-		std::string darkest_secret;
+		std::string _firstname;
+		std::string _lastname;
+		std::string _nickname;
+		std::string _phonenumber;
+		std::string _darkestsecret;
 
 	public:
-		void set_contact(const std::string& first, const std::string& last, const std::string& nick, const std::string& phone, const std::string& secret);
+		void setContact(const std::string& first, const std::string& last, const std::string& nick, const std::string& phone, const std::string& secret);
+		void getContact() const;
 
-		std::string get_firstname() const;
-		std::string get_lastname() const;
-		std::string get_nickname() const;
-		std::string get_phonenumber() const;
-		std::string get_darkestsecret() const;
+		std::string	getFirstName() const;
+		std::string	getLastName() const;
+		std::string	getNickName() const;
+		std::string	getPhoneNumber() const;
+		std::string	getDarkestSecret() const;
 
-		void print_contact() const;
+		void		setFirstName(const std::string& first);
+		void		setLastName(const std::string& last);
+		void		setNickName(const std::string& nick);
+		void		setPhoneNumber(const std::string& phone);
+		void		setDarkestSecret(const std::string& secret);
 };
 
 #endif
