@@ -1,9 +1,9 @@
-NAME		=
+NAME		= bureaucrat
 
 CXX			= c++
 CFLAGS		= -Wall -Wextra -Werror -std=c++17
 
-SRC			=
+SRC			= main.cpp Bureaucrat.cpp
 
 OBJ			= $(SRC:.cpp=.o)
 DEPS		= $(SRC:.cpp=.d)

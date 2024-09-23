@@ -1,14 +1,26 @@
 #include "Bureaucrat.hpp"
 #include <iostream>
 
-Bureaucrat::Bureaucrat()
+Bureaucrat::Bureaucrat() : _name("default")
 {
-	std::cout << "Default constructor called" << std::endl;
+	setGrade(75);
+	std::cout << "Bureaucrat default constructor called" << std::endl;
+}
+
+Bureaucrat::Bureaucrat(const std::string& name, int grade) : _name(name)
+{
+	std::cout << "Bureaucrat named constructor called" << std::endl;
+	if (grade < 1)
+		throw (GradeTooHighException());
+	else if (grade > 150)
+		throw (GradeTooLowException());
+	else
+		setGrade(grade);
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat &other)
 {
-	std::cout << "Copy constructor called" << std::endl;
+	std::cout << "Bureaucrat copy constructor called" << std::endl;
 	*this = other;
 }
 
@@ -16,33 +28,34 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat &other)
 {
 	if (this != &other)
 	{
-		std::cout << "Copy assignment operator called" << std::endl;
+		std::cout << "Bureaucrat copy assignment operator called" << std::endl;
+		//name cannot be reassigned because its const
+		setGrade(other.getGrade());
 	}
 	return *this;
 }
 
 Bureaucrat::~Bureaucrat()
 {
-	std::cout << "Destructor called" << std::endl;
+	std::cout << "Bureaucrat destructor called" << std::endl;
 }
 
-std::string Bureaucrat::getName()
+const std::string& Bureaucrat::getName() const
 {
 	return _name;
 }
-int			Bureaucrat::getGrade()
+int			Bureaucrat::getGrade() const
 {
 	return _grade;
 }
 void		Bureaucrat::setGrade(int grade)
 {
+	if (grade < 1)
+		throw (GradeTooHighException());
+	else if (grade > 150)
+		throw (GradeTooLowException());
 	_grade = grade;
 }
-
-// void		Bureaucrat::setName(std::string name)
-// {
-// 	_name = name;
-// }
 
 void		Bureaucrat::incrementGrade()
 {
@@ -57,8 +70,18 @@ void		Bureaucrat::decrementGrade()
 	_grade++;
 }
 
+std::ostream& operator<<(std::ostream& os, const Bureaucrat& bureaucrat)
+{
+	os << bureaucrat.getName() << " , Bureaucrat grade " << bureaucrat.getGrade();
+	return (os);
+}
 
-// const char*	GradeTooLowException::what() const noexcept
-// {
+const char*	Bureaucrat::GradeTooLowException::what() const noexcept
+{
+	return ("Grade too low exception");
+}
 
-// }
+const char*	Bureaucrat::GradeTooHighException::what() const noexcept
+{
+	return ("Grade too high exception");
+}
