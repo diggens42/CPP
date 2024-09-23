@@ -6,14 +6,20 @@ CFLAGS		= -Wall -Wextra -Werror -std=c++98
 SRC			= Account.cpp tests.cpp
 
 OBJ			= $(SRC:.cpp=.o)
+DEPS		= $(SRC:.cpp=.d)
 
 all:		$(NAME)
 
 $(NAME):	$(OBJ)
 			$(CXX) $(CFLAGS) -o $@ $(OBJ)
 
+%.o: %.cpp
+	$(CXX) $(CFLAGS) -MMD -MP -c $< -o $@
+
+-include $(DEPS)
+
 clean:
-			rm -f $(OBJ)
+			rm -f $(OBJ) $(DEPS)
 
 fclean: 	clean
 			rm -f $(NAME)

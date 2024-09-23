@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 16:36:04 by fwahl             #+#    #+#             */
-/*   Updated: 2024/09/21 16:44:26 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/09/22 16:07:01 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ class PhoneBook
 		PhoneBook();
 		void 	addContact(const Contact& contact);
 		bool 	searchContact() const;
-		void	readStrToVar(std::string& var);
+		bool	readStrToVar(std::string& var);
 };
 
 #endif

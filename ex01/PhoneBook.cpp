@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 17:11:14 by fwahl             #+#    #+#             */
-/*   Updated: 2024/09/21 17:23:05 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/09/22 16:10:52 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,24 +64,25 @@ bool PhoneBook::searchContact() const
 
 	int	idx;
 	std::cout << "Enter index of contact to display: ";
-	while (!(std::cin >> idx))
+	std::cin >> idx;
+	if (std::cin.eof())
+		return false ;
+	else if (std::cin.fail() || idx < 0 || idx >= 8 || idx >= i)
 	{
-		if (std::cin.eof())
-			return (false);
 		std::cin.clear();
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		std::cout << "Invalid input. Please enter a number: ";
+		std::cout << "Invalid index" << std::endl;
 	}
-	std::cout << std::endl;
-	if (idx >= 0 && idx < 8 && idx < i)
-		contacts[idx].getContact();
 	else
-		std::cout << "Invalid index." << std::endl;
+	{
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		contacts[idx].getContact();
+	}
 	return (true);
 }
 
 
-bool	readStrToVar(std::string& var)
+bool	PhoneBook::readStrToVar(std::string& var)
 {
 	while (true)
 	{
@@ -96,16 +97,16 @@ bool	readStrToVar(std::string& var)
 		{
 			std::cin.clear();
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			std::cout << "Invalid input, please try again";
+			std::cout << "Invalid input, please try again: ";
 		}
 		else if (var.empty())
 		{
 			std::cout << "Input can't be empty, please try again: ";
+			continue ;
 		}
 		else
 			break ;
 	}
-	std::cout << std::endl;
 	return (true);
 }
 
@@ -118,7 +119,7 @@ int main(void)
 	while (true)
 	{
 		std::cout << "Commands: ADD, SEARCH, EXIT" << std::endl;
-		if (!readStrToVar(cmd))
+		if (!phonebook.readStrToVar(cmd))
 			break ;
 		if (cmd == "ADD")
 		{
@@ -126,27 +127,27 @@ int main(void)
 
 			std::string first;
 			std::cout << "Enter firstname: ";
-			if (!readStrToVar(first))
+			if (!phonebook.readStrToVar(first))
 				break ;
 
 			std::string last;
 			std::cout << "Enter lastname: ";
-			if (!readStrToVar(last))
+			if (!phonebook.readStrToVar(last))
 				break ;
 
 			std::string nick;
 			std::cout << "Enter nickname: ";
-			if (!readStrToVar(nick))
+			if (!phonebook.readStrToVar(nick))
 				break ;
 
 			std::string phone;
 			std::cout << "Enter phonenumber: ";
-			if (!readStrToVar(phone))
+			if (!phonebook.readStrToVar(phone))
 				break ;
 
 			std::string secret;
 			std::cout << "Enter your darkest secret: ";
-			if (!readStrToVar(secret))
+			if (!phonebook.readStrToVar(secret))
 				break ;
 
 			newcontact.setContact(first, last, nick, phone, secret);
@@ -162,7 +163,6 @@ int main(void)
 			break ;
 		else
 			std::cout << "Invalid command, please try again" << std::endl;
-		std::cout << std::endl;
 	}
 	return (0);
 }
