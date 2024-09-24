@@ -5,7 +5,11 @@
 
 class Form {
 	public:
+		static constexpr int	_minGrade = 150;
+		static constexpr int	_maxGrade = 1;
+
 		Form();
+		Form(const std::string& name, int signGrade, int executeGrade);
 		Form(const Form &other);
 		Form& operator=(const Form &other);
 		~Form();
@@ -38,6 +42,6 @@ class Form {
 
 };
 
-std::ostream& operator<<(std::ostream& os, const Form& form);
+std::ostream&	operator<<(std::ostream& os, const Form& form);
 
 #endif // FORM_H

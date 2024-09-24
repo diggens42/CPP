@@ -13,9 +13,10 @@ Bureaucrat::Bureaucrat(const std::string& name, int grade) : _name(name)
 	setGrade(grade);
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat &other)
+Bureaucrat::Bureaucrat(const Bureaucrat &other) : _name(other.getName())
 {
 	std::cout << "Bureaucrat copy constructor called" << std::endl;
+	setGrade(other.getGrade());
 	*this = other;
 }
 
@@ -45,22 +46,22 @@ int			Bureaucrat::getGrade() const
 }
 void		Bureaucrat::setGrade(int grade)
 {
-	if (grade < 1)
+	if (grade < _maxGrade)
 		throw (GradeTooHighException());
-	else if (grade > 150)
+	else if (grade > _minGrade)
 		throw (GradeTooLowException());
 	_grade = grade;
 }
 
 void		Bureaucrat::incrementGrade()
 {
-	if (_grade <= 1)
+	if (_grade <= _maxGrade)
 		throw GradeTooHighException();
 	_grade--;
 }
 void		Bureaucrat::decrementGrade()
 {
-	if (_grade >= 150)
+	if (_grade >= _minGrade)
 		throw GradeTooLowException();
 	_grade++;
 }
@@ -79,4 +80,17 @@ const char*	Bureaucrat::GradeTooLowException::what() const noexcept
 const char*	Bureaucrat::GradeTooHighException::what() const noexcept
 {
 	return ("Grade too high exception");
+}
+
+void	Bureaucrat::signForm(Form& form)
+{
+	try
+	{
+		form.beSigned(*this);
+		std::cout << this->getName() << " signed " << form.getName() << std::endl;
+	}
+	catch (const std::exception& e)
+	{
+		std::cout << this->getName() << " couldn't sign " << form.getName() << " because " << e.what() << std::endl;
+	}
 }

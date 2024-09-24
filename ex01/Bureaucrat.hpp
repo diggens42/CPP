@@ -6,6 +6,9 @@
 
 class Bureaucrat {
 	public:
+		static constexpr int	_minGrade = 150;
+		static constexpr int	_maxGrade = 1;
+		
 		Bureaucrat();
 		Bureaucrat(const std::string& name, int grade);
 		Bureaucrat(const Bureaucrat &other);
@@ -32,8 +35,8 @@ class Bureaucrat {
 		};
 
 	private:
-		const std::string	_name;
-		int					_grade;
+		const std::string		_name;
+		int						_grade;
 };
 
 std::ostream& operator<<(std::ostream& os, const Bureaucrat& bureaucrat);

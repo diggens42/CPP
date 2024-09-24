@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 16:50:25 by fwahl             #+#    #+#             */
-/*   Updated: 2024/09/23 20:07:57 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/09/24 20:04:10 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,10 @@ int	main(void)
 	try
 	{
 		Bureaucrat jimmy("Jimmy", 100);
-		std::cout << "" << std::endl;
 	}
 	catch (std::exception& e)
 	{
-		std::cout << "Exception: " << e.what() << std::endl;
+		std::cerr << e.what() << std::endl;
 	}
 
 	// test Bureacraut constructor grade too high
