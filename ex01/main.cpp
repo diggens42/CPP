@@ -6,66 +6,61 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 16:50:25 by fwahl             #+#    #+#             */
-/*   Updated: 2024/09/23 20:07:57 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/09/25 01:40:15 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 int	main(void)
 {
-	// test valid Bureaucrat
+	std::cout << std::endl;
+	std::cout << "--------------------------------" << std::endl;
+	std::cout << " Grade high enough to sign&exec " << std::endl;
+	std::cout << "--------------------------------" << std::endl;
+	std::cout << std::endl;
 	try
 	{
-		Bureaucrat jimmy("Jimmy", 100);
-		std::cout << "" << std::endl;
+		Bureaucrat	jimmy("Jimmy", 100);
+		Form		form("Form A38", 120, 110);
+
+		jimmy.signForm(form);
 	}
 	catch (std::exception& e)
 	{
 		std::cout << "Exception: " << e.what() << std::endl;
 	}
 
-	// test Bureacraut constructor grade too high
+
+	std::cout << std::endl;
+	std::cout << "--------------------------------" << std::endl;
+	std::cout << "  Grade not high enough to sign " << std::endl;
+	std::cout << "--------------------------------" << std::endl;
+	std::cout << std::endl;
 	try
 	{
-		Bureaucrat bob("Bob", 0);
+		Bureaucrat	bob("Bob", 100);
+		Form		form2("Form B38", 99, 100);
+
+		bob.signForm(form2);
 	}
 	catch(const std::exception& e)
 	{
 		std::cerr << e.what() << std::endl;
 	}
 
-	// test Bureaucrat constructor grade too low
+	std::cout << std::endl;
+	std::cout << "--------------------------------" << std::endl;
+	std::cout << " Form constructor grade too low " << std::endl;
+	std::cout << "--------------------------------" << std::endl;
+	std::cout << std::endl;
 	try
 	{
-		Bureaucrat marc("Marc", 151);
+		Form		form3("Form D38", 151, 99);
 	}
 	catch(const std::exception& e)
 	{
 		std::cerr << e.what() << std::endl;
 	}
-
-	// test increment
-	try
-	{
-		Bureaucrat dude("Dude", 1);
-		dude.incrementGrade();
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << std::endl;
-	}
-
-	// test decrement
-	try
-	{
-		Bureaucrat angie("Angie", 150);
-		angie.decrementGrade();
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << std::endl;
-	}
-
-	return (0);
 }

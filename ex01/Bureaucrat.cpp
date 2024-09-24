@@ -38,11 +38,11 @@ Bureaucrat::~Bureaucrat()
 
 const std::string& Bureaucrat::getName() const
 {
-	return _name;
+	return (_name);
 }
 int			Bureaucrat::getGrade() const
 {
-	return _grade;
+	return (_grade);
 }
 void		Bureaucrat::setGrade(int grade)
 {
@@ -56,13 +56,13 @@ void		Bureaucrat::setGrade(int grade)
 void		Bureaucrat::incrementGrade()
 {
 	if (_grade <= _maxGrade)
-		throw GradeTooHighException();
+		throw (GradeTooHighException());
 	_grade--;
 }
 void		Bureaucrat::decrementGrade()
 {
 	if (_grade >= _minGrade)
-		throw GradeTooLowException();
+		throw (GradeTooLowException());
 	_grade++;
 }
 

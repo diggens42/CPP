@@ -4,11 +4,13 @@
 #include <string>
 #include "Form.hpp"
 
+class Form;
+
 class Bureaucrat {
 	public:
 		static constexpr int	_minGrade = 150;
 		static constexpr int	_maxGrade = 1;
-		
+
 		Bureaucrat();
 		Bureaucrat(const std::string& name, int grade);
 		Bureaucrat(const Bureaucrat &other);
