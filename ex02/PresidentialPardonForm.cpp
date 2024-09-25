@@ -25,3 +25,12 @@ PresidentialPardonForm::~PresidentialPardonForm()
 {
 	std::cout << "Destructor called" << std::endl;
 }
+
+void		PresidentialPardonForm::setTarget(const std::string& target)
+{
+	_target = target;
+}
+std::string	PresidentialPardonForm::getTarget() const
+{
+	return (_target);
+}

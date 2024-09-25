@@ -1,14 +1,19 @@
 #include "ShrubberyCreationForm.hpp"
 #include <iostream>
 
-ShrubberyCreationForm::ShrubberyCreationForm()
+ShrubberyCreationForm::ShrubberyCreationForm() : AForm("ShrubberyCreation", 145, 137)
 {
-	std::cout << "Default constructor called" << std::endl;
+	setTarget("default");
+	std::cout << "ShrubberyCreationForm default constructor called" << std::endl;
 }
-
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target) : AForm("ShrubberyCreation", 145, 137)
+{
+	setTarget(target);
+	std::cout << "ShrubberyCreationForm param constructor called" << std::endl;
+}
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other)
 {
-	std::cout << "Copy constructor called" << std::endl;
+	std::cout << "ShrubberyCreationForm copy constructor called" << std::endl;
 	*this = other;
 }
 
@@ -16,12 +21,21 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationF
 {
 	if (this != &other)
 	{
-		std::cout << "Copy assignment operator called" << std::endl;
+		std::cout << "ShrubberyCreationForm copy assignment operator called" << std::endl;
 	}
 	return *this;
 }
 
 ShrubberyCreationForm::~ShrubberyCreationForm()
 {
-	std::cout << "Destructor called" << std::endl;
+	std::cout << "ShrubberyCreationForm destructor called" << std::endl;
+}
+
+void		ShrubberyCreationForm::setTarget(const std::string& target)
+{
+	_target = target;
+}
+std::string	ShrubberyCreationForm::getTarget() const
+{
+	return (_target);
 }

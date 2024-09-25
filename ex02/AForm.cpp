@@ -76,3 +76,8 @@ std::ostream&	operator<<(std::ostream& os, const AForm& form)
 	os << "Form: " << form.getName() << ", Sign grade: " << form.getSignGrade() << ", Execute grade: " << form.getExecuteGrade() << ", Signed: " << (form.isSigned() ? "Yes" : "No");
 	return (os);
 }
+
+void		execute(Bureaucrat const & executor)
+{
+
+}
