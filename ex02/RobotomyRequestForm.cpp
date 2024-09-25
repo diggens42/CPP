@@ -3,11 +3,13 @@
 
 RobotomyRequestForm::RobotomyRequestForm() : AForm("RobotomyRequest", 72, 45)
 {
+	setTarget("default");
 	std::cout << "RobotomyRequestForm default constructor called" << std::endl;
 }
 
 RobotomyRequestForm::RobotomyRequestForm(const std::string& target) : AForm("RobotomyRequest", 72, 45)
 {
+	setTarget(target);
 	std::cout << "RobotomyRequestForm param constructor called" << std::endl;
 }
 
@@ -24,7 +26,7 @@ RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm &o
 		setTarget(other.getTarget());
 		std::cout << "RobotomyRequestForm copy assignment operator called" << std::endl;
 	}
-	return *this;
+	return (*this);
 }
 
 RobotomyRequestForm::~RobotomyRequestForm()

@@ -25,7 +25,7 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationF
 	{
 		setTarget(other.getTarget());
 	}
-	return *this;
+	return (*this);
 }
 
 ShrubberyCreationForm::~ShrubberyCreationForm()

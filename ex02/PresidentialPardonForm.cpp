@@ -26,7 +26,7 @@ PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPard
 		setTarget(other.getTarget());
 		std::cout << "PresidentialPardon copy assignment operator called" << std::endl;
 	}
-	return *this;
+	return (*this);
 }
 
 PresidentialPardonForm::~PresidentialPardonForm()
