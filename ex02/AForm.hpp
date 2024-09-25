@@ -22,7 +22,7 @@ class AForm {
 		int					getExecuteGrade() const;
 
 		void				beSigned(const Bureaucrat& bureaucrat);
-		virtual void		execute(Bureaucrat const & executor) = 0;
+		virtual void		execute(Bureaucrat const & executor) const = 0;
 
 		class GradeTooHighException : public std::exception
 		{

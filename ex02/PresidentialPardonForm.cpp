@@ -1,14 +1,21 @@
 #include "PresidentialPardonForm.hpp"
 #include <iostream>
 
-PresidentialPardonForm::PresidentialPardonForm()
+PresidentialPardonForm::PresidentialPardonForm() : AForm("PresidentialPardon", 25, 5)
 {
-	std::cout << "Default constructor called" << std::endl;
+	setTarget("default");
+	std::cout << "PresidentialPardon default constructor called" << std::endl;
 }
 
-PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &other)
+PresidentialPardonForm::PresidentialPardonForm(const std::string& target) : AForm("PresidentialPardon", 25, 5)
 {
-	std::cout << "Copy constructor called" << std::endl;
+	setTarget(target);
+	std::cout << "PresidentialPardon param constructor called" << std::endl;
+}
+
+PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &other) : AForm(other)
+{
+	std::cout << "PresidentialPardon copy constructor called" << std::endl;
 	*this = other;
 }
 
@@ -16,14 +23,15 @@ PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPard
 {
 	if (this != &other)
 	{
-		std::cout << "Copy assignment operator called" << std::endl;
+		setTarget(other.getTarget());
+		std::cout << "PresidentialPardon copy assignment operator called" << std::endl;
 	}
 	return *this;
 }
 
 PresidentialPardonForm::~PresidentialPardonForm()
 {
-	std::cout << "Destructor called" << std::endl;
+	std::cout << "PresidentialPardon destructor called" << std::endl;
 }
 
 void		PresidentialPardonForm::setTarget(const std::string& target)
@@ -33,4 +41,10 @@ void		PresidentialPardonForm::setTarget(const std::string& target)
 std::string	PresidentialPardonForm::getTarget() const
 {
 	return (_target);
+}
+
+void	PresidentialPardonForm::execute(Bureaucrat const & executor) const
+{
+	AForm::execute(executor);
+	std::cout << this->getTarget() << " has been pardoned by " << executor.getName() << std::endl;
 }
