@@ -82,7 +82,7 @@ const char*	Bureaucrat::GradeTooHighException::what() const noexcept
 	return ("Grade too high exception");
 }
 
-void	Bureaucrat::signForm(Form& form)
+void	Bureaucrat::signForm(AForm& form)
 {
 	try
 	{

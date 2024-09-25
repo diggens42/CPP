@@ -5,16 +5,16 @@
 
 class Bureaucrat;
 
-class Form {
+class AForm {
 	public:
 		static constexpr int	_minGrade = 150;
 		static constexpr int	_maxGrade = 1;
 
-		Form();
-		Form(const std::string& name, int signGrade, int executeGrade);
-		Form(const Form &other);
-		Form& operator=(const Form &other);
-		~Form();
+		AForm();
+		AForm(const std::string& name, int signGrade, int executeGrade);
+		AForm(const AForm &other);
+		AForm& operator=(const AForm &other);
+		~AForm();
 
 		const std::string&	getName() const;
 		bool				isSigned() const;
