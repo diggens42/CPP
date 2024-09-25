@@ -36,6 +36,18 @@ class AForm {
 				const char* what() const noexcept override;
 		};
 
+		class SignedExecption : public std::exception
+		{
+			public:
+				const char* what() const noexcept override;
+		};
+
+		class NotSignedException : public std::exception
+		{
+			public:
+				const char* what() const noexcept override;
+		};
+
 	private:
 		const std::string	_name;
 		bool				_signed;

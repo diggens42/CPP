@@ -71,13 +71,23 @@ const char* AForm::GradeTooLowException::what() const noexcept
 	return ("grade is too low");
 }
 
+const char*	AForm::SignedExecption::what() const noexcept
+{
+	return ("Form is already signed");
+}
+
+const char*	AForm::NotSignedException::what() const noexcept
+{
+	return ("Form is not signed");
+}
+
 std::ostream&	operator<<(std::ostream& os, const AForm& form)
 {
 	os << "Form: " << form.getName() << ", Sign grade: " << form.getSignGrade() << ", Execute grade: " << form.getExecuteGrade() << ", Signed: " << (form.isSigned() ? "Yes" : "No");
 	return (os);
 }
 
-void		execute(Bureaucrat const & executor)
+void		AForm::execute(Bureaucrat const & executor)
 {
 
 }
