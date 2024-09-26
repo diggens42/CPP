@@ -1,8 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Bureaucrat.hpp                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/26 16:40:27 by fwahl             #+#    #+#             */
+/*   Updated: 2024/09/26 16:40:50 by fwahl            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef BUREAUCRAT_H
 #define BUREAUCRAT_H
+#define	GREY  "\033[38;5;246m"
+#define	RESET "\033[0m"
+
 #include <iostream>
 #include <string>
-
 
 class Bureaucrat {
 	public:

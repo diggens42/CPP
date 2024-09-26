@@ -1,21 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Bureaucrat.cpp                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/26 16:39:12 by fwahl             #+#    #+#             */
+/*   Updated: 2024/09/26 16:39:13 by fwahl            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Bureaucrat.hpp"
-#include <iostream>
 
 Bureaucrat::Bureaucrat() : _name("default")
 {
 	setGrade(75);
-	std::cout << "Bureaucrat default constructor called" << std::endl;
+	std::cout << GREY << "Bureaucrat default constructor called" << RESET << std::endl;
 }
 
 Bureaucrat::Bureaucrat(const std::string& name, int grade) : _name(name)
 {
-	std::cout << "Bureaucrat named constructor called" << std::endl;
+	std::cout << GREY << "Bureaucrat named constructor called" << RESET  << std::endl;
 	setGrade(grade);
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat &other) : _name(other.getName())
 {
-	std::cout << "Bureaucrat copy constructor called" << std::endl;
+	std::cout << GREY<< "Bureaucrat copy constructor called" << RESET  << std::endl;
 	setGrade(other.getGrade());
 	*this = other;
 }
@@ -24,7 +35,7 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat &other)
 {
 	if (this != &other)
 	{
-		std::cout << "Bureaucrat copy assignment operator called" << std::endl;
+		std::cout << GREY << "Bureaucrat copy assignment operator called" << RESET  << std::endl;
 		//name cannot be reassigned because its const
 		setGrade(other.getGrade());
 	}
@@ -33,7 +44,7 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat &other)
 
 Bureaucrat::~Bureaucrat()
 {
-	std::cout << "Bureaucrat destructor called" << std::endl;
+	std::cout << GREY << "Bureaucrat destructor called" << RESET  << std::endl;
 }
 
 const std::string& Bureaucrat::getName() const
@@ -68,7 +79,7 @@ void		Bureaucrat::decrementGrade()
 
 std::ostream& operator<<(std::ostream& os, const Bureaucrat& bureaucrat)
 {
-	os << bureaucrat.getName() << " , Bureaucrat grade " << bureaucrat.getGrade();
+	os << bureaucrat.getName() << " , bureaucrat grade " << bureaucrat.getGrade();
 	return (os);
 }
 

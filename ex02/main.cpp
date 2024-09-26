@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 16:50:25 by fwahl             #+#    #+#             */
-/*   Updated: 2024/09/25 20:20:47 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/09/26 16:34:30 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,10 @@ int	main(void)
 
 		olaf.signForm(form3);
 		olaf.executeForm(form3);
-
+		olaf.executeForm(form3);
+		olaf.executeForm(form3);
+		olaf.executeForm(form3);
+		olaf.executeForm(form3);
 	}
 	catch(const std::exception& e)
 	{
@@ -81,11 +84,11 @@ int	main(void)
 	std::cout << std::endl;
 	try
 	{
-		Bureaucrat				olaf("Olaf", 50);
-		RobotomyRequestForm		form3("Angie");
+		Bureaucrat				marvin("Marvin", 50);
+		RobotomyRequestForm		form3("Matthias");
 
-		olaf.signForm(form3);
-		olaf.executeForm(form3);
+		marvin.signForm(form3);
+		marvin.executeForm(form3);
 
 	}
 	catch(const std::exception& e)
@@ -101,13 +104,22 @@ int	main(void)
 	try
 	{
 		Bureaucrat				high_performer("High Performer", 1);
-		RobotomyRequestForm		form3("Angie");
+		RobotomyRequestForm		form4("Peter");
 
-		high_performer.executeForm(form3);
+		high_performer.executeForm(form4);
 
 	}
 	catch(const std::exception& e)
 	{
 		std::cerr << e.what() << std::endl;
 	}
+
+	std::cout << std::endl;
+	std::cout << "--------------------------------" << std::endl;
+	std::cout << "           << operator          " << std::endl;
+	std::cout << "--------------------------------" << std::endl;
+	std::cout << std::endl;
+
+	ShrubberyCreationForm abc("some dude");
+	std::cout << abc << std::endl;
 }

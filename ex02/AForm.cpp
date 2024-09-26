@@ -1,9 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   AForm.cpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/26 16:23:24 by fwahl             #+#    #+#             */
+/*   Updated: 2024/09/26 16:23:27 by fwahl            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "AForm.hpp"
-#include <iostream>
 
 AForm::AForm() : _name("default"), _signed(false), _signGrade(75), _executeGrade(100)
 {
-	std::cout << "Form default constructor called" << std::endl;
+	std::cout << GREY << "AForm default constructor called" << RESET << std::endl;
 }
 
 AForm::AForm(const std::string& name, int signGrade, int executeGrade) : _name(name), _signed(false), _signGrade(signGrade), _executeGrade(executeGrade)
@@ -12,12 +23,12 @@ AForm::AForm(const std::string& name, int signGrade, int executeGrade) : _name(n
 		throw (GradeTooHighException());
 	if (getSignGrade() > _minGrade || getExecuteGrade() > _minGrade)
 		throw (GradeTooLowException());
-	std::cout << "Form named constructor called" << std::endl;
+	std::cout << GREY << "AForm named constructor called" << RESET << std::endl;
 }
 
 AForm::AForm(const AForm &other) : _name(other.getName()), _signed(other.isSigned()), _signGrade(other.getSignGrade()), _executeGrade(other.getExecuteGrade())
 {
-	std::cout << "Form copy constructor called" << std::endl;
+	std::cout << GREY << "AForm copy constructor called" << RESET << std::endl;
 	*this = other;
 }
 
@@ -26,14 +37,14 @@ AForm& AForm::operator=(const AForm &other)
 	if (this != &other)
 	{
 		_signed = other.isSigned();
-		std::cout << "Form copy assignment operator called" << std::endl;
+		std::cout << GREY << "AForm copy assignment operator called" << RESET << std::endl;
 	}
 	return *this;
 }
 
 AForm::~AForm()
 {
-	std::cout << "Form destructor called" << std::endl;
+	std::cout << GREY << "AForm destructor called" << RESET << std::endl;
 }
 
 const std::string&	AForm::getName() const

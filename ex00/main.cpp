@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 16:50:25 by fwahl             #+#    #+#             */
-/*   Updated: 2024/09/24 20:04:10 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/09/26 15:51:15 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 
 int	main(void)
 {
-	// test valid Bureaucrat
+	std::cout << std::endl;
+	std::cout << "--------------------------------" << std::endl;
+	std::cout << "        Valid bureaucrat        " << std::endl;
+	std::cout << "--------------------------------" << std::endl;
+	std::cout << std::endl;
 	try
 	{
 		Bureaucrat jimmy("Jimmy", 100);
@@ -24,7 +28,11 @@ int	main(void)
 		std::cerr << e.what() << std::endl;
 	}
 
-	// test Bureacraut constructor grade too high
+	std::cout << std::endl;
+	std::cout << "--------------------------------" << std::endl;
+	std::cout << "         Grade too high         " << std::endl;
+	std::cout << "--------------------------------" << std::endl;
+	std::cout << std::endl;
 	try
 	{
 		Bureaucrat bob("Bob", 0);
@@ -34,7 +42,11 @@ int	main(void)
 		std::cerr << e.what() << std::endl;
 	}
 
-	// test Bureaucrat constructor grade too low
+	std::cout << std::endl;
+	std::cout << "--------------------------------" << std::endl;
+	std::cout << "         Grade too low          " << std::endl;
+	std::cout << "--------------------------------" << std::endl;
+	std::cout << std::endl;
 	try
 	{
 		Bureaucrat marc("Marc", 151);
@@ -44,7 +56,11 @@ int	main(void)
 		std::cerr << e.what() << std::endl;
 	}
 
-	// test increment
+	std::cout << std::endl;
+	std::cout << "--------------------------------" << std::endl;
+	std::cout << "           Increment            " << std::endl;
+	std::cout << "--------------------------------" << std::endl;
+	std::cout << std::endl;
 	try
 	{
 		Bureaucrat dude("Dude", 1);
@@ -55,7 +71,11 @@ int	main(void)
 		std::cerr << e.what() << std::endl;
 	}
 
-	// test decrement
+	std::cout << std::endl;
+	std::cout << "--------------------------------" << std::endl;
+	std::cout << "           Decrement            " << std::endl;
+	std::cout << "--------------------------------" << std::endl;
+	std::cout << std::endl;
 	try
 	{
 		Bureaucrat angie("Angie", 150);
@@ -65,6 +85,14 @@ int	main(void)
 	{
 		std::cerr << e.what() << std::endl;
 	}
+
+	std::cout << std::endl;
+	std::cout << "--------------------------------" << std::endl;
+	std::cout << "           << operator          " << std::endl;
+	std::cout << "--------------------------------" << std::endl;
+	std::cout << std::endl;
+	Bureaucrat	bureaucrat("Obama", 123);
+	std::cout << bureaucrat << std::endl;
 
 	return (0);
 }

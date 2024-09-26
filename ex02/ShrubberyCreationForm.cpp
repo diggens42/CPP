@@ -1,26 +1,36 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ShrubberyCreationForm.cpp                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/26 16:26:11 by fwahl             #+#    #+#             */
+/*   Updated: 2024/09/26 16:29:30 by fwahl            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ShrubberyCreationForm.hpp"
-#include <iostream>
-#include <fstream>
 
 ShrubberyCreationForm::ShrubberyCreationForm() : AForm("ShrubberyCreation", 145, 137)
 {
 	setTarget("default");
-	std::cout << "ShrubberyCreationForm default constructor called" << std::endl;
+	std::cout << GREY << "ShrubberyCreationForm default constructor called" << RESET << std::endl;
 }
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target) : AForm("ShrubberyCreation", 145, 137)
 {
 	setTarget(target);
-	std::cout << "ShrubberyCreationForm param constructor called" << std::endl;
+	std::cout << GREY << "ShrubberyCreationForm param constructor called" << RESET << std::endl;
 }
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other) : AForm(other)
 {
-	std::cout << "ShrubberyCreationForm copy constructor called" << std::endl;
+	std::cout << GREY << "ShrubberyCreationForm copy constructor called" << RESET << std::endl;
 	*this = other;
 }
 
 ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm &other)
 {
-	std::cout << "ShrubberyCreationForm copy assignment operator called" << std::endl;
+	std::cout << GREY << "ShrubberyCreationForm copy assignment operator called" << RESET << std::endl;
 	if (this != &other)
 	{
 		setTarget(other.getTarget());
@@ -30,7 +40,7 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationF
 
 ShrubberyCreationForm::~ShrubberyCreationForm()
 {
-	std::cout << "ShrubberyCreationForm destructor called" << std::endl;
+	std::cout << GREY << "ShrubberyCreationForm destructor called" << RESET << std::endl;
 }
 
 void		ShrubberyCreationForm::setTarget(const std::string& target)

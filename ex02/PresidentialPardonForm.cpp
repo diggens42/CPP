@@ -1,21 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   PresidentialPardonForm.cpp                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/26 16:27:46 by fwahl             #+#    #+#             */
+/*   Updated: 2024/09/26 16:30:57 by fwahl            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "PresidentialPardonForm.hpp"
-#include <iostream>
 
 PresidentialPardonForm::PresidentialPardonForm() : AForm("PresidentialPardon", 25, 5)
 {
 	setTarget("default");
-	std::cout << "PresidentialPardon default constructor called" << std::endl;
+	std::cout << GREY << "PresidentialPardon default constructor called" << RESET << std::endl;
 }
 
 PresidentialPardonForm::PresidentialPardonForm(const std::string& target) : AForm("PresidentialPardon", 25, 5)
 {
 	setTarget(target);
-	std::cout << "PresidentialPardon param constructor called" << std::endl;
+	std::cout << GREY << "PresidentialPardon param constructor called" << RESET << std::endl;
 }
 
 PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &other) : AForm(other)
 {
-	std::cout << "PresidentialPardon copy constructor called" << std::endl;
+	std::cout << GREY << "PresidentialPardon copy constructor called" << RESET << std::endl;
 	*this = other;
 }
 
@@ -24,14 +35,14 @@ PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPard
 	if (this != &other)
 	{
 		setTarget(other.getTarget());
-		std::cout << "PresidentialPardon copy assignment operator called" << std::endl;
+		std::cout << GREY << "PresidentialPardon copy assignment operator called" << RESET << std::endl;
 	}
 	return (*this);
 }
 
 PresidentialPardonForm::~PresidentialPardonForm()
 {
-	std::cout << "PresidentialPardon destructor called" << std::endl;
+	std::cout << GREY << "PresidentialPardon destructor called" << RESET << std::endl;
 }
 
 void		PresidentialPardonForm::setTarget(const std::string& target)

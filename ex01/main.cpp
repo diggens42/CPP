@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 16:50:25 by fwahl             #+#    #+#             */
-/*   Updated: 2024/09/25 01:40:15 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/09/26 15:53:28 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,13 @@ int	main(void)
 	{
 		std::cerr << e.what() << std::endl;
 	}
+
+	std::cout << std::endl;
+	std::cout << "--------------------------------" << std::endl;
+	std::cout << "           << operator          " << std::endl;
+	std::cout << "--------------------------------" << std::endl;
+	std::cout << std::endl;
+
+	Form abc("Form ABC", 44, 55);
+	std::cout << abc << std::endl;
 }

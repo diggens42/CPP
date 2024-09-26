@@ -1,5 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ShrubberyCreationForm.hpp                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/26 16:26:02 by fwahl             #+#    #+#             */
+/*   Updated: 2024/09/26 16:26:49 by fwahl            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SHRUBBERYCREATIONFORM_H
 #define SHRUBBERYCREATIONFORM_H
+
+#include <fstream>
 
 #include "AForm.hpp"
 
