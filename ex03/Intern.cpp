@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 17:52:49 by fwahl             #+#    #+#             */
-/*   Updated: 2024/09/26 18:46:06 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/09/26 19:20:48 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 Intern::Intern()
 {
-	std::cout << GREY << "Default constructor called" << RESET << std::endl;
+	std::cout << GREY << "Intern default constructor called" << RESET << std::endl;
 }
 
 Intern::Intern(const Intern &other)
 {
-	std::cout << GREY << "Copy constructor called" << RESET << std::endl;
+	std::cout << GREY << "Intern copy constructor called" << RESET << std::endl;
 	*this = other;
 }
 
@@ -27,14 +27,14 @@ Intern& Intern::operator=(const Intern &other)
 {
 	if (this != &other)
 	{
-		std::cout << GREY << "Copy assignment operator called" << RESET << std::endl;
+		std::cout << GREY << "Intern copy assignment operator called" << RESET << std::endl;
 	}
 	return *this;
 }
 
 Intern::~Intern()
 {
-	std::cout << GREY << "Destructor called" << RESET << std::endl;
+	std::cout << GREY << "Intern destructor called" << RESET << std::endl;
 }
 
 AForm*	Intern::createShrubberyRequestForm(const std::string& target)
@@ -78,6 +78,7 @@ AForm* Intern::makeForm(const std::string& formName, const std::string& target)
 			std::cout << "Intern creates " << formName << std::endl;
 			return (form) ;
 		}
+		i++;
 	}
 	throw (UnknownFormException());
 }

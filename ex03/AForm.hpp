@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 16:23:32 by fwahl             #+#    #+#             */
-/*   Updated: 2024/09/26 16:23:34 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/09/26 19:18:58 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ class AForm {
 		AForm(const std::string& name, int signGrade, int executeGrade);
 		AForm(const AForm &other);
 		AForm& operator=(const AForm &other);
-		~AForm();
+		virtual ~AForm();
 
 		const std::string&	getName() const;
 		bool				isSigned() const;
