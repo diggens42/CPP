@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 16:27:46 by fwahl             #+#    #+#             */
-/*   Updated: 2024/09/26 16:30:57 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/09/26 17:09:49 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 PresidentialPardonForm::PresidentialPardonForm() : AForm("PresidentialPardon", 25, 5)
 {
-	setTarget("default");
 	std::cout << GREY << "PresidentialPardon default constructor called" << RESET << std::endl;
+	setTarget("default");
 }
 
 PresidentialPardonForm::PresidentialPardonForm(const std::string& target) : AForm("PresidentialPardon", 25, 5)
 {
-	setTarget(target);
 	std::cout << GREY << "PresidentialPardon param constructor called" << RESET << std::endl;
+	setTarget(target);
 }
 
 PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &other) : AForm(other)
@@ -34,8 +34,8 @@ PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPard
 {
 	if (this != &other)
 	{
-		setTarget(other.getTarget());
 		std::cout << GREY << "PresidentialPardon copy assignment operator called" << RESET << std::endl;
+		setTarget(other.getTarget());
 	}
 	return (*this);
 }

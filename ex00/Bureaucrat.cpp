@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 16:40:33 by fwahl             #+#    #+#             */
-/*   Updated: 2024/09/26 16:40:37 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/09/26 17:08:48 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 Bureaucrat::Bureaucrat() : _name("default")
 {
-	setGrade(75);
 	std::cout << GREY << "Bureaucrat default constructor called" << RESET << std::endl;
+	setGrade(75);
 }
 
 Bureaucrat::Bureaucrat(const std::string& name, int grade) : _name(name)

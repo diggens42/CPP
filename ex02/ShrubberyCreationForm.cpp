@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 16:26:11 by fwahl             #+#    #+#             */
-/*   Updated: 2024/09/26 16:29:30 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/09/26 17:10:26 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 ShrubberyCreationForm::ShrubberyCreationForm() : AForm("ShrubberyCreation", 145, 137)
 {
-	setTarget("default");
 	std::cout << GREY << "ShrubberyCreationForm default constructor called" << RESET << std::endl;
+	setTarget("default");
 }
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target) : AForm("ShrubberyCreation", 145, 137)
 {
-	setTarget(target);
 	std::cout << GREY << "ShrubberyCreationForm param constructor called" << RESET << std::endl;
+	setTarget(target);
 }
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other) : AForm(other)
 {
@@ -30,9 +30,9 @@ ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other)
 
 ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm &other)
 {
-	std::cout << GREY << "ShrubberyCreationForm copy assignment operator called" << RESET << std::endl;
 	if (this != &other)
 	{
+		std::cout << GREY << "ShrubberyCreationForm copy assignment operator called" << RESET << std::endl;
 		setTarget(other.getTarget());
 	}
 	return (*this);

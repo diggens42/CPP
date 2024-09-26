@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 16:38:37 by fwahl             #+#    #+#             */
-/*   Updated: 2024/09/26 16:38:38 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/09/26 17:09:13 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ Form::Form() : _name("default"), _signed(false), _signGrade(75), _executeGrade(1
 
 Form::Form(const std::string& name, int signGrade, int executeGrade) : _name(name), _signed(false), _signGrade(signGrade), _executeGrade(executeGrade)
 {
+	std::cout << GREY << "Form named constructor called" << RESET << std::endl;
 	if (getSignGrade() < _maxGrade || getExecuteGrade() < _maxGrade)
 		throw (GradeTooHighException());
 	if (getSignGrade() > _minGrade || getExecuteGrade() > _minGrade)
 		throw (GradeTooLowException());
-	std::cout << GREY << "Form named constructor called" << RESET << std::endl;
 }
 
 Form::Form(const Form &other) : _name(other.getName()), _signed(other.isSigned()), _signGrade(other.getSignGrade()), _executeGrade(other.getExecuteGrade())
@@ -36,8 +36,8 @@ Form& Form::operator=(const Form &other)
 {
 	if (this != &other)
 	{
-		_signed = other.isSigned();
 		std::cout << GREY << "Form copy assignment operator called" << RESET << std::endl;
+		_signed = other.isSigned();
 	}
 	return *this;
 }

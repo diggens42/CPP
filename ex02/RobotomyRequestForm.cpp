@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 16:27:20 by fwahl             #+#    #+#             */
-/*   Updated: 2024/09/26 16:30:15 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/09/26 17:10:01 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 RobotomyRequestForm::RobotomyRequestForm() : AForm("RobotomyRequest", 72, 45)
 {
-	setTarget("default");
 	std::cout << GREY << "RobotomyRequestForm default constructor called" << RESET << std::endl;
+	setTarget("default");
 }
 
 RobotomyRequestForm::RobotomyRequestForm(const std::string& target) : AForm("RobotomyRequest", 72, 45)
 {
-	setTarget(target);
 	std::cout << GREY << "RobotomyRequestForm param constructor called" << RESET << std::endl;
+	setTarget(target);
 }
 
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &other) : AForm(other)
@@ -34,8 +34,8 @@ RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm &o
 {
 	if (this != &other)
 	{
-		setTarget(other.getTarget());
 		std::cout << GREY << "RobotomyRequestForm copy assignment operator called" << RESET << std::endl;
+		setTarget(other.getTarget());
 	}
 	return (*this);
 }
