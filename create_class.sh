@@ -32,7 +32,13 @@ cat << EOF > $HPP_FILE
 #ifndef ${CLASS_NAME_UPPER}_H
 #define ${CLASS_NAME_UPPER}_H
 
-class $CLASS_NAME {
+#define	GREY  "\033[38;5;246m"
+#define	RESET "\033[0m"
+
+#include <iostream>
+
+class $CLASS_NAME
+{
 	public:
 		$CLASS_NAME();
 		$CLASS_NAME(const $CLASS_NAME &other);
@@ -49,16 +55,15 @@ EOF
 # Create the source file
 cat << EOF > $CPP_FILE
 #include "${CLASS_NAME}.hpp"
-#include <iostream>
 
 $CLASS_NAME::$CLASS_NAME()
 {
-	std::cout << "Default constructor called" << std::endl;
+	std::cout << GREY << "Default constructor called" << RESET << std::endl;
 }
 
 $CLASS_NAME::$CLASS_NAME(const $CLASS_NAME &other)
 {
-	std::cout << "Copy constructor called" << std::endl;
+	std::cout << GREY << "Copy constructor called" << RESET << std::endl;
 	*this = other;
 }
 
@@ -66,14 +71,14 @@ $CLASS_NAME& $CLASS_NAME::operator=(const $CLASS_NAME &other)
 {
 	if (this != &other)
 	{
-		std::cout << "Copy assignment operator called" << std::endl;
+		std::cout << GREY << "Copy assignment operator called" << RESET << std::endl;
 	}
 	return *this;
 }
 
 $CLASS_NAME::~$CLASS_NAME()
 {
-	std::cout << "Destructor called" << std::endl;
+	std::cout << GREY << "Destructor called" << RESET << std::endl;
 }
 EOF
 

@@ -8,9 +8,6 @@ SRC			= main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp Presidential
 OBJ			= $(SRC:.cpp=.o)
 DEPS		= $(SRC:.cpp=.d)
 
-GREY		= \033[37m
-WHITE		= \033[0m
-
 all:		$(NAME)
 
 $(NAME):	$(OBJ)
