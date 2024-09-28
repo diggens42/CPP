@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 16:23:32 by fwahl             #+#    #+#             */
-/*   Updated: 2024/09/26 19:18:58 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/09/28 18:08:24 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 #include <iostream>
 #include <string>
+#include <memory>
 
 #include "Bureaucrat.hpp"
 
