@@ -6,11 +6,9 @@
 
 #include <iostream>
 #include <string>
-#include <sstream>
-#include <limits>
-#include <cmath>
-#include <iomanip>
-#include <optional>
+#include <limits>	// std::numeric_limits
+#include <cmath>	// std::isnan, std::infinity
+#include <optional>	// std::optional
 
 class ScalarConverter
 {
@@ -28,6 +26,10 @@ class ScalarConverter
 		static std::optional<float>		isFloatOpt(const std::string& lit);
 		static std::optional<double>	isDoubleOpt(const std::string& lit);
 
+		static void	printChar(char c);
+		static void	printInt(long intie);
+		static void	printFloat(float floatie);
+		static void	printDouble(double michael_double);
 };
 
 #endif // SCALARCONVERTER_H
