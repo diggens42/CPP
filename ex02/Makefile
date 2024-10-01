@@ -3,7 +3,7 @@ NAME		= based
 CXX			= c++
 CFLAGS		= -Wall -Wextra -Werror -std=c++17
 
-SRC			= main.cpp Base.cpp
+SRC			= main.cpp Base.cpp Identify.cpp
 
 OBJ			= $(SRC:.cpp=.o)
 DEPS		= $(SRC:.cpp=.d)
