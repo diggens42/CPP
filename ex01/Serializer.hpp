@@ -5,17 +5,22 @@
 #define	RESET "\033[0m"
 
 #include <iostream>
+#include <string>
+
+#include "Data.hpp"
 
 class Serializer
 {
 	public:
+		~Serializer();
+
+		static uintptr_t	serialize(Data* ptr);
+		static Data*		deserialize(uintptr_t raw);
+
+	private:
 		Serializer();
 		Serializer(const Serializer &other);
 		Serializer& operator=(const Serializer &other);
-		~Serializer();
-
-	private:
-
 };
 
 #endif // SERIALIZER_H
