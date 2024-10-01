@@ -149,6 +149,7 @@ void	ScalarConverter::printDouble(double michael_double)
 		std::cout << "Char value (casted): \'" << static_cast<char>(michael_double) << "\'" << std::endl;
 	else
 		std::cout << "Char value (casted): non printable value" << std::endl;
+
 	if (michael_double > std::numeric_limits<int>::max() || michael_double < std::numeric_limits<int>::min())
 		std::cout << "Int value (casted): Impossible (value out of range)" << std::endl;
 	else if (michael_double == std::numeric_limits<double>::infinity())
@@ -159,5 +160,6 @@ void	ScalarConverter::printDouble(double michael_double)
 		std::cout << "Int value (casted): Impossible (nan does not exist for int)" << std::endl;
 	else
 		std::cout << "Int value (casted): " << static_cast<int>(michael_double) << std::endl;
+
 	std::cout << "Float value (casted): " << static_cast<float>(michael_double) << "f" << std::endl;
 }
