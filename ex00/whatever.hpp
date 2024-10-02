@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:34:02 by fwahl             #+#    #+#             */
-/*   Updated: 2024/10/02 16:10:40 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/10/02 16:20:21 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define WHATEVER_HPP
 
 #include <iostream>
+#include <string>
 #include <utility>
 
 template <typename T>
