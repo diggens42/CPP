@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 01:14:14 by fwahl             #+#    #+#             */
-/*   Updated: 2024/10/04 01:44:35 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/10/04 01:49:51 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,15 @@ class SpanIsFullException : public std::exception
 		}
 };
 
+class NotEnoughNumsException : public std::exception
+{
+	public:
+		const char*	what() const noexcept override
+		{
+			return("Not enough numbers to calc span");
+		}
+};
+
 class Span
 {
 	public:
@@ -37,6 +46,9 @@ class Span
 		Span(const Span &other);
 		Span& operator=(const Span &other);
 		~Span();
+
+		int		shortestSpan() const;
+		int		longestSpan() const;
 
 		void	addNumber(int num);
 

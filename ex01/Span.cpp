@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 01:14:08 by fwahl             #+#    #+#             */
-/*   Updated: 2024/10/04 01:43:55 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/10/04 01:58:38 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,3 +48,30 @@ void	Span::addNumber(int num)
 		throw (SpanIsFullException());
 	_nums.push_back(num);
 }
+
+int		Span::shortestSpan() const
+{
+	if (_nums.size() <= 1)
+		throw (NotEnoughNumsException());
+	std::deque<int>	sorted_nums = _nums;
+	std::sort(sorted_nums.begin(), sorted_nums.end());
+
+	int	shortest_span = 1, curr_span = 0;
+	size_t	i = 1;
+	while (i < sorted_nums.size())
+	{
+		curr_span = sorted_nums[i] = sorted_nums[i] - sorted_nums[i - 1];
+		shortest_span = std::min(shortest_span, curr_span);
+		i++;
+	}
+
+	return (shortest_span);
+}
+
+
+int		Span::longestSpan() const
+{
+
+}
+
+
