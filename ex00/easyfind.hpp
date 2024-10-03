@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 23:10:33 by fwahl             #+#    #+#             */
-/*   Updated: 2024/10/04 00:04:01 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/10/04 00:11:40 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 #include <vector>
 #include <forward_list>
 #include <list>
+#include <deque>
+#include <array>
 
 class ValueNotFoundException : public std::exception
 {
