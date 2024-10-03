@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 18:22:49 by fwahl             #+#    #+#             */
-/*   Updated: 2024/10/03 20:06:05 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/10/03 20:59:00 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include <cstddef>
 #include <exception>
 #include <stdexcept>
+#include <iostream>
+#include <string>
 
 template <typename T>
 class Array
@@ -30,7 +32,7 @@ class Array
 			unsigned int	i = 0;
 			while (i < _n)
 			{
-				_entries[i] = other._entries[i]
+				_entries[i] = other._entries[i];
 				i++;
 			}
 		}
@@ -46,10 +48,12 @@ class Array
 			{
 				delete[] _entries;
 				_n = other._n;
-				_entries = new T[n];
+				_entries = new T[_n];
+
+				unsigned int	i = 0;
 				while (i < _n)
 				{
-					_entries[i] = other._entries[i]
+					_entries[i] = other._entries[i];
 					i++;
 				}
 			}
