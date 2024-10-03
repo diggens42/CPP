@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 23:10:33 by fwahl             #+#    #+#             */
-/*   Updated: 2024/10/03 23:42:35 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/10/03 23:57:25 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 #define EASYFIND_HPP
 
 #include <exception>
+#include <iostream>
+
 #include <algorithm>
+#include <vector>
 
 class ValueNotFoundException : public std::exception
 {
