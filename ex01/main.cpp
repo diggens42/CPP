@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:14:41 by fwahl             #+#    #+#             */
-/*   Updated: 2024/10/02 18:16:19 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/10/03 21:51:29 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,6 @@ int main(void)
 	std::cout << "Printing string array: " << std::endl;
 	iter(str_array, str_array_len, printEntry<std::string>);
 
+	std::cout << std::endl;
 	return (0);
 }

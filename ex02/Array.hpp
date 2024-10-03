@@ -6,16 +6,14 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 18:22:49 by fwahl             #+#    #+#             */
-/*   Updated: 2024/10/03 20:59:00 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/10/03 22:57:09 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ARRAY_HPP
 #define ARRAY_HPP
 
-#include <cstddef>
 #include <exception>
-#include <stdexcept>
 #include <iostream>
 #include <string>
 
@@ -25,7 +23,7 @@ class Array
 	public:
 		Array() : _entries(nullptr), _n(0) {}
 
-		explicit Array(unsigned int n) : _entries(new T[n]), _n(n) {}
+		explicit Array(unsigned int n) : _entries(new T[n]()), _n(n) {}
 
 		Array(const Array& other) : _entries(new T[other._n]), _n(other._n)
 		{
@@ -39,7 +37,8 @@ class Array
 
 		~Array()
 		{
-			delete[] _entries;
+			if (_entries)
+				delete[] _entries;
 		}
 
 		Array&		operator=(const Array& other)
