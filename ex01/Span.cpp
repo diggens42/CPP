@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 01:14:08 by fwahl             #+#    #+#             */
-/*   Updated: 2024/10/04 02:07:19 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/10/04 02:32:20 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,6 @@ Span::~Span()
 	std::cout << GREY << "Span destructor called" << RESET << std::endl;
 }
 
-void	Span::addNumber(int num)
-{
-	if (_nums.size() >= _max)
-		throw (SpanIsFullException());
-	_nums.push_back(num);
-}
 
 int		Span::shortestSpan() const
 {
@@ -78,4 +72,21 @@ int		Span::longestSpan() const
 	return (*maxIter - *minIter);
 }
 
+void	Span::addNumber(int num)
+{
+	if (_nums.size() >= _max)
+		throw (SpanIsFullException());
+	_nums.push_back(num);
+}
 
+template<typename Iter>
+void	Span::addNumbers(Iter begin, Iter end)
+{
+	while (begin != end && _nums.size() < _max)
+	{
+		_nums.push_back(*begin);
+		++begin;
+	}
+	if (begin != end)
+		throw (SpanCapacityException());
+}

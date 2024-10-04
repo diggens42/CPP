@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 01:14:14 by fwahl             #+#    #+#             */
-/*   Updated: 2024/10/04 01:49:51 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/10/04 02:31:56 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,16 @@ class NotEnoughNumsException : public std::exception
 			return("Not enough numbers to calc span");
 		}
 };
+
+class SpanCapacityException : public std::exception
+{
+	public:
+		const char*	what() const noexcept override
+		{
+			return("Span capacity exceeeded");
+		}
+};
+
 
 class Span
 {
