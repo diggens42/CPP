@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 01:14:14 by fwahl             #+#    #+#             */
-/*   Updated: 2024/10/04 02:31:56 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/10/04 17:23:47 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,9 @@ class Span
 		Span(const Span &other);
 		Span& operator=(const Span &other);
 		~Span();
+
+		unsigned int	getMax() const;
+		void			setMax(unsigned int n);
 
 		int		shortestSpan() const;
 		int		longestSpan() const;

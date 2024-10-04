@@ -6,19 +6,21 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 01:14:08 by fwahl             #+#    #+#             */
-/*   Updated: 2024/10/04 02:32:20 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/10/04 17:25:48 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Span.hpp"
 
-Span::Span() : _max(0), _nums(0)
+Span::Span()
 {
+	setMax(0);
 	std::cout << GREY << "Span default constructor called" << RESET << std::endl;
 }
 
-Span::Span(unsigned int N) : _max(N)
+Span::Span(unsigned int N)
 {
+	setMax(N);
 	std::cout << GREY << "Span param constructor called" << RESET << std::endl;
 }
 
@@ -32,6 +34,8 @@ Span& Span::operator=(const Span &other)
 {
 	if (this != &other)
 	{
+		setMax(other.getMax());
+		_nums = other._nums;
 		std::cout << GREY << "Span copy assignment operator called" << RESET << std::endl;
 	}
 	return *this;
@@ -74,7 +78,7 @@ int		Span::longestSpan() const
 
 void	Span::addNumber(int num)
 {
-	if (_nums.size() >= _max)
+	if (_nums.size() >= getMax())
 		throw (SpanIsFullException());
 	_nums.push_back(num);
 }
@@ -82,11 +86,21 @@ void	Span::addNumber(int num)
 template<typename Iter>
 void	Span::addNumbers(Iter begin, Iter end)
 {
-	while (begin != end && _nums.size() < _max)
+	while (begin != end && _nums.size() < getMax())
 	{
 		_nums.push_back(*begin);
 		++begin;
 	}
 	if (begin != end)
 		throw (SpanCapacityException());
+}
+
+unsigned int	Span::getMax() const
+{
+	return (this->_max);
+}
+
+void			Span::setMax(unsigned int n)
+{
+	this->_max = n;
 }
