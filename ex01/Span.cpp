@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 01:14:08 by fwahl             #+#    #+#             */
-/*   Updated: 2024/10/04 01:58:38 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/10/04 02:07:19 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,11 @@ int		Span::shortestSpan() const
 
 int		Span::longestSpan() const
 {
+	if (_nums.size() <= 1)
+		throw (NotEnoughNumsException());
+	auto [minIter, maxIter] = std::minmax_element(_nums.begin(), _nums.end());
 
+	return (*maxIter - *minIter);
 }
 
 
