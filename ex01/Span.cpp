@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 01:14:08 by fwahl             #+#    #+#             */
-/*   Updated: 2024/10/04 17:25:48 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/10/04 19:46:12 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@ int		Span::shortestSpan() const
 	std::deque<int>	sorted_nums = _nums;
 	std::sort(sorted_nums.begin(), sorted_nums.end());
 
-	int	shortest_span = 1, curr_span = 0;
+	int	shortest_span = std::numeric_limits<int>::max(), curr_span = 0;
 	size_t	i = 1;
 	while (i < sorted_nums.size())
 	{
-		curr_span = sorted_nums[i] = sorted_nums[i] - sorted_nums[i - 1];
+		curr_span = sorted_nums[i] - sorted_nums[i - 1];
 		shortest_span = std::min(shortest_span, curr_span);
 		i++;
 	}
@@ -83,18 +83,6 @@ void	Span::addNumber(int num)
 	_nums.push_back(num);
 }
 
-template<typename Iter>
-void	Span::addNumbers(Iter begin, Iter end)
-{
-	while (begin != end && _nums.size() < getMax())
-	{
-		_nums.push_back(*begin);
-		++begin;
-	}
-	if (begin != end)
-		throw (SpanCapacityException());
-}
-
 unsigned int	Span::getMax() const
 {
 	return (this->_max);
@@ -103,4 +91,18 @@ unsigned int	Span::getMax() const
 void			Span::setMax(unsigned int n)
 {
 	this->_max = n;
+}
+
+int& Span::operator[](unsigned int idx)
+{
+	if (idx >= _nums.size())
+		throw std::out_of_range("Index out of range");
+	return _nums[idx];
+}
+
+const int& Span::operator[](unsigned int index) const
+{
+	if (index >= _nums.size())
+		throw std::out_of_range("Index out of range");
+	return _nums[index];
 }

@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 01:14:14 by fwahl             #+#    #+#             */
-/*   Updated: 2024/10/04 17:23:47 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/10/04 19:46:01 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <exception>
 #include <iostream>
 #include <deque>
+#include <vector>
 
 class SpanIsFullException : public std::exception
 {
@@ -55,6 +56,8 @@ class Span
 		Span(unsigned int N);
 		Span(const Span &other);
 		Span& operator=(const Span &other);
+		int& operator[](unsigned int idx);
+		const int& operator[](unsigned int index) const;
 		~Span();
 
 		unsigned int	getMax() const;
@@ -66,7 +69,16 @@ class Span
 		void	addNumber(int num);
 
 		template<typename Iter>
-		void	addNumbers(Iter begin, Iter end);
+		void	addNumbers(Iter begin, Iter end)
+		{
+			while (begin != end && _nums.size() < getMax())
+			{
+				_nums.push_back(*begin);
+				++begin;
+			}
+			if (begin != end)
+				throw (SpanCapacityException());
+		}
 
 	private:
 		unsigned int	_max;
