@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 01:14:00 by fwahl             #+#    #+#             */
-/*   Updated: 2024/10/05 16:50:42 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/10/05 16:56:59 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int main()
 	sp.addNumber(17);
 	sp.addNumber(9);
 	sp.addNumber(11);
-	std::cout << sp.shortestSpan() << std::endl;
-	std::cout << sp.longestSpan() << std::endl;
+	std::cout << "Min span: " << sp.shortestSpan() << std::endl;
+	std::cout << "Max span: " << sp.longestSpan() << std::endl;
 
 
 	std::cout << std::endl;
@@ -44,11 +44,11 @@ int main()
 		unsigned int i = 0;
 		while (i < sp2.getMax())
 		{
-			std::cout << sp2[i] << std::endl;
+			std::cout << "[" << i << "]  " << sp2[i] << std::endl;
 			i++;
 		}
-		std::cout << sp2.shortestSpan() << std::endl;
-		std::cout << sp2.longestSpan() << std::endl;
+		std::cout << "Min span: " << sp2.shortestSpan() << std::endl;
+		std::cout << "Max span: " << sp2.longestSpan() << std::endl;
 	}
 	catch (const std::exception& e)
 	{

@@ -1,4 +1,4 @@
-NAME		= whatever
+NAME		= mutantstack
 
 CXX			= c++
 CFLAGS		= -Wall -Wextra -Werror -std=c++17
