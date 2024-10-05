@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 01:14:08 by fwahl             #+#    #+#             */
-/*   Updated: 2024/10/04 19:46:12 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/10/05 16:47:07 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int		Span::longestSpan() const
 void	Span::addNumber(int num)
 {
 	if (_nums.size() >= getMax())
-		throw (SpanIsFullException());
+		throw (SpanCapacityException());
 	_nums.push_back(num);
 }
 
@@ -96,13 +96,13 @@ void			Span::setMax(unsigned int n)
 int& Span::operator[](unsigned int idx)
 {
 	if (idx >= _nums.size())
-		throw std::out_of_range("Index out of range");
-	return _nums[idx];
+		throw (std::out_of_range("Index out of range"));
+	return (_nums[idx]);
 }
 
 const int& Span::operator[](unsigned int index) const
 {
 	if (index >= _nums.size())
-		throw std::out_of_range("Index out of range");
-	return _nums[index];
+		throw (std::out_of_range("Index out of range"));
+	return (_nums[index]);
 }

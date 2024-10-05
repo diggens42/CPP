@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 01:14:00 by fwahl             #+#    #+#             */
-/*   Updated: 2024/10/04 19:52:55 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/10/05 16:50:42 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,7 @@ int main()
 	std::cout << std::endl;
 
 	std::deque<int> dequeNumbers = {6, 7, 8, 9, 10};
-	Span sp3(5);
-	sp3.addNumbers(dequeNumbers.begin(), dequeNumbers.end());
+	Span sp3(4);
 	try
 	{
 		sp3.addNumbers(dequeNumbers.begin(), dequeNumbers.end());
@@ -73,6 +72,26 @@ int main()
 	{
 		std::cerr << e.what() << std::endl;
 	}
+
+
+	std::cout << std::endl;
+	std::cout << "--------------------------------" << std::endl;
+	std::cout << " Test not enough nums exception " << std::endl;
+	std::cout << "--------------------------------" << std::endl;
+	std::cout << std::endl;
+	int	x = 3;
+	Span sp4(5);
+	try
+	{
+		sp4.addNumber(x);
+		std::cout << sp4.longestSpan() << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+
+	std::cout << std::endl;
 
 	return 0;
 }

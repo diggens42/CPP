@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 01:14:14 by fwahl             #+#    #+#             */
-/*   Updated: 2024/10/04 19:46:01 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/10/05 16:47:13 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,6 @@
 #include <iostream>
 #include <deque>
 #include <vector>
-
-class SpanIsFullException : public std::exception
-{
-	public:
-		const char*	what() const noexcept override
-		{
-			return("Span is full");
-		}
-};
 
 class NotEnoughNumsException : public std::exception
 {
@@ -47,7 +38,6 @@ class SpanCapacityException : public std::exception
 			return("Span capacity exceeeded");
 		}
 };
-
 
 class Span
 {
