@@ -5,16 +5,29 @@
 #define	RESET "\033[0m"
 
 #include <iostream>
+#include <stack>
+#include <deque>
 
-class MutantStack
+template <typename T, typename Container = std::deque<T>>
+class MutantStack : public std::stack<T, Container>
 {
 	public:
-		MutantStack();
-		MutantStack(const MutantStack &other);
-		MutantStack& operator=(const MutantStack &other);
-		~MutantStack();
+		typedef typename Container::iterator				iter;
+		typedef typename Container::const_iterator			const_iter;
+		typedef typename Container::reverse_iterator		rev_iter;
+		typedef typename Container::const_reverse_iterator	const_rev_iter;
 
-	private:
+		MutantStack() : std::stack<T, Container>() {}
+		MutantStack(const MutantStack<T, Container>& src) : std::stack<T, Container>(src) {}
+		MutantStack& operator=(const MutantStack<T, Container>& other)
+		{
+			if (this != &other)
+				std::stack<T, Container>::operator=(other);
+			return (*this);
+		}
+		~MutantStack() {}
+
+
 
 };
 
