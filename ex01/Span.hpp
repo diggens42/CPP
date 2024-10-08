@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 01:14:14 by fwahl             #+#    #+#             */
-/*   Updated: 2024/10/05 16:47:13 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/10/08 02:40:02 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 #include <iostream>
 #include <deque>
 #include <vector>
+#include <algorithm>
+#include <limits>
 
 class NotEnoughNumsException : public std::exception
 {
