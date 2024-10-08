@@ -7,6 +7,8 @@
 #include <iostream>
 #include <stack>
 #include <deque>
+#include <list>
+#include <string>
 
 template <typename T, typename Container = std::deque<T>>
 class MutantStack : public std::stack<T, Container>
@@ -27,15 +29,15 @@ class MutantStack : public std::stack<T, Container>
 		}
 		~MutantStack() {}
 
-		iter			begin()		{return (this->c.begin());}
-		iter			end()		{return (this->c.end());}
-		const_iter		begin()		{return (this->c.begin());}
-		const_iter		end()		{return (this->c.end());}
+		iter			begin()			{return (this->c.begin());}
+		iter			end()			{return (this->c.end());}
+		const_iter		begin() const	{return (this->c.begin());}
+		const_iter		end() const		{return (this->c.end());}
 
-		rev_iter		rbegin()	{return (this->c.rbegin());}
-		rev_iter		rend()		{return (this->c.rend());}
-		const_rev_iter	rbegin()	{return (this->c.rbegin());}
-		const_rev_iter	rend()		{return (this->c.rend());}
+		rev_iter		rbegin()		{return (this->c.rbegin());}
+		rev_iter		rend()			{return (this->c.rend());}
+		const_rev_iter	rbegin() const	{return (this->c.rbegin());}
+		const_rev_iter	rend() const	{return (this->c.rend());}
 
 };
 
