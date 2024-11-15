@@ -20,8 +20,9 @@ class BitcoinExchange
 		BitcoinExchange& operator=(const BitcoinExchange &other);
 		~BitcoinExchange();
 
+		void							parseData(const std::string& filename);
 		std::pair<std::string, double>	parseInputLine(const std::string& line);
-		void	checkDateFormat(const std::string& date);
+		void							checkDateFormat(const std::string& date);
 
 
 		class InvalidDateException : public std::exception

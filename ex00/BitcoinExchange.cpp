@@ -25,6 +25,22 @@ BitcoinExchange::~BitcoinExchange()
 	std::cout << GREY << "Destructor called" << RESET << std::endl;
 }
 
+void	BitcoinExchange::parseData(const std::string& filename)
+{
+	std::ifstream	btc_data(filename);
+	if (!btc_data.is_open())
+		throw (std::runtime_error("Error: couldn't open file"));
+
+	std::string	line;
+	std::getline(btc_data, line);
+	while (std::getline(btc_data, line))
+	{
+		std::pair<std::string, double> data = parseInputLine(line);
+		_btcData[data.first] = data.second;
+	}
+	btc_data.close();
+}
+
 std::pair<std::string, double>	BitcoinExchange::parseInputLine(const std::string& line)
 {
 	std::stringstream	linestream(line);
@@ -67,4 +83,14 @@ void	BitcoinExchange::checkDateFormat(const std::string& date)
 		throw (InvalidDateException());
 	if (mm == 2 && (((yyyy % 4 != 0 || (yyyy % 100 == 0 && yyyy % 400 != 0)) && dd == 29) || dd > 29))
 		throw (InvalidDateException());
+}
+
+const char*	BitcoinExchange::InvalidDateException::what() const noexcept
+{
+	return ("Invalid Date (YYYY-MM-DD)");
+}
+
+const char*	BitcoinExchange::InvalidValueException::what() const noexcept
+{
+	return ("Invalid Value (1-1000)");
 }

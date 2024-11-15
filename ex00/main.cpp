@@ -8,12 +8,15 @@ int main (int argc, char **argv)
 		std::cerr << "Enter './btc filename'" << std::endl;
 		return (1);
 	}
-	std::ifstream	btc_data(argv[1]);
-	if (!btc_data.is_open())
+	try
 	{
-		std::cerr << "Error opening btc data file" << std::endl;
+		BitcoinExchange bitcorn;
+		bitcorn.parseData(argv[1]);
+	}
+	catch (const std::exception& e)
+	{
+		std::cerr << "Error: " << e.what() << std::endl;
 		return (1);
 	}
-
 	return (0);
 }
