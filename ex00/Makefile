@@ -1,4 +1,4 @@
-NAME		= stonks
+NAME		= btc
 
 CXX			= c++
 CFLAGS		= -Wall -Wextra -Werror -std=c++17

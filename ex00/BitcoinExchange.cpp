@@ -24,3 +24,18 @@ BitcoinExchange::~BitcoinExchange()
 {
 	std::cout << GREY << "Destructor called" << RESET << std::endl;
 }
+
+std::pair<std::string, double>	BitcoinExchange::parseInputLine(const std::string& line)
+{
+	std::stringstream	linestream(line);
+	std::string			date;
+	double				value;
+
+	std::getline(linestream, date, ',');
+
+	linestream >> value;
+	if (linestream.fail())
+		throw (InvalidValueException());
+
+	return {date, value};
+}
