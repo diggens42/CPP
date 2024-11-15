@@ -21,6 +21,7 @@ class BitcoinExchange
 		~BitcoinExchange();
 
 		std::pair<std::string, double>	parseInputLine(const std::string& line);
+		void	checkDateFormat(const std::string& date);
 
 
 		class InvalidDateException : public std::exception
@@ -33,7 +34,7 @@ class BitcoinExchange
 		{
 			public:
 				const char* what() const noexcept override;
-		}
+		};
 
 	private:
 		std::map<std::string, double>	_btcData;
