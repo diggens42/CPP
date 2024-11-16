@@ -8,16 +8,8 @@ int main (int argc, char **argv)
 		std::cerr << "Enter './btc filename'" << std::endl;
 		return (1);
 	}
-	try
-	{
-		BitcoinExchange bitcorn;
-		bitcorn.parseRates("data.csv");
-		bitcorn.parseInput(argv[1]);
-	}
-	catch (const std::exception& e)
-	{
-		std::cerr << "Error: " << e.what() << std::endl;
-		return (1);
-	}
+	BitcoinExchange bitcorn;
+	bitcorn.parseRates("data.csv");
+	bitcorn.parseInput(argv[1]);
 	return (0);
 }

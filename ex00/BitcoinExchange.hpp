@@ -26,19 +26,45 @@ class BitcoinExchange
 		std::pair<std::string, double>	parseInputLine(const std::string& line);
 		void							checkDateFormat(const std::string& date);
 
+		double							getRate(const std::string& date);
 
 		class InvalidDateException : public std::exception
 		{
+			private:
+				std::string msg;
+
 			public:
+				explicit InvalidDateException(const std::string& date);
 				const char* what() const noexcept override;
 		};
 
 		class InvalidValueException : public std::exception
 		{
+			private:
+				std::string msg;
+
+			public:
+				explicit InvalidValueException(const double value);
+				const char* what() const noexcept override;
+		};
+
+		class RateNotFoundException : public std::exception
+		{
 			public:
 				const char* what() const noexcept override;
 		};
 
+		class ValueTooLowException : public std::exception
+		{
+			public:
+				const char* what() const noexcept override;
+		};
+
+		class ValueTooHighException : public std::exception
+		{
+			public:
+				const char* what() const noexcept override;
+		};
 	private:
 		std::map<std::string, double>	_btcInputData;
 		std::map<std::string, double>	_btcRates;
