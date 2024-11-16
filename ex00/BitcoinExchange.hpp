@@ -20,7 +20,9 @@ class BitcoinExchange
 		BitcoinExchange& operator=(const BitcoinExchange &other);
 		~BitcoinExchange();
 
-		void							parseData(const std::string& filename);
+		void							parseRates(const std::string& filename);
+		void							parseInput(const std::string& filename);
+		std::pair<std::string, double>	parseRatesLine(const std::string& line);
 		std::pair<std::string, double>	parseInputLine(const std::string& line);
 		void							checkDateFormat(const std::string& date);
 
@@ -38,7 +40,8 @@ class BitcoinExchange
 		};
 
 	private:
-		std::map<std::string, double>	_btcData;
+		std::map<std::string, double>	_btcInputData;
+		std::map<std::string, double>	_btcRates;
 
 };
 

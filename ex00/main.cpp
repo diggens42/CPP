@@ -11,7 +11,8 @@ int main (int argc, char **argv)
 	try
 	{
 		BitcoinExchange bitcorn;
-		bitcorn.parseData(argv[1]);
+		bitcorn.parseRates("data.csv");
+		bitcorn.parseInput(argv[1]);
 	}
 	catch (const std::exception& e)
 	{

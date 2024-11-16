@@ -25,7 +25,22 @@ BitcoinExchange::~BitcoinExchange()
 	std::cout << GREY << "Destructor called" << RESET << std::endl;
 }
 
-void	BitcoinExchange::parseData(const std::string& filename)
+void	BitcoinExchange::parseRates(const std::string& filename)
+{
+	std::ifstream	rates(filename);
+	if (!rates.is_open())
+		throw (std::runtime_error("Error: couldn't open file"));
+
+	std::string	line;
+	std::getline(rates, line);
+	while (std::getline(rates, line))
+	{
+
+	}
+
+}
+
+void	BitcoinExchange::parseInput(const std::string& filename)
 {
 	std::ifstream	btc_data(filename);
 	if (!btc_data.is_open())
@@ -36,9 +51,23 @@ void	BitcoinExchange::parseData(const std::string& filename)
 	while (std::getline(btc_data, line))
 	{
 		std::pair<std::string, double> data = parseInputLine(line);
-		_btcData[data.first] = data.second;
+		_btcInputData[data.first] = data.second;
 	}
 	btc_data.close();
+}
+
+std::pair<std::string, double>	BitcoinExchange::parseRatesLine(const std::string& line)
+{
+	std::stringstream	linestream(line);
+	std::string			date;
+	double				value;
+
+	std::getline(linestream, date, ',');
+	checkDateFormat(date);
+	linestream >> value;
+	if (linestream.fail())
+		throw (InvalidValueException());
+	return {date, value};
 }
 
 std::pair<std::string, double>	BitcoinExchange::parseInputLine(const std::string& line)
