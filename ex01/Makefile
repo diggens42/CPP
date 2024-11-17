@@ -1,4 +1,4 @@
-NAME		= rpn
+NAME		= RPN
 
 CXX			= c++
 CFLAGS		= -Wall -Wextra -Werror -std=c++17
