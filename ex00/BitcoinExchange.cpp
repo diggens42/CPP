@@ -2,12 +2,12 @@
 
 BitcoinExchange::BitcoinExchange()
 {
-	std::cout << GREY << "Default constructor called" << RESET << std::endl;
+	// std::cout << GREY << "Default constructor called" << RESET << std::endl;
 }
 
-BitcoinExchange::BitcoinExchange(const BitcoinExchange &other)
+BitcoinExchange::BitcoinExchange(const BitcoinExchange &other) : _btcRates(other._btcRates)
 {
-	std::cout << GREY << "Copy constructor called" << RESET << std::endl;
+	// std::cout << GREY << "Copy constructor called" << RESET << std::endl;
 	*this = other;
 }
 
@@ -15,14 +15,15 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange &other)
 {
 	if (this != &other)
 	{
-		std::cout << GREY << "Copy assignment operator called" << RESET << std::endl;
+		// std::cout << GREY << "Copy assignment operator called" << RESET << std::endl;
+		_btcRates = other._btcRates;
 	}
 	return *this;
 }
 
 BitcoinExchange::~BitcoinExchange()
 {
-	std::cout << GREY << "Destructor called" << RESET << std::endl;
+	// std::cout << GREY << "Destructor called" << RESET << std::endl;
 }
 
 bool	BitcoinExchange::parseRates(const std::string& filename)
