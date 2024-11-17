@@ -1,5 +1,7 @@
 #include "RPN.hpp"
 
+const std::string RPN::ops = "+-*/";
+
 RPN::RPN()
 {
 	std::cout << GREY << "Default constructor called" << RESET << std::endl;
@@ -23,4 +25,26 @@ RPN& RPN::operator=(const RPN &other)
 RPN::~RPN()
 {
 	std::cout << GREY << "Destructor called" << RESET << std::endl;
+}
+
+int	RPN::parseInput(const std::string& str)
+{
+	std::istringstream	rpn(str);
+	std::string			temp;
+
+	while (rpn >> temp)
+	{
+		if (isdigit(temp[0]) || temp[0] == '-' && temp.size() > 1)
+			_nums.push(std::stoi(temp));
+		else if (temp.size() == 1 && ops.find(temp[0]) != std::string::npos)
+		{
+			if (_nums.size() < 2)
+				throw (NotEnoughNumbersException());
+		}
+	}
+}
+
+const char*	RPN::NotEnoughNumbersException::what() const noexcept
+{
+	return ("Error: not enough numbers on the stack");
 }
