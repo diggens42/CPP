@@ -19,9 +19,22 @@ class RPN
 		RPN& operator=(const RPN &other);
 		~RPN();
 
-		int	parseInput(const std::string& str);
+		int	parseRPN(const std::string& str);
+		int	doSomeMath(int a, int b, char op);
 
 		class NotEnoughNumbersException : public std::exception
+		{
+			public:
+				const char* what() const noexcept override;
+		};
+
+		class DivideByZeroException : public std::exception
+		{
+			public:
+				const char* what() const noexcept override;
+		};
+
+		class InvalidOperatorException : public std::exception
 		{
 			public:
 				const char* what() const noexcept override;

@@ -27,7 +27,7 @@ RPN::~RPN()
 	std::cout << GREY << "Destructor called" << RESET << std::endl;
 }
 
-int	RPN::parseInput(const std::string& str)
+int	RPN::parseRPN(const std::string& str)
 {
 	std::istringstream	rpn(str);
 	std::string			temp;
@@ -40,11 +40,45 @@ int	RPN::parseInput(const std::string& str)
 		{
 			if (_nums.size() < 2)
 				throw (NotEnoughNumbersException());
+			int b = _nums.top();
+			_nums.pop();
+			int a = _nums.top();
+			_nums.pop();
+			_nums.push(doSomeMath(a, b, temp[0]));
 		}
+	}
+}
+
+int	RPN::doSomeMath(int a, int b, char op)
+{
+	switch (op)
+	{
+		case '+':
+			return (a + b);
+		case '-':
+			return (a - b);
+		case '*':
+			return (a * b);
+		case '/':
+			if (b == 0)
+				throw (DivideByZeroException());
+			return (a / b);
+		default:
+			throw (InvalidOperatorException());
 	}
 }
 
 const char*	RPN::NotEnoughNumbersException::what() const noexcept
 {
 	return ("Error: not enough numbers on the stack");
+}
+
+const char* RPN::DivideByZeroException::what() const noexcept
+{
+	return ("Error: can't divide by zero");
+}
+
+const char* RPN::InvalidOperatorException::what() const noexcept
+{
+	return ("Error: Invalid operator");
 }
