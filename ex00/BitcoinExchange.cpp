@@ -48,27 +48,29 @@ void	BitcoinExchange::parseRates(const std::string& filename)
 
 }
 
-void	BitcoinExchange::parseInput(const std::string& filename)
+void BitcoinExchange::parseInput(const std::string& filename)
 {
-	std::ifstream	btc_data(filename);
+	std::ifstream btc_data(filename);
 	if (!btc_data.is_open())
-		throw (std::runtime_error("Error: couldn't open input file"));
+		throw std::runtime_error("Error: couldn't open input file");
 
-	std::string	line;
+	std::string line;
 	std::getline(btc_data, line);
 	while (std::getline(btc_data, line))
 	{
 		try
 		{
 			std::pair<std::string, double> data = parseInputLine(line);
-			_btcInputData[data.first] = data.second;
-
+			const std::string& date = data.first;
+			double amount = data.second;
+			double rate = getRate(date);
+			double res = amount * rate;
+			std::cout << date << " => " << amount << " = " << std::fixed << std::setprecision(2) << res << std::endl;
 		}
-		catch(const std::exception& e)
+		catch (const std::exception& e)
 		{
 			std::cerr << e.what() << std::endl;
 		}
-
 	}
 	btc_data.close();
 }
@@ -80,7 +82,8 @@ std::pair<std::string, double>	BitcoinExchange::parseRatesLine(const std::string
 	double				value;
 
 	std::getline(linestream, date, ',');
-	checkDateFormat(date);
+	date.erase(date.find_last_not_of(" \t\n\r") + 1);
+	// checkDateFormat(date);
 	linestream >> value;
 	if (linestream.fail())
 		throw (InvalidValueException(value));
@@ -93,9 +96,10 @@ std::pair<std::string, double>	BitcoinExchange::parseInputLine(const std::string
 	std::string			date;
 	double				value;
 
-	std::getline(linestream, date, ',');
+	std::getline(linestream, date, '|');
+	date.erase(date.find_last_not_of(" \t\n\r") + 1);
 	checkDateFormat(date);
-	linestream >> value;
+	linestream >> std::ws >> value;
 	if (linestream.fail())
 		throw (InvalidValueException(value));
 	if (value < 0)
@@ -131,7 +135,7 @@ void	BitcoinExchange::checkDateFormat(const std::string& date)
 		throw (InvalidDateException(date));
 	if (dd == 31 && (mm == 4 || mm == 6 || mm == 9 || mm == 11))
 		throw (InvalidDateException(date));
-	if (mm == 2 && (((yyyy % 4 != 0 || (yyyy % 100 == 0 && yyyy % 400 != 0)) && dd == 29) || dd > 29))
+	if (mm == 2 && (((yyyy % 4 != 0 || (yyyy % 100 == 0 && yyyy % 400 == 0)) && dd == 29) || dd > 29))
 		throw (InvalidDateException(date));
 }
 

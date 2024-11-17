@@ -7,6 +7,7 @@
 #include <iostream>
 #include <fstream>
 #include <map>
+#include <unordered_map>
 #include <string>
 #include <sstream>
 #include <exception>
@@ -66,9 +67,8 @@ class BitcoinExchange
 				const char* what() const noexcept override;
 		};
 	private:
-		std::map<std::string, double>	_btcInputData;
+		std::unordered_multimap<std::string, double>	_btcInputData;
 		std::map<std::string, double>	_btcRates;
-
 };
 
 #endif // BITCOINEXCHANGE_H

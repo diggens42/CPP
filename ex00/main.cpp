@@ -11,5 +11,6 @@ int main (int argc, char **argv)
 	BitcoinExchange bitcorn;
 	bitcorn.parseRates("data.csv");
 	bitcorn.parseInput(argv[1]);
+	// bitcorn.matchData();
 	return (0);
 }
