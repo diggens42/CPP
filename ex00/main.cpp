@@ -9,8 +9,9 @@ int main (int argc, char **argv)
 		return (1);
 	}
 	BitcoinExchange bitcorn;
-	bitcorn.parseRates("data.csv");
-	bitcorn.parseInput(argv[1]);
-	// bitcorn.matchData();
+	bool rates_parsed = false;
+	rates_parsed = bitcorn.parseRates("data.csv");
+	if (rates_parsed == true)
+		bitcorn.parseInput(argv[1]);
 	return (0);
 }

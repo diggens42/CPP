@@ -25,14 +25,23 @@ BitcoinExchange::~BitcoinExchange()
 	std::cout << GREY << "Destructor called" << RESET << std::endl;
 }
 
-void	BitcoinExchange::parseRates(const std::string& filename)
+bool	BitcoinExchange::parseRates(const std::string& filename)
 {
 	std::ifstream	rates(filename);
-	if (!rates.is_open())
-		throw (std::runtime_error("Error: couldn't open rates file"));
-
 	std::string	line;
-	std::getline(rates, line);
+	try
+	{
+		if (!rates.is_open())
+			throw (std::runtime_error("Error: couldn't open rates file"));
+		std::getline(rates, line);
+		if (line != "date,exchange_rate")
+			throw (std::runtime_error("Error: First line of .csv is not 'date,exchange_rate'"));
+	}
+	catch (const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+		return (false);
+	}
 	while (std::getline(rates, line))
 	{
 		try
@@ -42,20 +51,30 @@ void	BitcoinExchange::parseRates(const std::string& filename)
 		}
 		catch(const std::exception& e)
 		{
-			std::cerr << e.what() << std::endl;;
+			std::cerr << e.what() << std::endl;
 		}
 	}
-
+	return (true);
 }
 
 void BitcoinExchange::parseInput(const std::string& filename)
 {
 	std::ifstream btc_data(filename);
-	if (!btc_data.is_open())
-		throw std::runtime_error("Error: couldn't open input file");
-
 	std::string line;
-	std::getline(btc_data, line);
+	try
+	{
+		if (!btc_data.is_open())
+			throw (std::runtime_error("Error: couldn't open input file"));
+		std::getline(btc_data, line);
+		if (line != "date | value")
+			throw (std::runtime_error("Error: first line of input is not 'date | value'"));
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+		return ;
+	}
+
 	while (std::getline(btc_data, line))
 	{
 		try
