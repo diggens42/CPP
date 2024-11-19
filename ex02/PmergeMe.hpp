@@ -21,17 +21,19 @@ class PmergeMe
 		~PmergeMe();
 
 		bool	checkInput(int argc, char **argv);
+
 		void	sortVec();
 		std::vector<std::pair<unsigned int, unsigned int>>	pairVec();
 
 		void	sortDeq();
-		void	pairDeq();
+		std::deque<std::pair<unsigned int, unsigned int>>	pairDeq();
 
 	private:
-		std::vector<unsigned int>							_vector;
+		std::vector<unsigned int>							_vec;
 		std::vector<std::pair<unsigned int, unsigned int>>	_vecPairs;
-		std::deque<unsigned int>	_deque;
 
+		std::deque<unsigned int>							_deq;
+		std::deque<std::pair<unsigned int, unsigned int>>	_deqPairs;
 };
 
 #endif // PMERGEME_H

@@ -14,8 +14,8 @@ PmergeMe::PmergeMe(int ac, char *av[])
 	while (i < ac)
 	{
 		unsigned int	num = std::stoul(av[i]);
-		_vector.push_back(num);
-		_deque.push_back(num);
+		_vec.push_back(num);
+		_deq.push_back(num);
 		i++;
 	}
 }
@@ -100,12 +100,12 @@ std::vector<std::pair<unsigned int, unsigned int>>	PmergeMe::pairVec()
 {
 	std::vector<std::pair<unsigned int, unsigned int>> vecPairs;
 
-	bool unpaired = (_vector.size() % 2 != 0);
+	bool unpaired = (_vec.size() % 2 != 0);
 	size_t	i = 0;
-	while (i < _vector.size() - (unpaired ? 1 : 0))
+	while (i < _vec.size() - (unpaired ? 1 : 0))
 	{
-		unsigned int	a = _vector[i];
-		unsigned int	b = _vector[i + 1];
+		unsigned int	a = _vec[i];
+		unsigned int	b = _vec[i + 1];
 
 		if (a > b)
 			vecPairs.push_back(std::make_pair(a, b));
@@ -118,9 +118,24 @@ std::vector<std::pair<unsigned int, unsigned int>>	PmergeMe::pairVec()
 
 void	PmergeMe::sortDeq()
 {
-
+	_deqPairs = pairDeq();
 }
-void	PmergeMe::pairDeq()
+std::deque<std::pair<unsigned int, unsigned int>>	PmergeMe::pairDeq()
 {
+	std::deque<std::pair<unsigned int, unsigned int>> deqPairs;
 
+	bool unpaired = (_deq.size() % 2 != 0);
+	size_t	i = 0;
+	while (i < _deq.size() - (unpaired ? 1 : 0))
+	{
+		unsigned int	a = _deq[i];
+		unsigned int	b = _deq[i + 1];
+
+		if (a > b)
+			deqPairs.push_back(std::make_pair(a, b));
+		else
+			deqPairs.push_back(std::make_pair(b, a));
+		i += 2;
+	}
+	return (deqPairs);
 }
