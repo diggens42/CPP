@@ -10,7 +10,14 @@ PmergeMe::PmergeMe(int ac, char *av[])
 	bool check = checkInput(ac, av);
 	if (check == false)
 		return ; //add except
-
+	int i = 1;
+	while (i < ac)
+	{
+		unsigned int	num = std::stoul(av[i]);
+		_vector.push_back(num);
+		_deque.push_back(num);
+		i++;
+	}
 }
 
 PmergeMe::PmergeMe(const PmergeMe &other)
@@ -56,6 +63,7 @@ bool	PmergeMe::checkInput(int argc, char **argv)
 			}
 			j++;
 		}
+
 		unsigned long num;
 		try
 		{
@@ -81,4 +89,38 @@ bool	PmergeMe::checkInput(int argc, char **argv)
 		i++;
 	}
 	return (true);
+}
+
+void	PmergeMe::sortVec()
+{
+	_vecPairs = pairVec();
+
+}
+std::vector<std::pair<unsigned int, unsigned int>>	PmergeMe::pairVec()
+{
+	std::vector<std::pair<unsigned int, unsigned int>> vecPairs;
+
+	bool unpaired = (_vector.size() % 2 != 0);
+	size_t	i = 0;
+	while (i < _vector.size() - (unpaired ? 1 : 0))
+	{
+		unsigned int	a = _vector[i];
+		unsigned int	b = _vector[i + 1];
+
+		if (a > b)
+			vecPairs.push_back(std::make_pair(a, b));
+		else
+			vecPairs.push_back(std::make_pair(b, a));
+		i += 2;
+	}
+	return (vecPairs);
+}
+
+void	PmergeMe::sortDeq()
+{
+
+}
+void	PmergeMe::pairDeq()
+{
+
 }
