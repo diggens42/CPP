@@ -9,6 +9,7 @@
 #include <vector>
 #include <deque>
 #include <set>
+#include <chrono>
 #include <exception>
 
 class PmergeMe
@@ -28,16 +29,21 @@ class PmergeMe
 		std::vector<unsigned int>							getSmallerNumsVec();
 		std::vector<size_t>									jacobsthalSequenceVec(size_t size);
 		void	binaryInsertVec(std::vector<unsigned int>&mainchain, const std::vector<size_t>& jacobsthal, const std::vector<unsigned int>& numstoinsert);
+		void	printResult();
 
 		void	sortDeq();
 		std::deque<std::pair<unsigned int, unsigned int>>	pairDeq();
 
 	private:
+		std::vector<unsigned int>	_unsorted;
+
 		std::vector<unsigned int>							_vec;
 		std::vector<std::pair<unsigned int, unsigned int>>	_vecPairs;
+		double												_vecTime;
 
 		std::deque<unsigned int>							_deq;
 		std::deque<std::pair<unsigned int, unsigned int>>	_deqPairs;
+		double												_deqTime;
 };
 
 #endif // PMERGEME_H

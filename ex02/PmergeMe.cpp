@@ -18,6 +18,7 @@ PmergeMe::PmergeMe(int ac, char *av[])
 		_deq.push_back(num);
 		i++;
 	}
+	_unsorted = _vec;
 }
 
 PmergeMe::PmergeMe(const PmergeMe &other)
@@ -93,12 +94,30 @@ bool	PmergeMe::checkInput(int argc, char **argv)
 
 void	PmergeMe::sortVec()
 {
+	std::chrono::high_resolution_clock::time_point	vecStart = std::chrono::high_resolution_clock::now();
 	_vecPairs = pairVec();
 	std::vector<unsigned int>	mainchain = sortLargerNumsRecursiveVec();
 	std::vector<unsigned int>	smallerNumsToInsert = getSmallerNumsVec();
 	std::vector<size_t>			jacobsthalSequence = jacobsthalSequenceVec(smallerNumsToInsert.size());
-
+	binaryInsertVec(mainchain, jacobsthalSequence, smallerNumsToInsert);
+	std::chrono::high_resolution_clock::time_point	vecEnd = std::chrono::high_resolution_clock::now();
+	_vecTime = std::chrono::duration_cast<std::chrono::microseconds> (vecEnd - vecStart).count();
 }
+
+void	PmergeMe::printResult()
+{
+	std::cout << "Before ";
+	for (const auto& num : _unsorted)
+		std::cout << num << " ";
+	std::cout << std::endl;
+	std::cout << "After ";
+	for (const auto& num : _vec)
+		std::cout << num << " ";
+	std::cout << std::endl;
+	std::cout << "Time to process a range of " << _vec.size() << " elements with std::vector: " << _vecTime << " us" << std::endl;
+	std::cout << "Time to process a range of " << _deq.size() << " elements with std::vector: " << _deqTime << " us" << std::endl;
+}
+
 void	PmergeMe::binaryInsertVec(std::vector<unsigned int>&mainchain, const std::vector<size_t>& jacobsthal, const std::vector<unsigned int>& numstoinsert)
 {
 	size_t	i = 0;
@@ -110,6 +129,7 @@ void	PmergeMe::binaryInsertVec(std::vector<unsigned int>&mainchain, const std::v
 
 		auto	insertPos = std::lower_bound(mainchain.begin(), mainchain.begin() + _vecPairs[curPos].first, numstoinsert[curPos]);
 		mainchain.insert(insertPos, numstoinsert[curPos]);
+		i++;
 	}
 }
 
