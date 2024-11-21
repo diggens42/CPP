@@ -94,8 +94,47 @@ bool	PmergeMe::checkInput(int argc, char **argv)
 void	PmergeMe::sortVec()
 {
 	_vecPairs = pairVec();
+	std::vector<unsigned int>	mainchain = sortLargerNumsRecursiveVec();
 
 }
+std::vector<unsigned int>	PmergeMe::sortLargerNumsRecursiveVec()
+{
+	if (_vecPairs.size() <= 1)
+	{
+		if (_vecPairs.empty())
+			return (std::vector<unsigned int>());
+		return (std::vector<unsigned int>{_vecPairs[0].first});
+	}
+	std::vector<unsigned int>	largerNums;
+	auto iter = _vecPairs.begin();
+	while (iter != _vecPairs.end())
+	{
+		largerNums.push_back(iter->first);
+		++iter;
+	}
+	std::vector<std::pair<unsigned int, unsigned int>>	pairsCopy = _vecPairs;
+	_vecPairs.clear();
+	size_t	i = 0;
+	while (i < _vecPairs.size())
+	{
+		if (i + 1 < largerNums.size())
+		{
+			unsigned int	a = largerNums[i];
+			unsigned int	b = largerNums[i + 1];
+			if (a > b)
+				_vecPairs.push_back(std::make_pair(a, b));
+			else
+				_vecPairs.push_back(std::make_pair(b, a));
+		}
+		else
+			_vecPairs.push_back(std::make_pair(largerNums[i], 0));
+		i += 2;
+	}
+	std::vector<unsigned int>	largerNumsSorted = sortLargerNumsRecursiveVec();
+	_vecPairs = pairsCopy;
+	return (largerNumsSorted);
+}
+
 std::vector<std::pair<unsigned int, unsigned int>>	PmergeMe::pairVec()
 {
 	std::vector<std::pair<unsigned int, unsigned int>> vecPairs;

@@ -24,6 +24,7 @@ class PmergeMe
 
 		void	sortVec();
 		std::vector<std::pair<unsigned int, unsigned int>>	pairVec();
+		std::vector<unsigned int>							sortLargerNumsRecursiveVec();
 
 		void	sortDeq();
 		std::deque<std::pair<unsigned int, unsigned int>>	pairDeq();
