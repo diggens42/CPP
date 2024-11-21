@@ -27,7 +27,7 @@ class PmergeMe
 		std::vector<unsigned int>							sortLargerNumsRecursiveVec();
 		std::vector<unsigned int>							getSmallerNumsVec();
 		std::vector<size_t>									jacobsthalSequenceVec(size_t size);
-
+		void	binaryInsertVec(std::vector<unsigned int>&mainchain, const std::vector<size_t>& jacobsthal, const std::vector<unsigned int>& numstoinsert);
 
 		void	sortDeq();
 		std::deque<std::pair<unsigned int, unsigned int>>	pairDeq();

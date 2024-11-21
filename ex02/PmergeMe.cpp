@@ -96,7 +96,21 @@ void	PmergeMe::sortVec()
 	_vecPairs = pairVec();
 	std::vector<unsigned int>	mainchain = sortLargerNumsRecursiveVec();
 	std::vector<unsigned int>	smallerNumsToInsert = getSmallerNumsVec();
+	std::vector<size_t>			jacobsthalSequence = jacobsthalSequenceVec(smallerNumsToInsert.size());
 
+}
+void	PmergeMe::binaryInsertVec(std::vector<unsigned int>&mainchain, const std::vector<size_t>& jacobsthal, const std::vector<unsigned int>& numstoinsert)
+{
+	size_t	i = 0;
+	while (i < numstoinsert.size())
+	{
+		size_t	curPos = jacobsthal[i];
+		if (curPos >= numstoinsert.size())
+			continue ;
+
+		auto	insertPos = std::lower_bound(mainchain.begin(), mainchain.begin() + _vecPairs[curPos].first, numstoinsert[curPos]);
+		mainchain.insert(insertPos, numstoinsert[curPos]);
+	}
 }
 
 std::vector<size_t>	PmergeMe::jacobsthalSequenceVec(size_t size)
@@ -132,8 +146,9 @@ std::vector<unsigned int>	PmergeMe::getSmallerNumsVec()
 	while (iter != _vecPairs.end())
 	{
 		smallerNums.push_back(iter->second);
-		++iter;
+		iter++;
 	}
+	return (smallerNums);
 }
 
 std::vector<unsigned int>	PmergeMe::sortLargerNumsRecursiveVec()
@@ -149,7 +164,7 @@ std::vector<unsigned int>	PmergeMe::sortLargerNumsRecursiveVec()
 	while (iter != _vecPairs.end())
 	{
 		largerNums.push_back(iter->first);
-		++iter;
+		iter++;
 	}
 	std::vector<std::pair<unsigned int, unsigned int>>	pairsCopy = _vecPairs;
 	_vecPairs.clear();
