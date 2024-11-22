@@ -92,6 +92,20 @@ bool	PmergeMe::checkInput(int argc, char **argv)
 	return (true);
 }
 
+void	PmergeMe::printResult()
+{
+	std::cout << "Before ";
+	for (const auto& num : _unsorted)
+		std::cout << num << " ";
+	std::cout << std::endl;
+	std::cout << "After ";
+	for (const auto& num : _vec)
+		std::cout << num << " ";
+	std::cout << std::endl;
+	std::cout << "Time to process a range of " << _vec.size() << " elements with std::vector: " << _vecTime << " us" << std::endl;
+	std::cout << "Time to process a range of " << _deq.size() << " elements with std::vector: " << _deqTime << " us" << std::endl;
+}
+
 void	PmergeMe::sortVec()
 {
 	std::chrono::high_resolution_clock::time_point		vecStart;
@@ -112,73 +126,24 @@ void	PmergeMe::sortVec()
 	_vecTime = std::chrono::duration_cast<std::chrono::microseconds> (vecEnd - vecStart).count();
 }
 
-void	PmergeMe::printResult()
+std::vector<std::pair<unsigned int, unsigned int>>	PmergeMe::pairVec()
 {
-	std::cout << "Before ";
-	for (const auto& num : _unsorted)
-		std::cout << num << " ";
-	std::cout << std::endl;
-	std::cout << "After ";
-	for (const auto& num : _vec)
-		std::cout << num << " ";
-	std::cout << std::endl;
-	std::cout << "Time to process a range of " << _vec.size() << " elements with std::vector: " << _vecTime << " us" << std::endl;
-	std::cout << "Time to process a range of " << _deq.size() << " elements with std::vector: " << _deqTime << " us" << std::endl;
-}
+	std::vector<std::pair<unsigned int, unsigned int>> vecPairs;
 
-void	PmergeMe::binaryInsertVec(std::vector<unsigned int>&mainchain, const std::vector<size_t>& jacobsthal, const std::vector<unsigned int>& numstoinsert, const std::vector<std::pair<unsigned int, unsigned int>>	vecPairs)
-{
+	bool unpaired = (_vec.size() % 2 != 0);
 	size_t	i = 0;
-	while (i < numstoinsert.size())
+	while (i < _vec.size() - (unpaired ? 1 : 0))
 	{
-		size_t	curPos = jacobsthal[i];
-		if (curPos >= numstoinsert.size())
-		{
-			i++;
-			continue ;
-		}
-		auto	insertPos = std::lower_bound(mainchain.begin(), mainchain.end(), numstoinsert[curPos]);
-		mainchain.insert(insertPos, numstoinsert[curPos]);
-		i++;
+		unsigned int	a = _vec[i];
+		unsigned int	b = _vec[i + 1];
+
+		if (a > b)
+			vecPairs.push_back(std::make_pair(a, b));
+		else
+			vecPairs.push_back(std::make_pair(b, a));
+		i += 2;
 	}
-}
-
-std::vector<size_t>	PmergeMe::jacobsthalSequenceVec(size_t size)
-{
-	std::vector<size_t>	jacobsthalSequence;
-
-	if (size == 0)
-		return (jacobsthalSequence);
-	jacobsthalSequence.reserve(size);
-	jacobsthalSequence.push_back(0);
-	if (size == 1)
-		return (jacobsthalSequence);
-	jacobsthalSequence.push_back(1);
-
-	size_t	cur = 1;
-	size_t	prev = 0;
-	while (jacobsthalSequence.size() < size)
-	{
-		size_t	next = cur + 2 * prev;
-		if (next < cur)
-			break ;
-		jacobsthalSequence.push_back(next);
-		prev = cur;
-		cur = next;
-	}
-	return (jacobsthalSequence);
-}
-
-std::vector<unsigned int>	PmergeMe::getSmallerNumsVec(const std::vector<std::pair<unsigned int, unsigned int>>& vecPairs)
-{
-	std::vector<unsigned int>	smallerNums;
-	auto iter = vecPairs.begin();
-	while (iter != vecPairs.end())
-	{
-		smallerNums.push_back(iter->second);
-		iter++;
-	}
-	return (smallerNums);
+	return (vecPairs);
 }
 
 std::vector<unsigned int>	PmergeMe::sortLargerNumsVec(std::vector<std::pair<unsigned int, unsigned int>>& vecPairs)
@@ -217,24 +182,59 @@ std::vector<unsigned int>	PmergeMe::sortLargerNumsVec(std::vector<std::pair<unsi
 	return (largerNumsSorted);
 }
 
-std::vector<std::pair<unsigned int, unsigned int>>	PmergeMe::pairVec()
+std::vector<unsigned int>	PmergeMe::getSmallerNumsVec(const std::vector<std::pair<unsigned int, unsigned int>>& vecPairs)
 {
-	std::vector<std::pair<unsigned int, unsigned int>> vecPairs;
-
-	bool unpaired = (_vec.size() % 2 != 0);
-	size_t	i = 0;
-	while (i < _vec.size() - (unpaired ? 1 : 0))
+	std::vector<unsigned int>	smallerNums;
+	auto iter = vecPairs.begin();
+	while (iter != vecPairs.end())
 	{
-		unsigned int	a = _vec[i];
-		unsigned int	b = _vec[i + 1];
-
-		if (a > b)
-			vecPairs.push_back(std::make_pair(a, b));
-		else
-			vecPairs.push_back(std::make_pair(b, a));
-		i += 2;
+		smallerNums.push_back(iter->second);
+		iter++;
 	}
-	return (vecPairs);
+	return (smallerNums);
+}
+
+std::vector<size_t>	PmergeMe::jacobsthalSequenceVec(size_t size)
+{
+	std::vector<size_t>	jacobsthalSequence;
+
+	if (size == 0)
+		return (jacobsthalSequence);
+	jacobsthalSequence.reserve(size);
+	jacobsthalSequence.push_back(0);
+	if (size == 1)
+		return (jacobsthalSequence);
+	jacobsthalSequence.push_back(1);
+
+	size_t	cur = 1;
+	size_t	prev = 0;
+	while (jacobsthalSequence.size() < size)
+	{
+		size_t	next = cur + 2 * prev;
+		if (next < cur)
+			break ;
+		jacobsthalSequence.push_back(next);
+		prev = cur;
+		cur = next;
+	}
+	return (jacobsthalSequence);
+}
+
+void	PmergeMe::binaryInsertVec(std::vector<unsigned int>&mainchain, const std::vector<size_t>& jacobsthal, const std::vector<unsigned int>& numstoinsert, const std::vector<std::pair<unsigned int, unsigned int>>	vecPairs)
+{
+	size_t	i = 0;
+	while (i < numstoinsert.size())
+	{
+		size_t	curPos = jacobsthal[i];
+		if (curPos >= numstoinsert.size())
+		{
+			i++;
+			continue ;
+		}
+		auto	insertPos = std::lower_bound(mainchain.begin(), mainchain.end(), numstoinsert[curPos]);
+		mainchain.insert(insertPos, numstoinsert[curPos]);
+		i++;
+	}
 }
 
 void	PmergeMe::sortDeq()
