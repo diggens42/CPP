@@ -25,20 +25,19 @@ class PmergeMe
 
 		void	sortVec();
 		std::vector<std::pair<unsigned int, unsigned int>>	pairVec();
-		std::vector<unsigned int>							sortLargerNumsRecursiveVec();
-		std::vector<unsigned int>							getSmallerNumsVec();
+		std::vector<unsigned int>							sortLargerNumsVec(std::vector<std::pair<unsigned int, unsigned int>>& vecPairs);
+		std::vector<unsigned int>							getSmallerNumsVec(const std::vector<std::pair<unsigned int, unsigned int>>& vecPairs);
 		std::vector<size_t>									jacobsthalSequenceVec(size_t size);
-		void	binaryInsertVec(std::vector<unsigned int>&mainchain, const std::vector<size_t>& jacobsthal, const std::vector<unsigned int>& numstoinsert);
-		void	printResult();
+		void	binaryInsertVec(std::vector<unsigned int>&mainchain, const std::vector<size_t>& jacobsthal, const std::vector<unsigned int>& numstoinsert, const std::vector<std::pair<unsigned int, unsigned int>>	vecPairs);
 
 		void	sortDeq();
 		std::deque<std::pair<unsigned int, unsigned int>>	pairDeq();
 
+		void	printResult();
 	private:
 		std::vector<unsigned int>	_unsorted;
 
 		std::vector<unsigned int>							_vec;
-		std::vector<std::pair<unsigned int, unsigned int>>	_vecPairs;
 		double												_vecTime;
 
 		std::deque<unsigned int>							_deq;
