@@ -148,11 +148,33 @@ std::vector<std::pair<unsigned int, unsigned int>>	PmergeMe::pairVec()
 
 std::vector<unsigned int>	PmergeMe::sortLargerNumsVec(std::vector<std::pair<unsigned int, unsigned int>>& vecPairs)
 {
-	if (vecPairs.size() <= 1)
+	if (vecPairs.size() <= 3)
 	{
+		std::vector<unsigned int>	res;
 		if (vecPairs.empty())
-			return (std::vector<unsigned int>());
-		return (std::vector<unsigned int>{vecPairs[0].first});
+			return (res);
+
+		res.push_back(vecPairs[0].first);
+		if (vecPairs.size() == 1)
+			return (res);
+
+		res.push_back(vecPairs[1].first);
+		if (vecPairs.size() == 2)
+		{
+			if (res[0] < res[1])
+				std::swap(res[0], res[1]);
+			return (res);
+		}
+
+		res.push_back(vecPairs[2].first);
+		if (res[0] < res[1])
+			std::swap(res[0], res[1]);
+		if (res[1] < res[2])
+			std::swap(res[1], res[2]);
+		if (res[0] < res[1])
+			std::swap(res[0], res[1]);
+
+		return (res);
 	}
 	std::vector<unsigned int>	largerNums;
 	auto iter = vecPairs.begin();
@@ -161,6 +183,7 @@ std::vector<unsigned int>	PmergeMe::sortLargerNumsVec(std::vector<std::pair<unsi
 		largerNums.push_back(iter->first);
 		iter++;
 	}
+
 	std::vector<std::pair<unsigned int, unsigned int>>	vecNewPairs;
 	size_t	i = 0;
 	while (i < largerNums.size())
@@ -220,7 +243,7 @@ std::vector<size_t>	PmergeMe::jacobsthalSequenceVec(size_t size)
 	return (jacobsthalSequence);
 }
 
-void	PmergeMe::binaryInsertVec(std::vector<unsigned int>&mainchain, const std::vector<size_t>& jacobsthal, const std::vector<unsigned int>& numstoinsert, const std::vector<std::pair<unsigned int, unsigned int>>	vecPairs)
+void	PmergeMe::binaryInsertVec(std::vector<unsigned int>&mainchain, const std::vector<size_t>& jacobsthal, const std::vector<unsigned int>& numstoinsert)
 {
 	size_t	i = 0;
 	while (i < numstoinsert.size())
