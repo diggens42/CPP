@@ -24,7 +24,7 @@ class PmergeMe
 		bool	checkInput(int argc, char **argv);
 
 		void	sortVec();
-		std::vector<std::pair<unsigned int, unsigned int>>	pairVec();
+		std::vector<std::pair<unsigned int, unsigned int>>	pairVec(size_t range);
 		std::vector<unsigned int>							sortLargerNumsVec(std::vector<std::pair<unsigned int, unsigned int>>& vecPairs);
 		std::vector<unsigned int>							getSmallerNumsVec(const std::vector<std::pair<unsigned int, unsigned int>>& vecPairs);
 		std::vector<size_t>									jacobsthalSequenceVec(size_t size);

@@ -110,29 +110,41 @@ void	PmergeMe::sortVec()
 {
 	std::chrono::high_resolution_clock::time_point		vecStart;
 	std::chrono::high_resolution_clock::time_point		vecEnd;
+	unsigned int										unpaired = 0;
+	bool												hasUnpaired;
 	std::vector<std::pair<unsigned int, unsigned int>>	vecPairs;
 	std::vector<unsigned int>							mainchain;
 	std::vector<unsigned int>							smallerNumsToInsert;
 	std::vector<size_t>									jacobsthalSequence;
 
 	vecStart = std::chrono::high_resolution_clock::now();
-	vecPairs = pairVec();
+	hasUnpaired = (_vec.size() % 2 != 0);
+	if (hasUnpaired)
+		unpaired = _vec.back();
+	vecPairs = pairVec(_vec.size() - hasUnpaired);
+	mainchain.reserve(_vec.size());
 	mainchain = sortLargerNumsVec(vecPairs);
+	smallerNumsToInsert.reserve(_vec.size() / 2);
 	smallerNumsToInsert = getSmallerNumsVec(vecPairs);
 	jacobsthalSequence = jacobsthalSequenceVec(smallerNumsToInsert.size());
 	binaryInsertVec(mainchain, jacobsthalSequence, smallerNumsToInsert);
+	if (hasUnpaired)
+	{
+		auto insertPos = std::lower_bound(mainchain.begin(), mainchain.end(), unpaired);
+		mainchain.insert(insertPos, unpaired);
+	}
+	_vec = mainchain;
 	vecEnd = std::chrono::high_resolution_clock::now();
-
 	_vecTime = std::chrono::duration_cast<std::chrono::microseconds> (vecEnd - vecStart).count();
 }
 
-std::vector<std::pair<unsigned int, unsigned int>>	PmergeMe::pairVec()
+std::vector<std::pair<unsigned int, unsigned int>>	PmergeMe::pairVec(size_t range)
 {
 	std::vector<std::pair<unsigned int, unsigned int>> vecPairs;
+	vecPairs.reserve(range / 2);
 
-	bool unpaired = (_vec.size() % 2 != 0);
 	size_t	i = 0;
-	while (i < _vec.size() - (unpaired ? 1 : 0))
+	while (i < range)
 	{
 		unsigned int	a = _vec[i];
 		unsigned int	b = _vec[i + 1];
