@@ -3,7 +3,7 @@ NAME		= PmergeMe
 CXX			= c++
 CFLAGS		= -Wall -Wextra -Werror -std=c++17
 
-SRC			= main.cpp
+SRC			= main.cpp PmergeMe.cpp
 
 OBJ			= $(SRC:.cpp=.o)
 DEPS		= $(SRC:.cpp=.d)

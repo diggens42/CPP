@@ -2,7 +2,7 @@
 
 PmergeMe::PmergeMe()
 {
-	std::cout << GREY << "Default constructor called" << RESET << std::endl;
+	// std::cout << GREY << "Default constructor called" << RESET << std::endl;
 }
 
 PmergeMe::PmergeMe(int ac, char *av[])
@@ -23,7 +23,7 @@ PmergeMe::PmergeMe(int ac, char *av[])
 
 PmergeMe::PmergeMe(const PmergeMe &other)
 {
-	std::cout << GREY << "Copy constructor called" << RESET << std::endl;
+	// std::cout << GREY << "Copy constructor called" << RESET << std::endl;
 	*this = other;
 }
 
@@ -31,14 +31,14 @@ PmergeMe& PmergeMe::operator=(const PmergeMe &other)
 {
 	if (this != &other)
 	{
-		std::cout << GREY << "Copy assignment operator called" << RESET << std::endl;
+		// std::cout << GREY << "Copy assignment operator called" << RESET << std::endl;
 	}
 	return *this;
 }
 
 PmergeMe::~PmergeMe()
 {
-	std::cout << GREY << "Destructor called" << RESET << std::endl;
+	// std::cout << GREY << "Destructor called" << RESET << std::endl;
 }
 
 bool	PmergeMe::checkInput(int argc, char **argv)
@@ -117,14 +117,28 @@ void	PmergeMe::sortVec()
 	std::vector<unsigned int>							smallerNumsToInsert;
 	std::vector<size_t>									jacobsthalSequence;
 
+	if (_vec.empty())
+	{
+		_vecTime = 0;
+		return ;
+	}
 	vecStart = std::chrono::high_resolution_clock::now();
 	hasUnpaired = (_vec.size() % 2 != 0);
 	if (hasUnpaired)
 		unpaired = _vec.back();
 	vecPairs = pairVec(_vec.size() - hasUnpaired);
-	mainchain.reserve(_vec.size());
+
+	// std::cout << "Pairs: ";
+	// for (auto &p : vecPairs) std::cout << "(" << p.first << ", " << p.second << ") ";
+	// std::cout << std::endl;
+
+	mainchain.reserve(_vec.size()); // not sure if this makes sense
 	mainchain = sortLargerNumsVec(vecPairs);
-	smallerNumsToInsert.reserve(_vec.size() / 2);
+
+	std::cout << "mainchain sorted: ";
+	for (auto &n : mainchain) std::cout << n << " ";
+	std::cout << std::endl;
+
 	smallerNumsToInsert = getSmallerNumsVec(vecPairs);
 	jacobsthalSequence = jacobsthalSequenceVec(smallerNumsToInsert.size());
 	binaryInsertVec(mainchain, jacobsthalSequence, smallerNumsToInsert);
@@ -133,8 +147,8 @@ void	PmergeMe::sortVec()
 		auto insertPos = std::lower_bound(mainchain.begin(), mainchain.end(), unpaired);
 		mainchain.insert(insertPos, unpaired);
 	}
-	_vec = mainchain;
 	vecEnd = std::chrono::high_resolution_clock::now();
+	_vec = mainchain;
 	_vecTime = std::chrono::duration_cast<std::chrono::microseconds> (vecEnd - vecStart).count();
 }
 
@@ -160,66 +174,58 @@ std::vector<std::pair<unsigned int, unsigned int>>	PmergeMe::pairVec(size_t rang
 
 std::vector<unsigned int>	PmergeMe::sortLargerNumsVec(std::vector<std::pair<unsigned int, unsigned int>>& vecPairs)
 {
-	if (vecPairs.size() <= 3)
+	if (vecPairs.size() <= 1)
 	{
 		std::vector<unsigned int>	res;
 		if (vecPairs.empty())
 			return (res);
-
 		res.push_back(vecPairs[0].first);
-		if (vecPairs.size() == 1)
-			return (res);
-
-		res.push_back(vecPairs[1].first);
-		if (vecPairs.size() == 2)
-		{
-			if (res[0] < res[1])
-				std::swap(res[0], res[1]);
-			return (res);
-		}
-
-		res.push_back(vecPairs[2].first);
-		if (res[0] < res[1])
-			std::swap(res[0], res[1]);
-		if (res[1] < res[2])
-			std::swap(res[1], res[2]);
-		if (res[0] < res[1])
-			std::swap(res[0], res[1]);
-
 		return (res);
 	}
 	std::vector<unsigned int>	largerNums;
-	auto iter = vecPairs.begin();
-	while (iter != vecPairs.end())
-	{
-		largerNums.push_back(iter->first);
-		iter++;
-	}
+	for (const auto& pair : vecPairs)
+		largerNums.push_back(pair.first);
 
-	std::vector<std::pair<unsigned int, unsigned int>>	vecNewPairs;
+	size_t	middle = largerNums.size() / 2;
+	std::vector<std::pair<unsigned int, unsigned int>> leftPairs(vecPairs.begin(), vecPairs.begin() + middle);
+	std::vector<std::pair<unsigned int, unsigned int>> rightPairs(vecPairs.begin() + middle, vecPairs.end());
+
+	std::vector<unsigned int> sortedLeftPairs = sortLargerNumsVec(leftPairs);
+	std::vector<unsigned int> sortedRightPairs = sortLargerNumsVec(rightPairs);
+	std::vector<unsigned int> mergeVec;
+
 	size_t	i = 0;
-	while (i < largerNums.size())
+	size_t	j = 0;
+	for (; i < sortedLeftPairs.size() && j < sortedRightPairs.size();)
 	{
-		if (i + 1 < largerNums.size())
+		if (sortedLeftPairs[i] <= sortedRightPairs[j])
 		{
-			unsigned int	a = largerNums[i];
-			unsigned int	b = largerNums[i + 1];
-			if (a > b)
-				vecNewPairs.push_back(std::make_pair(a, b));
-			else
-				vecNewPairs.push_back(std::make_pair(b, a));
+			mergeVec.push_back(sortedLeftPairs[i]);
+			i++;
 		}
 		else
-			vecNewPairs.push_back(std::make_pair(largerNums[i], 0));
-		i += 2;
+		{
+			mergeVec.push_back(sortedRightPairs[j]);
+			j++;
+		}
 	}
-	std::vector<unsigned int>	largerNumsSorted = sortLargerNumsVec(vecNewPairs);
-	return (largerNumsSorted);
+	while (i < sortedLeftPairs.size())
+	{
+		mergeVec.push_back(sortedLeftPairs[i]);
+		i++;
+	}
+	while (j < sortedRightPairs.size())
+	{
+		mergeVec.push_back(sortedRightPairs[j]);
+		j++;
+	}
+	return (mergeVec);
 }
 
 std::vector<unsigned int>	PmergeMe::getSmallerNumsVec(const std::vector<std::pair<unsigned int, unsigned int>>& vecPairs)
 {
 	std::vector<unsigned int>	smallerNums;
+	smallerNums.reserve(_vec.size() / 2);
 	auto iter = vecPairs.begin();
 	while (iter != vecPairs.end())
 	{
