@@ -120,7 +120,7 @@ void	PmergeMe::sortVec()
 	mainchain = sortLargerNumsVec(vecPairs);
 	smallerNumsToInsert = getSmallerNumsVec(vecPairs);
 	jacobsthalSequence = jacobsthalSequenceVec(smallerNumsToInsert.size());
-	binaryInsertVec(mainchain, jacobsthalSequence, smallerNumsToInsert, vecPairs);
+	binaryInsertVec(mainchain, jacobsthalSequence, smallerNumsToInsert);
 	vecEnd = std::chrono::high_resolution_clock::now();
 
 	_vecTime = std::chrono::duration_cast<std::chrono::microseconds> (vecEnd - vecStart).count();
@@ -221,26 +221,38 @@ std::vector<size_t>	PmergeMe::jacobsthalSequenceVec(size_t size)
 {
 	std::vector<size_t>	jacobsthalSequence;
 
-	if (size == 0)
-		return (jacobsthalSequence);
-	jacobsthalSequence.reserve(size);
-	jacobsthalSequence.push_back(0);
-	if (size == 1)
+	if (size <= 1)
 		return (jacobsthalSequence);
 	jacobsthalSequence.push_back(1);
 
-	size_t	cur = 1;
-	size_t	prev = 0;
-	while (jacobsthalSequence.size() < size)
+	size_t	prev = 1;
+	size_t	cur = 3;
+	size_t	next;
+	while (cur < size)
 	{
-		size_t	next = cur + 2 * prev;
-		if (next < cur)
-			break ;
-		jacobsthalSequence.push_back(next);
+		jacobsthalSequence.push_back(cur);
+		next = cur * 2 - prev;
 		prev = cur;
 		cur = next;
 	}
-	return (jacobsthalSequence);
+
+	std::vector<size_t>	res;
+	size_t	i = 0;
+	size_t	j;
+	size_t	prev_val;
+	while (i < jacobsthalSequence.size())
+	{
+		j = jacobsthalSequence[i];
+		prev_val = (i > 0 ? jacobsthalSequence[i - 1] : 0);
+		while (j-- > prev_val)
+		{
+			if (j + 1 <= size)
+				res.push_back(j);
+		}
+		i++;
+	}
+
+	return (res);
 }
 
 void	PmergeMe::binaryInsertVec(std::vector<unsigned int>&mainchain, const std::vector<size_t>& jacobsthal, const std::vector<unsigned int>& numstoinsert)
