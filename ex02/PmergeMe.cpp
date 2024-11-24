@@ -21,15 +21,22 @@ PmergeMe::PmergeMe(int ac, char *av[])
 
 PmergeMe::PmergeMe(const PmergeMe &other)
 {
-	// std::cout << GREY << "Copy constructor called" << RESET << std::endl;
-	*this = other;
+	_unsorted = other._unsorted;
+	_vec = other._vec;
+	_vecTime = other._vecTime;
+	_deq = other._deq;
+	_deqTime = other._deqTime;
 }
 
 PmergeMe& PmergeMe::operator=(const PmergeMe &other)
 {
 	if (this != &other)
 	{
-		// std::cout << GREY << "Copy assignment operator called" << RESET << std::endl;
+		_unsorted = other._unsorted;
+		_vec = other._vec;
+		_vecTime = other._vecTime;
+		_deq = other._deq;
+		_deqTime = other._deqTime;
 	}
 	return *this;
 }
