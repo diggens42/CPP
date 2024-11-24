@@ -24,7 +24,7 @@ class PmergeMe
 		PmergeMe& operator=(const PmergeMe &other);
 		~PmergeMe();
 
-		bool	checkInput(int argc, char **argv);
+		void	checkInput(int argc, char **argv);
 
 		void	sortVec();
 		std::vector<std::pair<unsigned int, unsigned int>>	pairVec(size_t range);
@@ -41,6 +41,31 @@ class PmergeMe
 		void												binaryInsertDeq(std::deque<unsigned int>&mainchain, const std::deque<size_t>& jacobsthal, const std::deque<unsigned int>& numstoinsert);
 
 		void	printResult();
+
+		class TooFewArgsException : public std::exception
+		{
+			public:
+				const char* what() const noexcept override;
+		};
+
+		class NonNumericArgException : public std::exception
+		{
+			public:
+				const char* what() const noexcept override;
+		};
+
+		class OutOfBoundsException : public std::exception
+		{
+			public:
+				const char* what() const noexcept override;
+		};
+
+		class DuplicateNumbersException : public std::exception
+		{
+			public:
+				const char* what() const noexcept override;
+		};
+
 	private:
 		std::vector<unsigned int>	_unsorted;
 

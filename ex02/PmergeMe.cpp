@@ -7,9 +7,7 @@ PmergeMe::PmergeMe()
 
 PmergeMe::PmergeMe(int ac, char *av[])
 {
-	bool check = checkInput(ac, av);
-	if (check == false)
-		return ; //add except
+	checkInput(ac, av);
 	int i = 1;
 	while (i < ac)
 	{
@@ -41,13 +39,10 @@ PmergeMe::~PmergeMe()
 	// std::cout << GREY << "Destructor called" << RESET << std::endl;
 }
 
-bool	PmergeMe::checkInput(int argc, char **argv)
+void	PmergeMe::checkInput(int argc, char **argv)
 {
 	if (argc < 2)
-	{
-		std::cout << "too few args" << std::endl;
-		return (false);
-	}
+		throw (TooFewArgsException());
 
 	std::set<unsigned int> unique_nums;
 
@@ -58,38 +53,18 @@ bool	PmergeMe::checkInput(int argc, char **argv)
 		while (argv[i][j])
 		{
 			if (!isdigit(argv[i][j]))
-			{
-				std::cout << "Error: non numeric arg" << std::endl;
-				return (false);
-			}
+				throw(NonNumericArgException());
 			j++;
 		}
 
-		unsigned long num;
-		try
-		{
-			num = std::stoul(argv[i]);
-			if (num > std::numeric_limits<unsigned int>::max())
-			{
-				std::cout << "Error: number " << argv[i] << " is out of bounds" << std::endl;
-				//add except
-				return (false);
-			}
-		}
-		catch(const std::exception& e)
-		{
-			std::cout << e.what() << std::endl;
-			return (false);
-		}
-
+		unsigned long num = std::stoul(argv[i]);
+		if (num > std::numeric_limits<unsigned int>::max())
+			throw (OutOfBoundsException());
 		if (!unique_nums.insert(static_cast<unsigned int>(num)).second)
-		{
-			std::cerr << "Error: duplicate number" << std::endl;
-			return (false);
-		}
+			throw (DuplicateNumbersException());
 		i++;
 	}
-	return (true);
+
 }
 
 void	PmergeMe::printResult()
@@ -466,4 +441,25 @@ void	PmergeMe::binaryInsertDeq(std::deque<unsigned int>&mainchain, const std::de
 		}
 		i++;
 	}
+}
+
+const char*	PmergeMe::TooFewArgsException::what() const noexcept
+{
+	return ("Error: too few arguments (usage: ./PmergeMe numbers)");
+}
+
+
+const char*	PmergeMe::NonNumericArgException::what() const noexcept
+{
+	return ("Error: argument is non-numeric");
+}
+
+const char*	PmergeMe::OutOfBoundsException::what() const noexcept
+{
+	return ("Error: Input numbers are out of bounds (unsigned int max)");
+}
+
+const char*	PmergeMe::DuplicateNumbersException::what() const noexcept
+{
+	return ("Error: Duplicate inout numbers");
 }
