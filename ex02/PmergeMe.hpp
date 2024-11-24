@@ -34,7 +34,9 @@ class PmergeMe
 		void	binaryInsertVec(std::vector<unsigned int>&mainchain, const std::vector<size_t>& jacobsthal, const std::vector<unsigned int>& numstoinsert);
 
 		void	sortDeq();
-		std::deque<std::pair<unsigned int, unsigned int>>	pairDeq();
+		std::deque<std::pair<unsigned int, unsigned int>>	pairDeq(size_t range);
+		std::deque<unsigned int>							sortLargerNumsDeq(std::deque<std::pair<unsigned int, unsigned int>>& deqPairs);
+		std::deque<unsigned int>							getSmallerNumsDeq(const std::deque<std::pair<unsigned int, unsigned int>>& deqPairs);
 
 		void	printResult();
 	private:
@@ -44,7 +46,6 @@ class PmergeMe
 		double												_vecTime;
 
 		std::deque<unsigned int>							_deq;
-		std::deque<std::pair<unsigned int, unsigned int>>	_deqPairs;
 		double												_deqTime;
 };
 

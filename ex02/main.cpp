@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:51:00 by fwahl             #+#    #+#             */
-/*   Updated: 2024/11/23 02:32:04 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/11/24 00:42:53 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,17 @@
 
 int main(int argc, char **argv)
 {
-	PmergeMe mergeinsert(argc, argv);
-	mergeinsert.sortVec();
-	// mergeinsert.sortDeq();
-	// mergeinsert.printResult();
+	try
+	{
+		PmergeMe mergeinsert(argc, argv);
+		mergeinsert.sortVec();
+		// mergeinsert.sortDeq();
+		mergeinsert.printResult();
+	}
+	catch (std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+		return (1);
+	}
 	return (0);
 }
