@@ -31,12 +31,14 @@ class PmergeMe
 		std::vector<unsigned int>							sortLargerNumsVec(std::vector<std::pair<unsigned int, unsigned int>>& vecPairs);
 		std::vector<unsigned int>							getSmallerNumsVec(const std::vector<std::pair<unsigned int, unsigned int>>& vecPairs);
 		std::vector<size_t>									jacobsthalSequenceVec(size_t size);
-		void	binaryInsertVec(std::vector<unsigned int>&mainchain, const std::vector<size_t>& jacobsthal, const std::vector<unsigned int>& numstoinsert);
+		void												binaryInsertVec(std::vector<unsigned int>&mainchain, const std::vector<size_t>& jacobsthal, const std::vector<unsigned int>& numstoinsert);
 
 		void	sortDeq();
 		std::deque<std::pair<unsigned int, unsigned int>>	pairDeq(size_t range);
 		std::deque<unsigned int>							sortLargerNumsDeq(std::deque<std::pair<unsigned int, unsigned int>>& deqPairs);
 		std::deque<unsigned int>							getSmallerNumsDeq(const std::deque<std::pair<unsigned int, unsigned int>>& deqPairs);
+		std::deque<size_t>									jacobsthalSequenceDeq(size_t size);
+		void												binaryInsertDeq(std::deque<unsigned int>&mainchain, const std::deque<size_t>& jacobsthal, const std::deque<unsigned int>& numstoinsert);
 
 		void	printResult();
 	private:
