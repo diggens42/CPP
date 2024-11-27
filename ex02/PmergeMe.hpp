@@ -26,12 +26,19 @@ class PmergeMe
 
 		void	checkInput(int argc, char **argv);
 
+		struct Pair
+		{
+			unsigned int	larger;
+			unsigned int	smaller;
+			size_t			pos;
+		};
+
 		void	sortVec();
-		std::vector<std::pair<unsigned int, unsigned int>>	pairVec(size_t range);
-		std::vector<unsigned int>							sortLargerNumsVec(std::vector<std::pair<unsigned int, unsigned int>>& vecPairs);
-		std::vector<unsigned int>							getSmallerNumsVec(const std::vector<std::pair<unsigned int, unsigned int>>& vecPairs);
+		std::vector<PmergeMe::Pair>							pairVec(size_t range);
+		void												setPosition(const std::vector<unsigned int>& sortedNumbers, std::vector<Pair>& pairs);
+		std::vector<unsigned int>							sortLargerNumsVec(std::vector<Pair>& vecPairs);
 		std::vector<size_t>									jacobsthalSequenceVec(size_t size);
-		void												binaryInsertVec(std::vector<unsigned int>&mainchain, const std::vector<size_t>& jacobsthal, const std::vector<unsigned int>& numstoinsert);
+		void												binaryInsertVec(std::vector<unsigned int>&mainchain, const std::vector<size_t>& jacobsthal, std::vector<Pair>& pairs);
 
 		void	sortDeq();
 		std::deque<std::pair<unsigned int, unsigned int>>	pairDeq(size_t range);
