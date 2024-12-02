@@ -24,8 +24,6 @@ class PmergeMe
 		PmergeMe& operator=(const PmergeMe &other);
 		~PmergeMe();
 
-		void	checkInput(int argc, char **argv);
-
 		struct Pair
 		{
 			unsigned int	larger;
@@ -33,21 +31,23 @@ class PmergeMe
 			size_t			pos;
 		};
 
-		void	sortVec();
-		std::vector<PmergeMe::Pair>							pairVec(size_t range);
-		void												setPosition(const std::vector<unsigned int>& sortedNumbers, std::vector<Pair>& pairs);
-		std::vector<unsigned int>							sortLargerNumsVec(std::vector<Pair>& vecPairs);
-		std::vector<size_t>									jacobsthalSequenceVec(size_t size);
-		void												binaryInsertVec(std::vector<unsigned int>&mainchain, const std::vector<size_t>& jacobsthal, std::vector<Pair>& pairs);
+		void						checkInput(int argc, char **argv);
 
-		void	sortDeq();
-		std::deque<std::pair<unsigned int, unsigned int>>	pairDeq(size_t range);
-		std::deque<unsigned int>							sortLargerNumsDeq(std::deque<std::pair<unsigned int, unsigned int>>& deqPairs);
-		std::deque<unsigned int>							getSmallerNumsDeq(const std::deque<std::pair<unsigned int, unsigned int>>& deqPairs);
-		std::deque<size_t>									jacobsthalSequenceDeq(size_t size);
-		void												binaryInsertDeq(std::deque<unsigned int>&mainchain, const std::deque<size_t>& jacobsthal, const std::deque<unsigned int>& numstoinsert);
+		void						sortVec();
+		std::vector<Pair>			pairVec(size_t range);
+		std::vector<unsigned int>	sortLargerNumsVec(std::vector<Pair>& vecPairs);
+		void						setPositionVec(const std::vector<unsigned int>& sortedNumbers, std::vector<Pair>& pairs);
+		std::vector<size_t>			jacobsthalSequenceVec(size_t size);
+		void						binaryInsertVec(std::vector<unsigned int>&mainchain, const std::vector<size_t>& jacobsthal, std::vector<Pair>& pairs);
 
-		void	printResult();
+		void						sortDeq();
+		std::deque<Pair>			pairDeq(size_t range);
+		std::deque<unsigned int>	sortLargerNumsDeq(std::deque<Pair>& deqPairs);
+		void						setPositionDeq(const std::deque<unsigned int>& sortedNumbers, std::deque<Pair>& pairs);
+		std::deque<size_t>			jacobsthalSequenceDeq(size_t size);
+		void						binaryInsertDeq(std::deque<unsigned int>&mainchain, const std::deque<size_t>& jacobsthal, std::deque<Pair>& pairs);
+
+		void						printResult();
 
 		class TooFewArgsException : public std::exception
 		{
@@ -76,11 +76,11 @@ class PmergeMe
 	private:
 		std::vector<unsigned int>	_unsorted;
 
-		std::vector<unsigned int>							_vec;
-		double												_vecTime;
+		std::vector<unsigned int>	_vec;
+		double						_vecTime;
 
-		std::deque<unsigned int>							_deq;
-		double												_deqTime;
+		std::deque<unsigned int>	_deq;
+		double						_deqTime;
 };
 
 #endif // PMERGEME_H
