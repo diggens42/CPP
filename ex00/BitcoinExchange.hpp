@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 19:51:35 by fwahl             #+#    #+#             */
-/*   Updated: 2024/11/18 19:51:36 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/12/02 18:25:27 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #define	RESET "\033[0m"
 
 #include <iostream>
+#include <iomanip>
 #include <fstream>
 #include <map>
 #include <string>
