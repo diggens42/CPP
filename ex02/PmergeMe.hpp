@@ -33,8 +33,9 @@ class PmergeMe
 		void						sortVec();
 		std::vector<Pair>			pairVec(size_t range);
 		std::vector<unsigned int>	sortLargerNumsVec(std::vector<Pair>& vecPairs);
-		void						setPositionVec(const std::vector<unsigned int>& sortedNumbers, std::vector<Pair>& pairs);
+		void						setPositionVec(const std::vector<unsigned int>& mainchain, std::vector<Pair>& pairs);
 		std::vector<size_t>			jacobsthalSequenceVec(size_t size);
+		size_t	PmergeMe::binSearchVec(const std::vector<unsigned int>& mainchain, size_t start, size_t end, unsigned int smallernums);
 		void						binaryInsertVec(std::vector<unsigned int>&mainchain, const std::vector<size_t>& jacobsthal, std::vector<Pair>& pairs);
 
 		void						sortDeq();

@@ -201,13 +201,13 @@ std::vector<unsigned int>	PmergeMe::sortLargerNumsVec(std::vector<Pair>& vecPair
 	return (mergeVec);
 }
 
-void	PmergeMe::setPositionVec(const std::vector<unsigned int>& sortedNumbers, std::vector<Pair>& pairs)
+void	PmergeMe::setPositionVec(const std::vector<unsigned int>& mainchain, std::vector<Pair>& pairs)
 {
-	for (size_t i = 0; i < sortedNumbers.size(); ++i)
+	for (size_t i = 0; i < mainchain.size(); ++i)
 	{
 		for (auto& pair : pairs)
 		{
-			if (pair.larger == sortedNumbers[i])
+			if (pair.larger == mainchain[i])
 			{
 				pair.pos = i;
 				break ;
@@ -241,59 +241,83 @@ std::vector<size_t>	PmergeMe::jacobsthalSequenceVec(size_t size)
 	return (jacobsthalSequence);
 }
 
+size_t	PmergeMe::binSearchVec(const std::vector<unsigned int>& mainchain, size_t start, size_t end, unsigned int smallernums)
+{
+	size_t	mid;
+
+	while (start < end)
+	{
+		mid = start + (end - start) / 2;
+
+		if (mainchain[mid] >= smallernums)
+			end = mid;
+		else
+			start = mid + 1;
+	}
+	return (start);
+}
+
 void	PmergeMe::binaryInsertVec(std::vector<unsigned int>&mainchain, const std::vector<size_t>& jacobsthal, std::vector<Pair>& pairs)
 {
-	size_t i = 0;
-	while (i < jacobsthal.size())
-	{
-		if (jacobsthal[i] >= pairs.size())
-			break ;
-		const auto&	pair = pairs[jacobsthal[i]];
-		auto		start = mainchain.begin();
-		auto		end	= mainchain.begin() + pair.pos;
-		auto		insertPos = std::lower_bound(start, end, pair.smaller);
-		size_t		insertIdx = std::distance(mainchain.begin(), insertPos);
 
-		mainchain.insert(insertPos, pair.smaller);
 
-		for (auto& p : pairs)
-		{
-			if (p.pos >= insertIdx)
-				p.pos++;
-		}
-		i++;
-	}
 
-	std::vector<bool>	alreadyInserted(pairs.size(), false);
-	i = 0;
-	while (i < jacobsthal.size())
-	{
-		if (jacobsthal[i] < pairs.size())
-			alreadyInserted[jacobsthal[i]] = true;
-		i++;
-	}
 
-	i = 0;
-	while (i < pairs.size())
-	{
-		if (!alreadyInserted[i])
-		{
-			const auto&	pair = pairs[i];
-			auto		start = mainchain.begin();
-			auto		end = mainchain.begin() + pair.pos;
-			auto		insertPos = std::lower_bound(start, end, pair.smaller);
-			size_t		insertIdx = std::distance(mainchain.begin(), insertPos);
+	// size_t i = 0;
+	// while (i < jacobsthal.size())
+	// {
+	// 	if (jacobsthal[i] >= pairs.size())
+	// 		break ;
+	// 	const auto&	pair = pairs[jacobsthal[i]];
+	// 	auto		start = mainchain.begin();
+	// 	auto		end	= mainchain.begin() + pair.pos;
+	// 	auto		insertPos = std::lower_bound(start, end, pair.smaller); //binary search selbst schreiben..
+	// 	size_t		insertIdx = std::distance(mainchain.begin(), insertPos);
 
-			mainchain.insert(insertPos, pair.smaller);
+	// 	std::cout << "insertPos: " << *insertPos << std::endl;
+	// 	std::cout << "insertIdx: " << insertIdx << std::endl;
+	// 	std::cout << "InsertNbr: " << pair.smaller << std::endl;
+	// 	std::cout << "_________" << std::endl;
+	// 	mainchain.insert(insertPos, pair.smaller);
 
-			for (auto& p : pairs)
-			{
-				if (p.pos >= insertIdx)
-					p.pos++;
-			}
-		}
-		i++;
-	}
+	// 	for (auto& p : pairs)
+	// 	{
+	// 		if (p.pos >= insertIdx)
+	// 			p.pos++;
+	// 	}
+	// 	i++;
+	// }
+
+	// std::vector<bool>	alreadyInserted(pairs.size(), false);
+	// i = 0;
+	// while (i < jacobsthal.size())
+	// {
+	// 	if (jacobsthal[i] < pairs.size())
+	// 		alreadyInserted[jacobsthal[i]] = true;
+	// 	i++;
+	// }
+
+	// i = 0;
+	// while (i < pairs.size())
+	// {
+	// 	if (!alreadyInserted[i])
+	// 	{
+	// 		const auto&	pair = pairs[i];
+	// 		auto		start = mainchain.begin();
+	// 		auto		end = mainchain.begin() + pair.pos;
+	// 		auto		insertPos = std::lower_bound(start, end, pair.smaller);
+	// 		size_t		insertIdx = std::distance(mainchain.begin(), insertPos);
+
+	// 		mainchain.insert(insertPos, pair.smaller);
+
+	// 		for (auto& p : pairs)
+	// 		{
+	// 			if (p.pos >= insertIdx)
+	// 				p.pos++;
+	// 		}
+	// 	}
+	// 	i++;
+	// }
 }
 
 
