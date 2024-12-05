@@ -263,37 +263,35 @@ size_t	PmergeMe::binSearchVec(const std::vector<unsigned int>& mainchain, size_t
 	return (start);
 }
 
-void	PmergeMe::binInsertVec(std::vector<unsigned int>&mainchain, const std::vector<size_t>& jacobsthal, std::vector<Pair>& pairs)
+void	PmergeMe::binInsertVec(std::vector<unsigned int>& mainchain, const std::vector<size_t>& jacobsthal, std::vector<Pair>& pairs)
 {
-	std::vector<bool> alreadyInserted(pairs.size(), false);
-	size_t	i = 0;
-	size_t	j = 0;
-	while (i < pairs.size())
+	if (pairs.size() < 2)
+		return ;
+
+	std::vector<bool>	alreadyInserted(pairs.size(), false);
+	for (size_t j = 0; j < jacobsthal.size(); ++j)
 	{
-		size_t	pairIdx;
+		size_t	curIdx = jacobsthal[j];
+		if (curIdx >= pairs.size())
+			curIdx = pairs.size() - 1;
 
-		if (j < jacobsthal.size() && jacobsthal[j] == i)
+		while (curIdx < pairs.size() && !alreadyInserted[curIdx])
 		{
-			pairIdx = jacobsthal[j];
-			j++;
+			const auto&	pair = pairs[curIdx];
+			size_t		insertIdx = binSearchVec(mainchain, 0, pair.pos, pair.smaller);
+			mainchain.insert(mainchain.begin() + insertIdx, pair.smaller);
+			alreadyInserted[curIdx] = true;
+
+			for (auto& p : pairs)
+			{
+				if (p.pos >= insertIdx)
+					p.pos++;
+			}
+
+			if (curIdx == 0)
+				break ;
+			curIdx++;
 		}
-		else
-			pairIdx = i;
-
-		if (alreadyInserted[pairIdx])
-			continue ;
-
-		const auto&	pair = pairs[pairIdx];
-		size_t	insertIdx = binSearchVec(mainchain, 0, pair.pos, pair.smaller);
-
-		mainchain.insert(mainchain.begin() + insertIdx, pair.smaller);
-		for (auto& p : pairs)
-		{
-			if (p.pos >= insertIdx)
-				p.pos++;
-		}
-		alreadyInserted[pairIdx] = true;
-		i++;
 	}
 }
 
@@ -471,35 +469,33 @@ size_t	PmergeMe::binSearchDeq(const std::deque<unsigned int>& mainchain, size_t 
 
 void	PmergeMe::binInsertDeq(std::deque<unsigned int>& mainchain, const std::deque<size_t>& jacobsthal, std::deque<Pair>& pairs)
 {
-	std::vector<bool> alreadyInserted(pairs.size(), false);
-	size_t	i = 0;
-	size_t	j = 0;
-	while (i < pairs.size())
+	if (pairs.size() < 2)
+		return ;
+
+	std::vector<bool>	alreadyInserted(pairs.size(), false);
+	for (size_t j = 0; j < jacobsthal.size(); ++j)
 	{
-		size_t	pairIdx;
+		size_t	curIdx = jacobsthal[j];
+		if (curIdx >= pairs.size())
+			curIdx = pairs.size() - 1;
 
-		if (j < jacobsthal.size() && jacobsthal[j] == i)
+		while (curIdx < pairs.size() && !alreadyInserted[curIdx])
 		{
-			pairIdx = jacobsthal[j];
-			j++;
+			const auto&	pair = pairs[curIdx];
+			size_t		insertIdx = binSearchDeq(mainchain, 0, pair.pos, pair.smaller);
+			mainchain.insert(mainchain.begin() + insertIdx, pair.smaller);
+			alreadyInserted[curIdx] = true;
+
+			for (auto& p : pairs)
+			{
+				if (p.pos >= insertIdx)
+					p.pos++;
+			}
+
+			if (curIdx == 0)
+				break ;
+			curIdx++;
 		}
-		else
-			pairIdx = i;
-
-		if (alreadyInserted[pairIdx])
-			continue ;
-
-		const auto&	pair = pairs[pairIdx];
-		size_t	insertIdx = binSearchDeq(mainchain, 0, pair.pos, pair.smaller);
-
-		mainchain.insert(mainchain.begin() + insertIdx, pair.smaller);
-		for (auto& p : pairs)
-		{
-			if (p.pos >= insertIdx)
-				p.pos++;
-		}
-		alreadyInserted[pairIdx] = true;
-		i++;
 	}
 }
 
