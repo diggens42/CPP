@@ -36,7 +36,7 @@ class PmergeMe
 		void						setPositionVec(const std::vector<unsigned int>& mainchain, std::vector<Pair>& pairs);
 		std::vector<size_t>			jacobsthalSequenceVec(size_t size);
 		size_t						binSearchVec(const std::vector<unsigned int>& mainchain, size_t start, size_t end, unsigned int smallernums);
-		void						binaryInsertVec(std::vector<unsigned int>&mainchain, const std::vector<size_t>& jacobsthal, std::vector<Pair>& pairs);
+		void						binInsertVec(std::vector<unsigned int>&mainchain, const std::vector<size_t>& jacobsthal, std::vector<Pair>& pairs);
 		bool						isSortedVec(const std::vector<unsigned int>& sortedvec) const;
 
 		void						sortDeq();
@@ -44,7 +44,9 @@ class PmergeMe
 		std::deque<unsigned int>	sortLargerNumsDeq(std::deque<Pair>& deqPairs);
 		void						setPositionDeq(const std::deque<unsigned int>& sortedNumbers, std::deque<Pair>& pairs);
 		std::deque<size_t>			jacobsthalSequenceDeq(size_t size);
-		void						binaryInsertDeq(std::deque<unsigned int>&mainchain, const std::deque<size_t>& jacobsthal, std::deque<Pair>& pairs);
+		size_t						binSearchDeq(const std::deque<unsigned int>& mainchain, size_t start, size_t end, unsigned int smallernums);
+		void						binInsertDeq(std::deque<unsigned int>& mainchain, const std::deque<size_t>& jacobsthal, std::deque<Pair>& pairs);
+		bool						isSortedDeq(const std::deque<unsigned int>& sortedvec) const;
 
 		void						printResult();
 

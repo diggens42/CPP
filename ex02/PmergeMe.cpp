@@ -95,9 +95,11 @@ void	PmergeMe::printResult()
 		std::cout << "Vec OK" << std::endl;
 	else
 		std::cout << "Vec not sorted" << std::endl;
+	if (isSortedDeq(_deq) == true)
+		std::cout << "Deq OK" << std::endl;
+	else
+		std::cout << "Deq not sorted" << std::endl;
 }
-
-//VECTOR
 
 void	PmergeMe::sortVec()
 {
@@ -120,16 +122,16 @@ void	PmergeMe::sortVec()
 		unpaired = _vec.back();
 	vecPairs = pairVec(_vec.size() - hasUnpaired);
 
-	mainchain.reserve(_vec.size()); // not sure if this makes sense
+	mainchain.reserve(_vec.size());
 	mainchain = sortLargerNumsVec(vecPairs);
 	setPositionVec(mainchain, vecPairs);
 	jacobsthalSequence = jacobsthalSequenceVec(vecPairs.size());
 
-	binaryInsertVec(mainchain, jacobsthalSequence, vecPairs);
+	binInsertVec(mainchain, jacobsthalSequence, vecPairs);
 	if (hasUnpaired)
 	{
-		auto insertPos = std::lower_bound(mainchain.begin(), mainchain.end(), unpaired);
-		mainchain.insert(insertPos, unpaired);
+		auto insertPos = binSearchVec(mainchain, 0, mainchain.size(), unpaired);
+		mainchain.insert(mainchain.begin() + insertPos, unpaired);
 	}
 	vecEnd = std::chrono::high_resolution_clock::now();
 	_vec = mainchain;
@@ -225,7 +227,6 @@ std::vector<size_t>	PmergeMe::jacobsthalSequenceVec(size_t size)
 {
 	std::vector<size_t>	jacobsthalSequence;
 
-
 	if (size == 0)
 		return (jacobsthalSequence);
 	jacobsthalSequence.push_back(0);
@@ -262,12 +263,28 @@ size_t	PmergeMe::binSearchVec(const std::vector<unsigned int>& mainchain, size_t
 	return (start);
 }
 
-void	PmergeMe::binaryInsertVec(std::vector<unsigned int>&mainchain, const std::vector<size_t>& jacobsthal, std::vector<Pair>& pairs)
+void	PmergeMe::binInsertVec(std::vector<unsigned int>&mainchain, const std::vector<size_t>& jacobsthal, std::vector<Pair>& pairs)
 {
-	for (size_t i = 0; i < jacobsthal.size() && jacobsthal[i] < pairs.size(); ++i)
+	std::vector<bool> alreadyInserted(pairs.size(), false);
+	size_t	i = 0;
+	size_t	j = 0;
+	while (i < pairs.size())
 	{
-		const auto& pair = pairs[jacobsthal[i]];
-		size_t insertIdx = binSearchVec(mainchain, 0, pair.pos, pair.smaller);
+		size_t	pairIdx;
+
+		if (j < jacobsthal.size() && jacobsthal[j] == i)
+		{
+			pairIdx = jacobsthal[j];
+			j++;
+		}
+		else
+			pairIdx = i;
+
+		if (alreadyInserted[pairIdx])
+			continue ;
+
+		const auto&	pair = pairs[pairIdx];
+		size_t	insertIdx = binSearchVec(mainchain, 0, pair.pos, pair.smaller);
 
 		mainchain.insert(mainchain.begin() + insertIdx, pair.smaller);
 		for (auto& p : pairs)
@@ -275,37 +292,22 @@ void	PmergeMe::binaryInsertVec(std::vector<unsigned int>&mainchain, const std::v
 			if (p.pos >= insertIdx)
 				p.pos++;
 		}
-	}
-
-	std::vector<bool>	alreadyInserted(pairs.size(), false);
-	size_t	i = 0;
-	while (i < jacobsthal.size())
-	{
-		if (jacobsthal[i] < pairs.size())
-			alreadyInserted[jacobsthal[i]] = true;
-		i++;
-	}
-
-	i = 0;
-	while (i < pairs.size())
-	{
-		if (!alreadyInserted[i])
-		{
-			const auto& pair = pairs[i];
-			size_t insertIdx = binSearchVec(mainchain, 0, pair.pos, pair.smaller);
-
-			mainchain.insert(mainchain.begin() + insertIdx, pair.smaller);
-
-			for (auto& p : pairs)
-			{
-				if (p.pos >= insertIdx)
-					p.pos++;
-			}
-		}
+		alreadyInserted[pairIdx] = true;
 		i++;
 	}
 }
 
+bool	PmergeMe::isSortedVec(const std::vector<unsigned int>& sortedvec) const
+{
+	size_t	i = 1;
+	while (i < sortedvec.size())
+	{
+		if (sortedvec[i - 1] > sortedvec[i])
+			return (false);
+		i++;
+	}
+	return (true);
+}
 
 void	PmergeMe::sortDeq()
 {
@@ -331,11 +333,11 @@ void	PmergeMe::sortDeq()
 	mainchain = sortLargerNumsDeq(deqPairs);
 	setPositionDeq(mainchain, deqPairs);
 	jacobsthalSequence = jacobsthalSequenceDeq(deqPairs.size());
-	binaryInsertDeq(mainchain, jacobsthalSequence, deqPairs);
+	binInsertDeq(mainchain, jacobsthalSequence, deqPairs);
 	if (hasUnpaired)
 	{
-		auto insertPos = std::lower_bound(mainchain.begin(), mainchain.end(), unpaired);
-		mainchain.insert(insertPos, unpaired);
+		auto insertPos = binSearchDeq(mainchain, 0, mainchain.size(), unpaired);
+		mainchain.insert(mainchain.begin() + insertPos, unpaired);
 	}
 	deqEnd = std::chrono::high_resolution_clock::now();
 	_deq = mainchain;
@@ -450,62 +452,58 @@ std::deque<size_t>	PmergeMe::jacobsthalSequenceDeq(size_t size)
 	return (jacobsthalSequence);
 }
 
-void	PmergeMe::binaryInsertDeq(std::deque<unsigned int>&mainchain, const std::deque<size_t>& jacobsthal, std::deque<Pair>& pairs)
+size_t	PmergeMe::binSearchDeq(const std::deque<unsigned int>& mainchain, size_t start, size_t end, unsigned int smallernums)
 {
-	size_t i = 0;
-	while (i < jacobsthal.size())
+	size_t	mid;
+
+	while (start < end)
 	{
-		if (jacobsthal[i] >= pairs.size())
-			break ;
-		const auto&	pair = pairs[jacobsthal[i]];
-		auto		start = mainchain.begin();
-		auto		end	= mainchain.begin() + pair.pos;
-		auto		insertPos = std::lower_bound(start, end, pair.smaller);
-		size_t		insertIdx = std::distance(mainchain.begin(), insertPos);
+		mid = start + (end - start) / 2;
 
-		mainchain.insert(insertPos, pair.smaller);
+		if (mainchain[mid] >= smallernums)
+			end = mid;
+		else
+			start = mid + 1;
+	}
+	return (start);
+}
 
+
+void	PmergeMe::binInsertDeq(std::deque<unsigned int>& mainchain, const std::deque<size_t>& jacobsthal, std::deque<Pair>& pairs)
+{
+	std::vector<bool> alreadyInserted(pairs.size(), false);
+	size_t	i = 0;
+	size_t	j = 0;
+	while (i < pairs.size())
+	{
+		size_t	pairIdx;
+
+		if (j < jacobsthal.size() && jacobsthal[j] == i)
+		{
+			pairIdx = jacobsthal[j];
+			j++;
+		}
+		else
+			pairIdx = i;
+
+		if (alreadyInserted[pairIdx])
+			continue ;
+
+		const auto&	pair = pairs[pairIdx];
+		size_t	insertIdx = binSearchDeq(mainchain, 0, pair.pos, pair.smaller);
+
+		mainchain.insert(mainchain.begin() + insertIdx, pair.smaller);
 		for (auto& p : pairs)
 		{
 			if (p.pos >= insertIdx)
 				p.pos++;
 		}
-		i++;
-	}
-
-	std::vector<bool>	alreadyInserted(pairs.size(), false);
-	i = 0;
-	while (i < jacobsthal.size())
-	{
-		if (jacobsthal[i] < pairs.size())
-			alreadyInserted[jacobsthal[i]] = true;
-		i++;
-	}
-
-	i = 0;
-	while (i < pairs.size())
-	{
-		if (!alreadyInserted[i])
-		{
-			const auto&	pair = pairs[i];
-			auto		start = mainchain.begin();
-			auto		end = mainchain.begin() + pair.pos;
-			auto		insertPos = std::lower_bound(start, end, pair.smaller);
-			size_t		insertIdx = std::distance(mainchain.begin(), insertPos);
-
-			mainchain.insert(insertPos, pair.smaller);
-
-			for (auto& p : pairs)
-			{
-				if (p.pos >= insertIdx)
-					p.pos++;
-			}
-		}
+		alreadyInserted[pairIdx] = true;
 		i++;
 	}
 }
 
-bool	PmergeMe::isSortedVec(const std::vector<unsigned int>& sortedvec) const
+bool	PmergeMe::isSortedDeq(const std::deque<unsigned int>& sortedvec) const
 {
 	size_t	i = 1;
 	while (i < sortedvec.size())
@@ -516,6 +514,7 @@ bool	PmergeMe::isSortedVec(const std::vector<unsigned int>& sortedvec) const
 	}
 	return (true);
 }
+
 
 const char*	PmergeMe::TooFewArgsException::what() const noexcept
 {
