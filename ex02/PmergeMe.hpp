@@ -35,8 +35,9 @@ class PmergeMe
 		std::vector<unsigned int>	sortLargerNumsVec(std::vector<Pair>& vecPairs);
 		void						setPositionVec(const std::vector<unsigned int>& mainchain, std::vector<Pair>& pairs);
 		std::vector<size_t>			jacobsthalSequenceVec(size_t size);
-		size_t	PmergeMe::binSearchVec(const std::vector<unsigned int>& mainchain, size_t start, size_t end, unsigned int smallernums);
+		size_t						binSearchVec(const std::vector<unsigned int>& mainchain, size_t start, size_t end, unsigned int smallernums);
 		void						binaryInsertVec(std::vector<unsigned int>&mainchain, const std::vector<size_t>& jacobsthal, std::vector<Pair>& pairs);
+		bool						isSortedVec(const std::vector<unsigned int>& sortedvec) const;
 
 		void						sortDeq();
 		std::deque<Pair>			pairDeq(size_t range);
@@ -80,5 +81,8 @@ class PmergeMe
 		std::deque<unsigned int>	_deq;
 		double						_deqTime;
 };
+
+// ./PmergeMe $(awk -v n=3000 -v max=100000 'BEGIN {srand(); for (i = 1; i <= max; i++) nums[i] = i; for (i = 1; i <= n; i++) { j = int(rand() * max) + 1; printf nums[j] " "; nums[j] = nums[max--]; }}')
+
 
 #endif // PMERGEME_H
