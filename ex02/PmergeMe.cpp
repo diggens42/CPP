@@ -84,21 +84,21 @@ void	PmergeMe::printResult()
 	for (const auto& num : _vec)
 		std::cout << num << " ";
 	std::cout << std::endl;
-	// std::cout << "After deq: ";
-	// for (const auto& num : _deq)
-	// 	std::cout << num << " ";
-	// std::cout << std::endl;
+	std::cout << "After deq: ";
+	for (const auto& num : _deq)
+		std::cout << num << " ";
+	std::cout << std::endl;
 	std::cout << "Time to process a range of " << _vec.size() << " elements with std::vector: " << _vecTime << " us" << std::endl;
-	// std::cout << "Time to process a range of " << _deq.size() << " elements with std::deque:  " << _deqTime << " us" << std::endl;
+	std::cout << "Time to process a range of " << _deq.size() << " elements with std::deque:  " << _deqTime << " us" << std::endl;
 
 	if (isSortedVec(_vec) == true)
 		std::cout << "Vec OK" << std::endl;
 	else
 		std::cout << "Vec not sorted" << std::endl;
-	// if (isSortedDeq(_deq) == true)
-	// 	std::cout << "Deq OK" << std::endl;
-	// else
-	// 	std::cout << "Deq not sorted" << std::endl;
+	if (isSortedDeq(_deq) == true)
+		std::cout << "Deq OK" << std::endl;
+	else
+		std::cout << "Deq not sorted" << std::endl;
 }
 
 void	PmergeMe::sortVec()
@@ -112,7 +112,7 @@ void	PmergeMe::sortVec()
 	std::vector<unsigned int>							mainchain;
 	std::vector<size_t>									jacobsthalSequence;
 
-	if (_vec.empty())
+	if (_vec.empty() || _vec.size() == 1)
 	{
 		_vecTime = 0;
 		return ;
@@ -308,7 +308,7 @@ void	PmergeMe::sortDeq()
 	std::deque<unsigned int>							mainchain;
 	std::deque<size_t>									jacobsthalSequence;
 
-	if (_deq.empty())
+	if (_deq.empty() || _deq.size() == 1)
 	{
 		_deqTime = 0;
 		return ;
@@ -319,8 +319,10 @@ void	PmergeMe::sortDeq()
 		unpaired = _deq.back();
 	deqPairs = pairDeq(_deq.size() - hasUnpaired);
 	deqPairsSorted = sortLargerNumsDeq(deqPairs);
+
 	jacobsthalSequence = jacobsthalSequenceDeq(deqPairs.size());
-	mainchain = binInsertDeq(jacobsthalSequence, deqPairs);
+
+	mainchain = binInsertDeq(jacobsthalSequence, deqPairsSorted);
 	if (hasUnpaired)
 	{
 		auto insertPos = binSearchDeq(mainchain, 0, mainchain.size(), unpaired);
