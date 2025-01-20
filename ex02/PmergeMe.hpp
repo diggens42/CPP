@@ -25,8 +25,7 @@ class PmergeMe
 
 		void													sortVec();
 		std::vector<std::pair<unsigned int, unsigned int>>		pairVec(size_t range);
-		std::vector<std::pair<unsigned int, unsigned int>>		sortLargerNumsVec(std::vector<std::pair<unsigned int, unsigned int>>& vecPairs);
-		void													setPositionVec(const std::vector<unsigned int>& mainchain, std::vector<std::pair<unsigned int, unsigned int>>& pairs);
+		std::vector<std::pair<unsigned int, unsigned int>>		sortPairsByLargerNumsVec(std::vector<std::pair<unsigned int, unsigned int>>& vecPairs);
 		std::vector<size_t>										jacobsthalSequenceVec(size_t size);
 		size_t													binSearchVec(const std::vector<unsigned int>& mainchain, size_t start, size_t end, unsigned int smallernums);
 		std::vector<unsigned int>								binInsertVec(const std::vector<size_t>& jacobsthal, std::vector<std::pair<unsigned int, unsigned int>>& pairs);
@@ -34,7 +33,7 @@ class PmergeMe
 
 		void													sortDeq();
 		std::deque<std::pair<unsigned int, unsigned int>>		pairDeq(size_t range);
-		std::deque<std::pair<unsigned int, unsigned int>>		sortLargerNumsDeq(std::deque<std::pair<unsigned int, unsigned int>>& deqPairs);
+		std::deque<std::pair<unsigned int, unsigned int>>		sortPairsByLargerNumsDeq(std::deque<std::pair<unsigned int, unsigned int>>& deqPairs);
 		std::deque<size_t>										jacobsthalSequenceDeq(size_t size);
 		size_t													binSearchDeq(const std::deque<unsigned int>& mainchain, size_t start, size_t end, unsigned int smallernums);
 		std::deque<unsigned int>								binInsertDeq(const std::deque<size_t>& jacobsthal, std::deque<std::pair<unsigned int, unsigned int>>& pairs);
@@ -76,7 +75,6 @@ class PmergeMe
 		double						_deqTime;
 };
 
-// ./PmergeMe $(awk -v n=3000 -v max=100000 'BEGIN {srand(); for (i = 1; i <= max; i++) nums[i] = i; for (i = 1; i <= n; i++) { j = int(rand() * max) + 1; printf nums[j] " "; nums[j] = nums[max--]; }}')
 // ./PmergeMe `jot -r 3000 1 1000`
 
 #endif // PMERGEME_H

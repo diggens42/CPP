@@ -51,8 +51,6 @@ void	PmergeMe::checkInput(int argc, char **argv)
 	if (argc < 2)
 		throw (TooFewArgsException());
 
-	// std::set<unsigned int> unique_nums;
-
 	int i = 1;
 	while (i < argc)
 	{
@@ -67,8 +65,6 @@ void	PmergeMe::checkInput(int argc, char **argv)
 		unsigned long num = std::stoul(argv[i]);
 		if (num > std::numeric_limits<unsigned int>::max())
 			throw (OutOfBoundsException());
-		// if (!unique_nums.insert(static_cast<unsigned int>(num)).second)
-		// 	throw (DuplicateNumbersException());
 		i++;
 	}
 
@@ -76,7 +72,7 @@ void	PmergeMe::checkInput(int argc, char **argv)
 
 void	PmergeMe::printResult()
 {
-	std::cout << "Before ";
+	std::cout << "Before: ";
 	for (const auto& num : _unsorted)
 		std::cout << num << " ";
 	std::cout << std::endl;
@@ -124,7 +120,7 @@ void	PmergeMe::sortVec()
 	vecPairs = pairVec(_vec.size() - hasUnpaired);
 
 	vecPairsSorted.reserve(_vec.size());
-	vecPairsSorted = sortLargerNumsVec(vecPairs);
+	vecPairsSorted = sortPairsByLargerNumsVec(vecPairs);
 
 	jacobsthalSequence = jacobsthalSequenceVec(vecPairs.size());
 
@@ -159,7 +155,7 @@ std::vector<std::pair<unsigned int, unsigned int>>	PmergeMe::pairVec(size_t rang
 	return (vecPairs);
 }
 
-std::vector<std::pair<unsigned int, unsigned int>>	PmergeMe::sortLargerNumsVec(std::vector<std::pair<unsigned int, unsigned int>>& vecPairs)
+std::vector<std::pair<unsigned int, unsigned int>>	PmergeMe::sortPairsByLargerNumsVec(std::vector<std::pair<unsigned int, unsigned int>>& vecPairs)
 {
 	if (vecPairs.size() <= 1)
 	{
@@ -177,8 +173,8 @@ std::vector<std::pair<unsigned int, unsigned int>>	PmergeMe::sortLargerNumsVec(s
 	std::vector<std::pair<unsigned int, unsigned int>> leftPairs(vecPairs.begin(), vecPairs.begin() + middle);
 	std::vector<std::pair<unsigned int, unsigned int>> rightPairs(vecPairs.begin() + middle, vecPairs.end());
 
-	std::vector<std::pair<unsigned int, unsigned int>>	sortedLeftPairs = sortLargerNumsVec(leftPairs);
-	std::vector<std::pair<unsigned int, unsigned int>>	sortedRightPairs = sortLargerNumsVec(rightPairs);
+	std::vector<std::pair<unsigned int, unsigned int>>	sortedLeftPairs = sortPairsByLargerNumsVec(leftPairs);
+	std::vector<std::pair<unsigned int, unsigned int>>	sortedRightPairs = sortPairsByLargerNumsVec(rightPairs);
 	std::vector<std::pair<unsigned int, unsigned int>>	mergeVec;
 
 	size_t	i = 0;
@@ -318,7 +314,7 @@ void	PmergeMe::sortDeq()
 	if (hasUnpaired)
 		unpaired = _deq.back();
 	deqPairs = pairDeq(_deq.size() - hasUnpaired);
-	deqPairsSorted = sortLargerNumsDeq(deqPairs);
+	deqPairsSorted = sortPairsByLargerNumsDeq(deqPairs);
 
 	jacobsthalSequence = jacobsthalSequenceDeq(deqPairs.size());
 
@@ -352,7 +348,7 @@ std::deque<std::pair<unsigned int, unsigned int>>	PmergeMe::pairDeq(size_t range
 	return (deqPairs);
 }
 
-std::deque<std::pair<unsigned int, unsigned int>>	PmergeMe::sortLargerNumsDeq(std::deque<std::pair<unsigned int, unsigned int>>& deqPairs)
+std::deque<std::pair<unsigned int, unsigned int>>	PmergeMe::sortPairsByLargerNumsDeq(std::deque<std::pair<unsigned int, unsigned int>>& deqPairs)
 {
 	if (deqPairs.size() <= 1)
 	{
@@ -370,8 +366,8 @@ std::deque<std::pair<unsigned int, unsigned int>>	PmergeMe::sortLargerNumsDeq(st
 	std::deque<std::pair<unsigned int, unsigned int>>	leftPairs(deqPairs.begin(), deqPairs.begin() + middle);
 	std::deque<std::pair<unsigned int, unsigned int>>	rightPairs(deqPairs.begin() + middle, deqPairs.end());
 
-	std::deque<std::pair<unsigned int, unsigned int>>	sortedLeftPairs = sortLargerNumsDeq(leftPairs);
-	std::deque<std::pair<unsigned int, unsigned int>>	sortedRightPairs = sortLargerNumsDeq(rightPairs);
+	std::deque<std::pair<unsigned int, unsigned int>>	sortedLeftPairs = sortPairsByLargerNumsDeq(leftPairs);
+	std::deque<std::pair<unsigned int, unsigned int>>	sortedRightPairs = sortPairsByLargerNumsDeq(rightPairs);
 	std::deque<std::pair<unsigned int, unsigned int>>	mergeDeq;
 
 	size_t	i = 0;
@@ -505,7 +501,4 @@ const char*	PmergeMe::OutOfBoundsException::what() const noexcept
 	return ("Error: Input numbers are out of bounds (unsigned int max)");
 }
 
-const char*	PmergeMe::DuplicateNumbersException::what() const noexcept
-{
-	return ("Error: Duplicate inout numbers");
-}
+
