@@ -122,6 +122,12 @@ void	PmergeMe::sortVec()
 	vecPairsSorted.reserve(_vec.size());
 	vecPairsSorted = sortPairsByLargerNumsVec(vecPairs);
 
+	for (auto pair : vecPairsSorted)
+	{
+		std::cout << "( " << pair.first << " , " << pair.second << " )  ";
+	}
+	std::cout << std::endl;
+
 	jacobsthalSequence = jacobsthalSequenceVec(vecPairs.size());
 
 	mainchain = binInsertVec(jacobsthalSequence, vecPairsSorted);
