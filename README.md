@@ -1,4 +1,4 @@
-# C++ Course: From Beginner to Advanced Concepts
+# C++: Beginner to Advanced Concepts
 
 Comprehensive introduction to C++ programming. Fundamental concepts and progression through advanced topics to provide a deep understanding of C++. Learning the skills needed to write efficient and scalable C++ code.
 
